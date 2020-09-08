@@ -86,23 +86,6 @@ export const transformElement = ( element, transform ) => {
 }
 
 /**
- * Element.matches with IE support.
- *
- * @param {HTMLElement} target The element to match
- * @param {String} selector The CSS selector to match
- * the element against
- *
- * @return {Boolean}
- */
-export const matches = ( target, selector ) => {
-
-	let matchesMethod = target.matches || target.matchesSelector || target.msMatchesSelector;
-
-	return !!( matchesMethod && matchesMethod.call( target, selector ) );
-
-}
-
-/**
  * Find the closest parent that matches the given
  * selector.
  *
@@ -113,21 +96,25 @@ export const matches = ( target, selector ) => {
  * @return {HTMLElement} The matched parent or null
  * if no matching parent was found
  */
-export const closest = ( target, selector ) => {
+export const closestParent = ( target, selector ) => {
 
-	// Native Element.closest
-	if( typeof target.closest === 'function' ) {
-		return target.closest( selector );
-	}
+	let parent = target.parentNode;
 
-	// Polyfill
-	while( target ) {
-		if( matches( target, selector ) ) {
-			return target;
+	while( parent ) {
+
+		// There's some overhead doing this each time, we don't
+		// want to rewrite the element prototype but should still
+		// be enough to feature detect once at startup...
+		let matchesMethod = parent.matches || parent.matchesSelector || parent.msMatchesSelector;
+
+		// If we find a match, we're all set
+		if( matchesMethod && matchesMethod.call( parent, selector ) ) {
+			return parent;
 		}
 
 		// Keep searching
-		target = target.parentNode;
+		parent = parent.parentNode;
+
 	}
 
 	return null;

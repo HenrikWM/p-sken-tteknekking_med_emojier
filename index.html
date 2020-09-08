@@ -1,182 +1,40 @@
-<!DOCTYPE html>
-<html lang="nb">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <meta name="description" content="Si det med emojis - Pangea 2020" />
-    <meta name="author" content="Henrik Walker Moe" />
-    <meta
-      name="viewport"
-      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+		<title>reveal.js</title>
 
-    <meta
-      property="og:title"
-      content="Kodeknekking for spioner - JavaZone/Bekk fagdag 2019"
-    />
-    <meta
-      property="og:description"
-      content="En gjennomgang av løsningen på PST-gåten presentert på JavaZone/Bekk fagdag 2019"
-    />
-    <meta property="og:site_name" content="Github" />
-    <meta
-      property="og:image"
-      content="https://henrikwm.github.io/kodeknekking_for_spioner/img/twitterhai-eu/twitterhai-eu_1337_shrk.jpg"
-    />
-    <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://henrikwm.github.io/kodeknekking_for_spioner"
-    />
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@github" />
-    <meta name="twitter:creator" content="@henrikwm" />
-    <meta
-      name="twitter:title"
-      content="Kodeknekking for spioner - JavaZone/Bekk fagdag 2019"
-    />
-    <meta
-      name="twitter:description"
-      content="En gjennomgang av løsningen på PST-gåten presentert på JavaZone/Bekk fagdag 2019"
-    />
-    <meta
-      name="twitter:image"
-      content="https://henrikwm.github.io/kodeknekking_for_spioner/img/twitterhai-eu/twitterhai-eu_1337_shrk.jpg"
-    />
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>Slide 1</section>
+				<section>Slide 2</section>
+			</div>
+		</div>
 
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="msapplication-tap-highlight" content="no" />
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
 
-    <title>Si det med emojis - Pangea 2020</title>
-
-    <link rel="stylesheet" href="dist/reset.css" />
-    <link rel="stylesheet" href="dist/reveal.css" />
-    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
-    <link rel="stylesheet" href="dist/custom.css" />
-
-    <!-- Title-Footer plugin -->
-    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
-    <link rel="stylesheet" href="plugin/title-footer/title-footer-custom.css" />
-
-    <!-- Theme used for syntax highlighted code -->
-    <link
-      rel="stylesheet"
-      href="plugin/highlight/zenburn.css"
-      id="highlight-theme"
-    />
-
-    <!-- Globals -->
-    <script type="text/javascript">
-      var isPresenting = true;
-      var defaultFooterText =
-        "Kodeknekking for spioner - JavaZone/Bekk fagdag 2019";
-    </script>
-  </head>
-  <body>
-    <div class="reveal">
-      <div class="slides">
-        <section>Slide 1</section>
-        <section data-source="bitmoji">
-          <aside class="notes">
-            * Her ser vi HTML-koden bak nettsiden<br />
-            * La oss ta zoome inn litt
-          </aside>
-        </section>
-        <section>Slide 2</section>
-      </div>
-    </div>
-
-    <script src="dist/reveal.js"></script>
-    <script src="plugin/markdown/markdown.js"></script>
-    <script src="plugin/highlight/highlight.js"></script>
-    <script src="plugin/search/search.js"></script>
-    <script src="plugin/notes/notes.js"></script>
-
-    <!-- Reveal-listeners -->
-    <script type="text/javascript" async defer>
-      // Sources
-      var sources = {
-        background_image: "Foto: iStock.com, rami_hakala",
-        bitmoji: "Bitmoji Avatar Ⓒ Snap Group Limited",
-      };
-
-      function setFooterSource() {
-        var currentSlide = Reveal.getCurrentSlide();
-
-        var footer = document.getElementById("title-footer");
-        if (footer) {
-          footer.parentNode.removeChild(footer);
-        }
-
-        var source = currentSlide.getAttribute("data-source");
-        if (source !== null) {
-          title_footer.initialize(sources[source]);
-        }
-      }
-
-      Reveal.addEventListener("ready", function (event) {
-        setFooterSource();
-      });
-
-      Reveal.addEventListener(
-        "slidechanged",
-        function () {
-          setFooterSource();
-        },
-        false
-      );
-    </script>
-
-    <script>
-      // More info about initialization & config:
-      // - https://revealjs.com/initialization/
-      // - https://revealjs.com/config/
-      Reveal.initialize({
-        controls: true,
-        progress: true,
-        center: true,
-        hash: true,
-        history: true,
-
-        navigationMode: "linear",
-
-        transition: "slide", // none/fade/slide/convex/concave/zoom
-
-        parallaxBackgroundImage: "img/background_bond.png",
-        parallaxBackgroundSize: "3700px 1600px",
-
-        // Learn about plugins: https://revealjs.com/plugins/
-        // plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch],
-        dependencies: [
-          {
-            src: "plugin/markdown/markdown.js",
-            condition: function () {
-              return !!document.querySelector("[data-markdown]");
-            },
-          },
-
-          // Syntax highlight for <code> elements
-          { src: "plugin/highlight/highlight.js", async: true },
-
-          { src: "plugin/search/search.js", async: true },
-
-          // Speaker notes
-          { src: "plugin/notes/notes.js", async: true },
-
-          // Zoom in and out with Alt+click
-          { src: "plugin/zoom/zoom.js", async: true },
-
-          // Title-Footer plugin
-          { src: "plugin/title-footer/title-footer.js" },
-        ],
-      });
-    </script>
-  </body>
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
 </html>

@@ -54,7 +54,7 @@ export default class Notes {
 	 */
 	updateVisibility() {
 
-		if( this.Reveal.getConfig().showNotes && this.hasNotes() && !this.Reveal.print.isPrintingPDF() ) {
+		if( this.Reveal.getConfig().showNotes && this.hasNotes() ) {
 			this.Reveal.getRevealElement().classList.add( 'show-notes' );
 		}
 		else {
