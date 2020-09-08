@@ -4,9 +4,11 @@
 
 Dette er løsningen på oppgaven gitt på andre påskedag. Oppgaven gir oss 3 filer:
 
-- [merkelig.py](../andre_påskedag/merkelig.py) (Python-skript)
+- [merkelig.py](../andre_påskedag/merkelig.py) (Python-skriptfil)
 - [underfundig](../andre_påskedag/underfundig) (fil med masse emojier)
-- [paskekyllingbetjenter.png](../andre_påskedag/paskekyllingbetjenter.png)
+- [paskekyllingbetjenter.png](../andre_påskedag/paskekyllingbetjenter.png):
+
+![Påskekyllingbetjenter](../andre_påskedag/paskekyllingbetjenter.png)
 
 ### Hent flagget
 
@@ -18,7 +20,7 @@ Løsningen er i `solve.py`.
 python3 .\solve.py ..\andre_påskedag\underfundig
 ```
 
-Programmet vil skrive ut flagget:
+Programmet skriver ut flagget:
 
 `PHST{Mitt navn er Gwyn. Pen Gwyn.}`
 
