@@ -195,7 +195,16 @@ gulp.task("css-core", () =>
     .pipe(gulp.dest("./dist"))
 );
 
-gulp.task("css", gulp.parallel("css-themes", "css-core"));
+gulp.task("css-custom", () =>
+  gulp
+    .src(["css/custom.scss"])
+    .pipe(sass())
+    .pipe(autoprefixer())
+    .pipe(minify({ compatibility: "ie9" }))
+    .pipe(gulp.dest("./dist"))
+);
+
+gulp.task("css", gulp.parallel("css-themes", "css-core", "css-custom"));
 
 gulp.task("qunit", () => {
   let serverConfig = {
