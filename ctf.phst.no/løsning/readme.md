@@ -12,12 +12,12 @@ Dette er løsningen på oppgaven gitt på andre påskedag. Oppgaven gir oss 3 fi
 
 ### Hent flagget
 
-Løsningen er i `solve.py`.
+Løsningen er i `løsning.py`.
 
 Åpne et nytt terminalvindu og kjør skriptet:
 
 ```cmd
-python3 .\solve.py ..\andre_påskedag\underfundig
+python3 .\løsning.py ..\andre_påskedag\underfundig
 ```
 
 Programmet skriver ut flagget:
