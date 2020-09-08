@@ -1,40 +1,220 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!DOCTYPE html>
+<html lang="nb">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-		<title>reveal.js</title>
+    <title>Kodeknekking for spioner - JavaZone/Bekk fagdag 2019</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <meta
+      name="description"
+      content="Kodeknekking for spioner - JavaZone/Bekk fagdag 2019"
+    />
+    <meta name="author" content="Henrik Walker Moe" />
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+    <meta
+      property="og:title"
+      content="Kodeknekking for spioner - JavaZone/Bekk fagdag 2019"
+    />
+    <meta
+      property="og:description"
+      content="En gjennomgang av løsningen på PST-gåten presentert på JavaZone/Bekk fagdag 2019"
+    />
+    <meta property="og:site_name" content="Github" />
+    <meta
+      property="og:image"
+      content="https://henrikwm.github.io/kodeknekking_for_spioner/img/twitterhai-eu/twitterhai-eu_1337_shrk.jpg"
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://henrikwm.github.io/kodeknekking_for_spioner"
+    />
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@github" />
+    <meta name="twitter:creator" content="@henrikwm" />
+    <meta
+      name="twitter:title"
+      content="Kodeknekking for spioner - JavaZone/Bekk fagdag 2019"
+    />
+    <meta
+      name="twitter:description"
+      content="En gjennomgang av løsningen på PST-gåten presentert på JavaZone/Bekk fagdag 2019"
+    />
+    <meta
+      name="twitter:image"
+      content="https://henrikwm.github.io/kodeknekking_for_spioner/img/twitterhai-eu/twitterhai-eu_1337_shrk.jpg"
+    />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="dist/custom.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/zenburn.css"
+      id="highlight-theme"
+    />
+
+    <!-- Title-Footer plugin -->
+    <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
+    <link rel="stylesheet" href="plugin/title-footer/title-footer-custom.css" />
+
+    <!-- Globals -->
+    <script type="text/javascript">
+      var defaultFooterText =
+        "Kodeknekking for spioner - JavaZone/Bekk fagdag 2019";
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>Slide 1</section>
+        <section>Slide 2</section>
+        <section
+          data-transition="none"
+          data-code-frame="osx"
+          data-highlight-theme="solarized-dark"
+        >
+          <pre>
+              <code class="javascript smaller" data-trim data-line-numbers="1">
+              password.charCodeAt(0) == 8 * 8 + 8 &&
+              password.charCodeAt(1) == Math.pow(9, 2) - 29 &&
+              password.charCodeAt(2) == Math.pow(10, 2) + Math.pow(3, 2) &&
+              password.charCodeAt(3) == password.charCodeAt(2) &&
+              password.substring(4, 5) == 3 &&
+              password.charCodeAt(5) == 7 * 17 - 5 &&
+              password.charCodeAt(6) == password.charCodeAt(0) &&
+              password.charCodeAt(7) == password.charCodeAt(1) &&
+              password.charCodeAt(8) == 0x69
+              </code>
+            </pre>
+          <p class="larger">?</p>
+          <aside class="notes">
+            Så vi begynner med første tegn i passordet.<br />
+            Hva blir 8 * 8 + 8?
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <!-- Reveal-listeners -->
+    <script type="text/javascript" async defer>
+      // Sources
+      var sources = {
+        background_image: "Foto: iStock.com, rami_hakala",
+        bitmoji: "Bitmoji Avatar Ⓒ Snap Group Limited",
+        henrikwm: "Kilde: Henrik Walker Moe, Lisens: CC BY 4.0",
+      };
+
+      function setFooterSource() {
+        var currentSlide = Reveal.getCurrentSlide();
+
+        var footer = document.getElementById("title-footer");
+        if (footer) {
+          footer.parentNode.removeChild(footer);
+        }
+
+        var source = currentSlide.getAttribute("data-source");
+        if (source !== null) {
+          title_footer.initialize(sources[source]);
+        }
+      }
+
+      Reveal.addEventListener("ready", function (event) {
+        setFooterSource();
+      });
+
+      Reveal.addEventListener(
+        "slidechanged",
+        function () {
+          setFooterSource();
+        },
+        false
+      );
+    </script>
+
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        history: true,
+
+        navigationMode: "linear",
+
+        transition: "slide", // none/fade/slide/convex/concave/zoom
+
+        parallaxBackgroundImage: "img/background_bond.png",
+        parallaxBackgroundSize: "3700px 1600px",
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        dependencies: [
+          // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+          {
+            src: "lib/js/classList.js",
+            condition: function () {
+              return !document.body.classList;
+            },
+          },
+
+          // Interpret Markdown in <section> elements
+          {
+            src: "plugin/markdown/marked.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+          {
+            src: "plugin/markdown/markdown.js",
+            condition: function () {
+              return !!document.querySelector("[data-markdown]");
+            },
+          },
+
+          // Syntax highlight for <code> elements
+          { src: "plugin/highlight/highlight.js", async: true },
+
+          { src: "plugin/search/search.js", async: true },
+
+          // Speaker notes
+          { src: "plugin/notes/notes.js", async: true },
+
+          // Zoom in and out with Alt+click
+          { src: "plugin/zoom-js/zoom.js", async: true },
+
+          // Title-Footer plugin
+          { src: "plugin/title-footer/title-footer.js" },
+        ],
+      });
+    </script>
+  </body>
 </html>
