@@ -78,6 +78,9 @@
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
     <link rel="stylesheet" href="plugin/title-footer/title-footer-custom.css" />
 
+    <!-- QR Codes -->
+    <script type="text/javascript" src="lib/qrcode.min.js"></script>
+
     <!-- Globals -->
     <script type="text/javascript">
       var defaultFooterText =
@@ -87,31 +90,167 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section>Slide 1</section>
-        <section>Slide 2</section>
-        <section
-          data-transition="none"
-          data-code-frame="osx"
-          data-highlight-theme="solarized-dark"
-        >
-          <pre>
-              <code class="javascript smaller" data-trim data-line-numbers="1">
-              password.charCodeAt(0) == 8 * 8 + 8 &&
-              password.charCodeAt(1) == Math.pow(9, 2) - 29 &&
-              password.charCodeAt(2) == Math.pow(10, 2) + Math.pow(3, 2) &&
-              password.charCodeAt(3) == password.charCodeAt(2) &&
-              password.substring(4, 5) == 3 &&
-              password.charCodeAt(5) == 7 * 17 - 5 &&
-              password.charCodeAt(6) == password.charCodeAt(0) &&
-              password.charCodeAt(7) == password.charCodeAt(1) &&
-              password.charCodeAt(8) == 0x69
-              </code>
-            </pre>
-          <p class="larger">?</p>
-          <aside class="notes">
-            Så vi begynner med første tegn i passordet.<br />
-            Hva blir 8 * 8 + 8?
-          </aside>
+        <!-- =================== INTRO =================== -->
+        <section>
+          <section data-source="background_image">
+            <p>
+              <span class="fragment">henrikwm</span>
+              <span class="fragment">@</span>
+              <span class="fragment">bekk</span>
+            </p>
+            <aside class="notes">
+              Hei! Mitt navn er (NESTE) Henrik Walker Moe og jeg er fagleder for
+              (NESTE) (NESTE) Sikkerhet i Bekk<br /><br />
+
+              Og idag skal jeg snakke om...
+            </aside>
+          </section>
+
+          <section data-transition="concave" data-source="bitmoji">
+            <div>
+              <h2>Kodeknekking med emojis</h2>
+              <img src="img/intro_spy_avatar.png" class="plain" />
+            </div>
+            <aside class="notes"></aside>
+          </section>
+
+          <section>
+            <h3>Hvem er jeg?</h3>
+            <aside class="notes">Så noen raske ord om meg</aside>
+          </section>
+
+          <section
+            data-background="img/intro_henrik_ecotrail.JPG"
+            data-source="henrikwm"
+          >
+            <aside class="notes">
+              Jeg...<br />
+              * liker å løpe, noen ganger langt. Her fra Ecotrail i mai ifjor<br />
+              * er sta, har pågangsmot <br />
+              * liker utfordringer med klare mål<br /><br />
+
+              Alle disse egenskapene viser det seg, egner seg ikke bare til å
+              holde ut i 5 mil i skogen på Ecotrail, de egner seg også veldig
+              godt til kodeknekking
+            </aside>
+          </section>
+
+          <section>
+            <h3>I ❤️ CTF-er</h3>
+            <aside class="notes">
+              Og som nevnt, jeg digger Capture the Flag oppgaver!<br />
+
+              * Hvorfor liker jeg CTF'er? <br />
+              ** <b>Prosessen</b>: <b>rekognosering</b> og <b>analyse</b> for å
+              forstå hvordan man kan <b>utnytte</b> en sårbarhet<br />
+              ** <b>Måldrevne</b>: delmål underveis, motiverer<br />
+              ** <b>Belønning!</b>: (flagget, viktig spisskompetanse)<br /><br />
+            </aside>
+          </section>
+        </section>
+
+        <section></section>
+        <section></section>
+        <section></section>
+
+        <!-- =================== OPPSUMMERING =================== -->
+        <section>
+          <section>
+            <h2>Hva har vi lært?</h2>
+            <aside class="notes">
+              Så med det er mitt lille hobbyprosjekt ved veis ende, alle gåtene
+              er løst. <br />
+
+              * Hvordan gjorde jeg det? <br />
+              ** blindsporbokstaver til koordinater, 2 arb.dag effektivt<br />
+              ** lærte meg Linux, python, verktøy, Kali Linux VM med Docker<br />
+              ** nøt prosessen<br /><br />
+
+              * Lærte å skrive ned både løsning og oppgave, til evt. senere
+              bruk<br /><br />
+
+              (ANEKDOTE)<br />
+              * Hvordan hjalp CTF-erfaringene med å løse gåten?<br />
+              ** Definere <b>delmål</b><br />
+              ** Sikte inn på <b>en ting</b> av gangen<br />
+              ** Bruke de <b>riktige verktøyene</b>
+            </aside>
+          </section>
+
+          <section>
+            <h3>Kodeknekking</h3>
+            <p>lærerikt</p>
+            <p>utfordrende</p>
+            <p>tålmodighetsprøve</p>
+            <p>dopamin-kick!</p>
+            <aside class="notes">
+              * er lærerikt<br />
+              * er utfordrende<br />
+              * er en skikkelig tålmodighetsprøve<br />
+              * er et realt dopamin-kick når man løser noe!<br /><br />
+
+              * Hvordan blir vi gode kodeknekkere? (Verktøy og kunnskap)<br /><br />
+              ** Verktøyene jeg brukte har vi allerede gått igjennom<br />
+              ** Når det gjelder kunnskap har jeg noen tips...
+            </aside>
+          </section>
+
+          <section>
+            <h2>Lyst til å bli en kodeknekker?</h2>
+            <aside class="notes">
+              Syns du det du så idag så kult ut?<br /><br />
+
+              Vil du ha mer?
+            </aside>
+          </section>
+
+          <section>
+            <h2>Bli med og prøv selv! 🕵️‍♀️🕵️‍♂️</h2>
+            <p>link til mathas sin CTF</p>
+            <aside class="notes">
+              Bli med på vår CTF og prøv selv!<br /><br />
+
+              Min kollega Mathias har en CTF ute CTF'er er på mange måter
+              sikkerhetsbransjens e-sport og vi håper
+              <b>du også</b> blir hekta!
+            </aside>
+          </section>
+
+          <!-- =================== TAKK =================== -->
+          <section data-transition="concave">
+            <h2>Takk!</h2>
+            <br />
+            <div class="columns">
+              <div class="col">
+                <div
+                  class="qrcode"
+                  align="center"
+                  title="https://henrikwm.github.io/si_det_med_emojis"
+                ></div>
+                <div class="half-size"><a class="qrcode-link"></a></div>
+              </div>
+              <div class="col">
+                <img
+                  src="img/oppsummering-takk2.png"
+                  class="plain"
+                  style="width: 50%"
+                />
+              </div>
+            </div>
+            <br />
+            <p>
+              <a href="mailto:henrik.walker.moe@bekk.no"
+                >henrik.walker.moe@bekk.no</a
+              >
+            </p>
+
+            <aside class="notes">
+              * Det var alt jeg hadde for idag<br />
+              * Tusen takk for at dere fulgte med!<br /><br />
+
+              * Takk for meg!
+            </aside>
+          </section>
         </section>
       </div>
     </div>
@@ -155,6 +294,36 @@
         },
         false
       );
+    </script>
+
+    <!-- QR Codes -->
+    <script type="text/javascript">
+      // Get presentation URL
+      var qrcode_url = "https://henrikwm.github.io/si_det_med_emojis";
+
+      // Generate QR Codes : class="qrcode"
+      var qrcode_elements = document.getElementsByClassName("qrcode");
+      for (var i = 0; i < qrcode_elements.length; i++) {
+        var qrcode_el = qrcode_elements[i];
+
+        var qrcode = new QRCode(qrcode_el, {
+          text: qrcode_url,
+          width: 250,
+          height: 250,
+        });
+
+        // Alter generated image
+        var img_el = qrcode._el.childNodes[1];
+        img_el.classList.add("plain"); // remove border
+      }
+
+      // Add text to links : class="qrcode-link"
+      var qrcode_link_elements = document.getElementsByClassName("qrcode-link");
+      for (var i = 0; i < qrcode_link_elements.length; i++) {
+        var link_el = qrcode_link_elements[i];
+        link_el.textContent = qrcode_url;
+        link_el.href = qrcode_url;
+      }
     </script>
 
     <script>
