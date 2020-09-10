@@ -208,13 +208,105 @@
           <section>
             Forstå operasjonene på chifferteksten ved å lese stack-output
           </section>
-          <section>Nesten i mål (reverser teksten)</section>
+          <section>
+            <p>Vi henter ut chifferteksten</p>
+            <pre><code class="python" data-trim data-noescape>
+              chiphertext = extract_ciphertext(underfundig_content)
+
+              print(chiphertext)
+              </code></pre>
+            <aside class="notes">
+              Vi kaller 'extract_ciphertext'-metoden for å hente ut
+              chifferteksten og gir innholdet i emoji-filen som input
+            </aside>
+          </section>
+          <section>
+            <h3>
+              Passord:
+              "w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer!
+              Flagget vet du allerede :)\nIkke riktig :(\n
+            </h3>
+            <aside class="notes">
+              Og da får vi chifferteksten og litt mer tekst som lå skjult i
+              emoji-programmet!<br /><br />
+
+              Vi kjenner igjen noe av teksten:<br />
+              * 'Passord:' er det programmet printer ut når den vil ha
+              passordet<br />
+              * så mange kryptiske tegn <br />
+              * 'Gratulerer' og 'Ikke riktig'-teksten er teksten programmet gir
+              oss ved galt eller riktig passord
+              <br /><br />
+
+              Siden vi vet den lesbare teksten er det programmet selv printer ut
+              kan vi anta at det ikke-lesbare her er selve chifferteksten vi er
+              ute etter!
+            </aside>
+          </section>
+          <section>
+            <p>"w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*</p>
+            <p>\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵ</p>
+            <aside class="notes">
+              Altså det er dette som vi må jobbe litt med.<br /><br />
+
+              Vi trenger å forstå hvordan chifferteksten er blitt kryptert slik
+              at vi kan dekryptere den
+            </aside>
+          </section>
+          <section>
+            <p>Vi dechiffrerer chifferteksten</p>
+            <pre><code class="python" data-trim data-noescape>
+              deciphered_cipher_raw = decipher(chiphertext)
+
+              print(deciphered_cipher_raw)
+              </code></pre>
+            <aside class="notes">
+              Vi kaller 'decipher'-metoden for å hente ut det vi håper er
+              dechiffrerte flagget og gir chifferteksten vi fikk istad som input
+            </aside>
+          </section>
+          <section>
+            <h3>}.nywG neP .nywG re nvan ttiM{TSHP</h3>
+            <aside class="notes">
+              Vi er nesten i mål! Hva må vi gjøre her?<br /><br />
+
+              Du ser at flaggformatet her ikke er helt riktig. Se mot høyreenden
+              av teksten. Stemmer, den er bakvendt! Så for å få riktig
+              flaggformat med "PHST{" osv. så må reversere teksten
+            </aside>
+          </section>
+          <section>
+            <p>Vi snur om på rekkefølgen på teksten</p>
+            <pre><code class="python smaller" data-trim data-noescape>
+              deciphered_cipher = deciphered_cipher_raw[::-1]
+
+              print(deciphered_cipher)
+              </code></pre>
+            <aside class="notes">Vi reverserer en tekst slik i Python</aside>
+          </section>
+          <section>
+            <h3>PHST{Mitt navn er Gwyn. Pen Gwyn.}</h3>
+            <aside class="notes">
+              Yes! <b>Der</b> fant vi endelig flagget! <br /><br />
+
+              Mitt navn er Gwyn. Pen Gwyn
+            </aside>
+          </section>
           <section data-source="leo_reversing">
             <img
               data-src="img/leo_reversing.JPG"
               class="plain"
               style="width: 60%"
             />
+            <aside class="notes">
+              Vi er i mål! Jeg syns vi kan være litt stolte av å ha tolket et
+              emoji-program som kjørte på en stack-basert virtuell maskin!
+              <br /><br />
+
+              Det var mye detektivarbeid og kodeknekking som måtte til, men med
+              litt pågangsmot, innsats og å bruke tid på forstå ett og ett
+              delproblem, så fant vi altså riktig løsning til slutt
+            </aside>
           </section>
         </section>
 
