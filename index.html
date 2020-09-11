@@ -171,23 +171,164 @@
             <h3>ctf.phst.no</h3>
             <aside class="notes">
               Så vår reise starter på ctf.phst.no hvor årets påske-CTF fra PST
-              lå
+              lå. <br /><br />
+
+              Og oppgaven jeg har tenkt å vise dere... (NESTE)
             </aside>
           </section>
         </section>
 
         <section>
-          <section>"Andre påskedag" (30p)</section>
-          <section>3 filene</section>
-          <section>definere problemet og mål</section>
+          <section>
+            <h2>"Andre påskedag"</h2>
+
+            <aside class="notes">
+              ...heter "Andre påskedag" <br /><br />
+
+              Grunnen til at jeg ønsket å vise frem nettopp denne er fordi den
+              tester deg på de tingene man trenger å være god på for å være en
+              kodeknekker: <br /><br />
+
+              * analytisk <br />
+              * bryte ned problemet<br />
+              * kunne verktøyene<br />
+              * forstå fagteorien bak problemstillingen vi må løse<br />
+            </aside>
+          </section>
+          <section>
+            <h3>Vi har fått 3 filer</h3>
+            <ul>
+              <li>
+                <a href="ctf.phst.no/andre_påskedag/paskekyllingbetjenter.png"
+                  >paskekyllingbetjenter.png</a
+                >
+              </li>
+              <li>
+                <a href="ctf.phst.no/andre_påskedag/merkelig.py">merkelig.py</a>
+              </li>
+              <li>
+                <a href="ctf.phst.no/andre_påskedag/underfundig">underfundig</a>
+              </li>
+            </ul>
+            <aside class="notes">(les opp) <br /><br /></aside>
+          </section>
         </section>
 
         <section>
-          <section>Analyse</section>
-          <section>Stegsolve med bildet</section>
-          <section>underfunding og emojis</section>
-          <section>Kjør merkelig.py</section>
-          <section>stack-basert virtuell maskin</section>
+          <section>
+            <h2>Analyse</h2>
+          </section>
+          <section>
+            <p>paskekyllingbetjenter.png</p>
+            <img
+              data-src="img/paskekyllingbetjenter.png"
+              class="plain"
+              style="width: 90%"
+            />
+            <aside class="notes">
+              Vi begynner med bilde av påskekyllingbetjentene.<br /><br />
+
+              For å lete etter ledetråder i bilder liker jeg å bruke programmene
+              <b>file</b> og <b>strings</b> på Linux. Ofte finner man skjult
+              tekst i bilder og disse programmene vil finne det<br /><br />
+
+              Dessverre var det ingen skjult tekst i bildet.<br /><br />
+
+              Så neste analyse jeg tenker er lurt da:
+              <b>Steganografi</b>-analyse!
+            </aside>
+          </section>
+          <section>
+            <img
+              data-src="img/paskekyllingbetjenter_stegsolve.gif"
+              class="plain"
+              style="width: 100%"
+            />
+            <aside class="notes">
+              (Forklar Steganografi)<br /><br />
+
+              Her bruker jeg <b>Stegsolve</b>: et program som lar oss bla
+              igjennom bildefiltre for å se etter skjult tekst i bilder
+              <br /><br />
+
+              Men vi finner ingenting her heller.<br /><br />
+
+              Konklusjon: dette er bare lokkemat og vi legger bildet til side
+            </aside>
+          </section>
+
+          <section>
+            <p>underfundig</p>
+            <img
+              data-src="img/underfundig_emojis.png"
+              class="plain"
+              style="width: 100%"
+            />
+            <aside class="notes">
+              Her har vi 1043 emojier på rad og rekke! (stablet de sammen
+              her)<br /><br />
+
+              Tydeligvis noe mening med dette. Vi ser noen emojier repeteres,
+              noen bare forekommer en gang. Hva kan disse påskekyllingbetjentene
+              ha enkodet her som emojis? <br /><br />
+
+              Det er ikke så mye mer å finne ut her, så vi ser på siste fil.
+            </aside>
+          </section>
+          <section>
+            <p>merkelig.py</p>
+            <img
+              data-src="img/merkelig_py_1.png"
+              class="plain"
+              style="width: 70%"
+            />
+            <aside class="notes">
+              Dette er et Pyton-skript og vi må forsøke å forstå hva den
+              gjør.<br /><br />
+
+              * Vi ser enkelte emojier defineres med en tall-verdi <br />
+              * Vi ser en funksjon <b>parse_num</b> som gjør om input til et
+              tall
+              <br />
+              * Vi ser at <b>underfundig</b>-filen med alle emojiene kreves som
+              input for å kjøre<br />
+              * Vi ser en "stack" bli definert som et 256-plasser stor array
+              (list) <br /><br />
+
+              Vi legger merke til variabelnavnene: <b>pc</b>, <b>stack</b> og
+              <b>sp</b>
+            </aside>
+          </section>
+          <section>
+            <p>merkelig.py</p>
+            <img
+              data-src="img/merkelig_py_2.png"
+              class="plain"
+              style="width: 80%"
+            />
+            <aside class="notes">
+              Hmm. Videre ned i skriptet ser vi at dette kjøres i en
+              while-loop.<br /><br />
+
+              Og når vi ser hva <b>op</b> brukes til i hver loop-iterasjon
+              begynner dette å bli klart hva vi har.
+            </aside>
+          </section>
+          <section>
+            <h2>Stack-basert virtuell maskin</h2>
+            <p>Et program som kjøres på en virtuell maskin</p>
+            <aside class="notes">
+              Vi har en "Stack-based virtual machine" med å gjøre. Man har lagd
+              et program med emojier, og skriptet leser emojiene og tolker
+              operasjonene programmet ønsker å gjøre.<br /><br />
+
+              Denne stacken brukes til å holde på data den virtuelle maskinen
+              har i "minnet" når programmet kjører
+            </aside>
+          </section>
+          <section>skisse</section>
+
+          <section>definere problemet og mål</section>
         </section>
 
         <section>
