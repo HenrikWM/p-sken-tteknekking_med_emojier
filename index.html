@@ -381,19 +381,20 @@
 
             <!-- Visualisere/outputte hva emojiene blir brukt til -->
             <aside class="notes">
-              Kanskje kan vi finne et mønster i emojiprogrammet? <br /><br />
+              Kanskje kan vi finne et mønster i emojiprogrammet? (NESTE)
+              <br /><br />
 
-              * Hvis vi tar de første emojiene fra
-              underfundig-filen...(NESTE)<br />
-              * Så trekker vi fra de operand-emojiene vi vet er
+              * Dette er de første emojiene fra underfundig-filen...(NESTE)<br />
+              * Hvis vi trekker fra de operand-emojiene vi vet er
               programinstruksjoner (NESTE)<br />
-              * Hva sitter vi igjen med da? (NESTE)<br /><br />
+              * Hva sitter vi igjen med da?<br /><br />
 
-              Spennende!
+              Kan dette være data som programmet bruker på noen måte (bokstaver
+              og tall)?
             </aside>
           </section>
           <section>
-            <p>I merkelig.py ser vi...</p>
+            <p>I merkelig.py så vi...</p>
             <pre><code class="python" data-trim data-noescape>
               if op == "🐰":
                 stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 tegn
@@ -401,6 +402,14 @@
                 pc += 4
             </code></pre>
             <p>... leses 4 tegn av gangen</p>
+            <aside class="notes">
+              Det vi ser på hare-operanden er at den virtuelle maskinen vår
+              leser inn 4 tegn av gangen.<br /><br />
+
+              Og tilbake fra "parse_num" får vi et tall...<br /><br />
+
+              Hva hvis de data-emojiene 4 og 4 av gangen er tall?
+            </aside>
           </section>
           <section>
             <p>På tide å lage et hjelpeskript:</p>
@@ -414,7 +423,8 @@
               </li>
               <p class="fragment">
                 Vi kan generere en fil med "pseudo-kode" som gjør det lettere å
-                forstå underfundig-programmet
+                forstå underfundig-programmet, og skrive ut operander og data
+                slik at vi kan lettere tolke hva programmet gjør
               </p>
             </ul>
           </section>
