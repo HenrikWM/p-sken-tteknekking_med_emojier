@@ -118,7 +118,7 @@
         <!-- =================== OM MEG =================== -->
         <section>
           <section>
-            <h3>Hvem er jeg?</h3>
+            <h2>Hvem er jeg?</h2>
             <aside class="notes">Et par ord om meg</aside>
           </section>
 
@@ -315,50 +315,176 @@
             </aside>
           </section>
           <section>
-            <h2>Stack-basert virtuell maskin</h2>
+            <h3>Stack-basert virtuell maskin</h3>
             <p>Et program som kjøres på en virtuell maskin</p>
             <aside class="notes">
-              Vi har en "Stack-based virtual machine" med å gjøre. Man har lagd
-              et program med emojier, og skriptet leser emojiene og tolker
-              operasjonene programmet ønsker å gjøre.<br /><br />
+              Det vi har her er en "Stack-based virtual machine". Emojiene er et
+              program og Python-skriptet tolker hver emoji og operasjonen
+              programmet ønsker å gjøre.<br />
 
-              Denne stacken brukes til å holde på data den virtuelle maskinen
-              har i "minnet" når programmet kjører
+              * lese input fra bruker<br />
+              * hoppe til neste instruks<br />
+              * lagre data i minnet osv.<br />
+
+              Og denne stacken vi har sett brukes til å holde på data som den
+              virtuelle maskinen har i "minnet" når programmet kjører
             </aside>
           </section>
           <section>skisse</section>
 
-          <section>definere problemet og mål</section>
+          <section>
+            <!-- definere problemet og mål -->
+            <p>Vi må forstå hva programmet gjør</p>
+          </section>
+
+          <section>
+            <p>Vi prøver å kjøre skriptet - ber om passord</p>
+            <pre><code class="python" data-trim data-noescape>
+              > python .\merkelig.py .\underfundig
+              Passord:
+            </code></pre>
+            <aside class="notes">
+              Når vi kjører skriptet så spør det etter et passord
+            </aside>
+          </section>
+          <section>
+            <p>Passordet var feil :(</p>
+            <pre><code class="python" data-trim data-noescape>
+              > python .\merkelig.py .\underfundig
+              Passord: pangea
+              Ikke riktig :(
+            </code></pre>
+            <aside class="notes">
+              Og det feiler uansett hva man gir som input <br /><br />
+
+              Ser ut til at vi må finne et passord for å komme i mål
+            </aside>
+          </section>
         </section>
 
         <section>
-          <section>Hva er et program?</section>
+          <section>
+            <h2>Hva er et program?</h2>
+          </section>
           <section>Stacken</section>
         </section>
 
         <section>
-          <section>Forstå hva merkelig.py gjør</section>
-          <section>Visualisere/outputte hva emojiene blir brukt til</section>
-          <section>Visualisere/outputte stacken</section>
-          <section>Delmål 1: Finne chifferteksten</section>
-        </section>
-
-        <section>
-          <section>Dekryptere chifferteksten</section>
-          <section>Forstå mønsteret</section>
           <section>
-            Forstå operasjonene på chifferteksten ved å lese stack-output
+            <h2>Forstå hva merkelig.py gjør</h2>
           </section>
           <section>
-            <p>Vi henter ut chifferteksten</p>
-            <pre><code class="python" data-trim data-noescape>
-              chiphertext = extract_ciphertext(underfundig_content)
+            <p>Finner vi et mønster i emojiene?</p>
+            <p class="fragment fade-up">🐰🎮🍫🎮🎲🐤🐰🍫🎨🎮🎲🐤🐰🍫🍫🎧🎲🐤</p>
+            <p class="fragment fade-up">🐰🐥🌱🌻🐇🥚🐤🐣🌞</p>
+            <p class="fragment fade-up">🎮🍫🎮🎲🍫🎨🎮🎲🍫🍫🎧🎲</p>
 
-              print(chiphertext)
+            <!-- Visualisere/outputte hva emojiene blir brukt til -->
+            <aside class="notes">
+              Kanskje kan vi finne et mønster i emojiprogrammet? <br /><br />
+
+              * Hvis vi tar de første emojiene fra
+              underfundig-filen...(NESTE)<br />
+              * Så trekker vi fra de operand-emojiene vi vet er
+              programinstruksjoner (NESTE)<br />
+              * Hva sitter vi igjen med da? (NESTE)<br /><br />
+
+              Spennende!
+            </aside>
+          </section>
+          <section>
+            <p>I merkelig.py ser vi...</p>
+            <pre><code class="python" data-trim data-noescape>
+              if op == "🐰":
+                stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 tegn
+                sp += 1
+                pc += 4
+            </code></pre>
+            <p>... leses 4 tegn av gangen</p>
+          </section>
+          <section>
+            <p>På tide å lage et hjelpeskript:</p>
+            <ul>
+              <li class="fragment">
+                Vi vet hva operandene er (programmets instrukser)
+              </li>
+              <li class="fragment">
+                Vi vet hva den virtuelle maskinen gjør per operand (push, pop,
+                jmp osv.)
+              </li>
+              <p class="fragment">
+                Vi kan generere en fil med "pseudo-kode" som gjør det lettere å
+                forstå underfundig-programmet
+              </p>
+            </ul>
+          </section>
+
+          <section>
+            <pre><code class="python" data-trim data-noescape>
+              > python .\underfundig_som_kommandoer.py .\underfundig
+            </code></pre>
+          </section>
+
+          <section>
+            <img
+              data-src="img/underfundig_som_kommandoer.png"
+              class="plain"
+              style="width: 30%"
+            />
+            <aside class="notes">
+              Programmet har lest underfundig-filen og den skriver ut linje for
+              linje operandene og emoji-gruppene på 4, som er data programmet
+              bruker.
+              <br /><br />
+
+              * Fra toppen: hare leser inn de neste 4 emojiene i
+              underfundig-programmet
+              <br />
+              * 4 emojiene er data (tallverdi 80, 80 i ASCII-tabellen er
+              bokstaven "P") <br />
+              * Kylling skriver "P" ut til terminalen min <br /><br />
+
+              Jeg syns vi kan skimte ordet "Passord" vertikalt her? Vi er inne
+              på noe...
+            </aside>
+          </section>
+
+          <section>
+            <table>
+              <tr>
+                <td>Emoji</td>
+                <td>🎮🍫🎮🎲</td>
+                <td>🍫🎨🎮🎲</td>
+              </tr>
+              <tr>
+                <td>Bokstav</td>
+                <td>P</td>
+                <td>a</td>
+              </tr>
+              <tr>
+                <td>ASCII-tallverdi</td>
+                <td>80</td>
+                <td>97</td>
+              </tr>
+            </table>
+            <aside class="notes">
+              Siden vi nå har forstått at det skjuler seg tekst i
+              programmet...<br />
+              Kan vi lage et Python-skript som skriver ut alle bokstavene i hele
+              underfundig-programmet tro?
+            </aside>
+          </section>
+
+          <section>
+            <p>Vi henter ut alle bokstavene i underfundig-programmet</p>
+            <pre><code class="python" data-trim data-noescape>
+              text = extract_text(underfundig_content)
+
+              print(text)
               </code></pre>
             <aside class="notes">
-              Vi kaller 'extract_ciphertext'-metoden for å hente ut
-              chifferteksten og gir innholdet i emoji-filen som input
+              Vi kaller 'extract_text'-metoden for å hente ut alle bokstavene og
+              gir innholdet i underfundig-filen som input
             </aside>
           </section>
           <section>
@@ -368,13 +494,13 @@
               Flagget vet du allerede :)\nIkke riktig :(\n
             </h3>
             <aside class="notes">
-              Og da får vi chifferteksten og litt mer tekst som lå skjult i
+              Og da får vi masse tekst som lå skjult i dette
               emoji-programmet!<br /><br />
 
               Vi kjenner igjen noe av teksten:<br />
               * 'Passord:' er det programmet printer ut når den vil ha
               passordet<br />
-              * så mange kryptiske tegn <br />
+              * så er det mange kryptiske tegn <br />
               * 'Gratulerer' og 'Ikke riktig'-teksten er teksten programmet gir
               oss ved galt eller riktig passord
               <br /><br />
@@ -388,16 +514,26 @@
             <p>"w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*</p>
             <p>\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵ</p>
             <aside class="notes">
-              Altså det er dette som vi må jobbe litt med.<br /><br />
+              Altså det er dette som er vår chiffertekst.<br /><br />
 
               Vi trenger å forstå hvordan chifferteksten er blitt kryptert slik
               at vi kan dekryptere den
             </aside>
           </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Dekryptere chifferteksten</h2>
+          </section>
+          <section>Forstå mønsteret</section>
+          <section>
+            Forstå operasjonene på chifferteksten ved å lese stack-output
+          </section>
           <section>
             <p>Vi dechiffrerer chifferteksten</p>
             <pre><code class="python" data-trim data-noescape>
-              deciphered_cipher_raw = decipher(chiphertext)
+              deciphered_cipher_raw = decipher(text)
 
               print(deciphered_cipher_raw)
               </code></pre>

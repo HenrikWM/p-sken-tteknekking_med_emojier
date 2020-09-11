@@ -42,7 +42,7 @@ def removeOperands(characters):
     return characters_without_operands
 
 
-def extract_ciphertext(characters):
+def extract_text(characters):
     underfundig_characters_groups = list(group(removeOperands(characters), 4))
     underfundig_characters_decoded = ""
     for underfundig_character_group in underfundig_characters_groups:
@@ -106,16 +106,16 @@ underfundig_content = open(sys.argv[1], "rt", encoding="utf-8").read()
 # Decode all characters in "underfundig"-file.
 # Gets only data which is ASCII/Binary and skips any operands
 # Output = 'Passord: "w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer! Flagget vet du allerede :)\nIkke riktig :(\n'
-chiphertext = extract_ciphertext(underfundig_content)
+text = extract_text(underfundig_content)
 
-print(chiphertext)
+print(text)
 
 # Get deciphered text
 # w XOR (4-*) = '}'
 # 4 XOR (D-*) = '.'
 # etc.
 # Output = '}.nywG neP .nywG re nvan ttiM{TSHP'
-deciphered_cipher_raw = decipher(chiphertext)
+deciphered_cipher_raw = decipher(text)
 
 print(deciphered_cipher_raw)
 
