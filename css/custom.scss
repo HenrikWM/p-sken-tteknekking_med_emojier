@@ -28,6 +28,13 @@
 .reveal pre {
   box-shadow: none;
 }
+
+.reveal pre.less-spacing {
+  line-height: 1.1em;
+}
+.reveal pre code.smallest {
+  font-size: 0.8em;
+}
 .reveal pre code.smaller {
   font-size: 0.9em;
 }

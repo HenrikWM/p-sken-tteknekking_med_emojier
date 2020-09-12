@@ -473,7 +473,7 @@
               tilsvarer kjente instrukser som push, pop, jump, XOR osv.<br /><br />
 
               Ved å studere <b>merkelig.py</b> kan vi utlede at:<br />
-              * hare jumper/"hopper" til neste programinstruks<br />
+              * kaninen jumper/"hopper" til neste programinstruks<br />
               * push på stacken er kylling<br />
               * pop av stacken og subtrahering er solsikke<br />
               * pop av stacken med addering er palme<br />
@@ -661,7 +661,10 @@
           </section>
 
           <section>
-            <p>Vi henter ut alle bokstavene i underfundig-programmet</p>
+            <p>
+              Vi henter ut alle bokstavene i underfundig-programmet
+              (underfundig_dekompilering.py)
+            </p>
             <pre><code class="python" data-trim data-noescape>
               text = extract_text(underfundig_content)
 
@@ -675,7 +678,7 @@
           <section>
             <h3>
               Passord:
-              "w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer!
+              w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer!
               Flagget vet du allerede :)\nIkke riktig :(\n
             </h3>
             <aside class="notes">
@@ -696,7 +699,7 @@
             </aside>
           </section>
           <section>
-            <p>"w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*</p>
+            <p>w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*</p>
             <p>\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵ</p>
             <br />
             <h3 class="fragment fade-up">🕵️‍♀️🕵️‍♂️</h3>
@@ -716,12 +719,285 @@
           <section>
             <h2>Dekryptere chifferteksten</h2>
           </section>
+
           <section>Forstå mønsteret</section>
+
           <section>
             Forstå operasjonene på chifferteksten ved å lese stack-output
           </section>
+
           <section>
-            <p>Vi dechiffrerer chifferteksten</p>
+            <p>
+              Målet vårt nå er å dekryptere chifferteksten til noe som matcher
+              flaggformatet "PHST{...}"
+            </p>
+          </section>
+
+          <section>
+            <p>
+              Vi endrer litt på merkelig.py: for hver operand som kjøres så
+              printer vi ut hele stacken
+            </p>
+            <p>Da ser vi det samme som maskinen ser når programmet kjøres</p>
+            <pre><code class="shell" data-trim data-noescape>
+              > python .\merkelig.py .\underfundig
+              Passord: tulleinput
+            </code></pre>
+          </section>
+
+          <section>
+            <p>Passord "tulleinput" gir denne stacken:</p>
+            <pre><code class="shell" data-trim data-noescape>
+              (...)
+                  t , u , l , l , e , i , n , p , u , t
+              🐣:116,117,108,108,101,105,110,112,117,116,(10) (...)
+              🐣:116,117,108,108,101,105,110,112,117,116,10,(0) (...)
+              🐰:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
+              🐰:116,117,108,108,101,105,110,112,117,116,10,34,(0) (...)
+              🌻:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
+              🌻:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">-24</span>,(34) (...)
+              🌻:116,117,108,108,101,105,110,112,117,116,1272,(34) (...)
+              🐇:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">(1272)</span>,34 (...)
+              🐰:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">(73)</span>,34
+              (...)
+    </code></pre>
+            <p>
+              Alle forsøk med gale passord ender med et negativt tallverdi på
+              stacken som visst gjør at programmeta alltid spoler til "Ikke
+              riktig :("
+            </p>
+            <aside class="notes">
+              Maskinen har lest "tulleinput" inn i på stacken som
+              ASCII-tallverdier<br />
+
+              Siste linje med (73) er I, som i "Ikke riktig :("
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Forsøk med lengre og lengre tullepassord passord viste seg å gi
+              resultat
+            </p>
+            <p>Hvis passordet er 34 tegn langt...</p>
+          </section>
+
+          <section>
+            <p>Passord "tulleinput123456789123456789123456" gir:</p>
+            <pre><code class="shell smaller" data-trim data-noescape>
+            (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
+            🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(34) (...)
+            🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(0),<span class="fragment highlight-green">34</span> (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,119,(34) (...)
+            🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
+            🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,(119),34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,(42),34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,42,(34) (...)
+            (...)
+        </code></pre>
+            <p>
+              34 er der igjen! Passordet mitt er 34 tegn langt. Er det en
+              passordlengdesjekk? Vi kom nå også til 🥚 som gjør XOR-operasjoner
+              mellom to stack-verdier
+            </p>
+          </section>
+
+          <section>
+            <p>
+              ASCII-tegnet til tallet <b>34</b> er
+              <span class="fragment highlight-green">"</span> (hermetegn)
+            </p>
+            <p>
+              I teksten vi fant (<span class="fragment highlight-green"
+                >Passord: "w*4*D*T*W(...)</span
+              >) finner vi <b>"</b> 😮
+            </p>
+            <p>Vi har funnet programmets hardkodede passordlengde!</p>
+          </section>
+
+          <section>
+            <p>
+              Så vi vet passordets lengde og det ble gjort en XOR-operasjon med
+              verdier på stacken denne gangen.
+            </p>
+            <pre><code class="shell smaller" data-trim data-noescape>
+              (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
+              🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(34) (...)
+              🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,<span class="fragment highlight-green">(0)</span>,34 (...)
+              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
+              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,119,(34) (...)
+              🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,<span class="fragment highlight-green">54,(119)</span>,34 (...)
+              🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,<span class="fragment highlight-green">65</span>,(119),34 (...)
+              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,(42),34 (...)
+              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,42,(34) (...)
+              (...)
+            </code></pre>
+            <p>
+              At gjeldende stack-verdi er "0" når 🐇 operasjonen kjøres gjør
+              visst at vi kommer litt videre
+            </p>
+            <aside class="notes">
+              Vi vet nå at passordets lengde er 34 tegn langt. Da kjører
+              programmet videre og gjør XOR-operasjoner med innholdet på
+              stacken, altså passordet vårt. Det viser seg også at
+              kaninen-operanden alltid har "0" som gjeldende stack-verdi når det
+              XOR-es.<br /><br />
+
+              Her blir første tegn i chifferteksten ("w", 119) XOR'et med siste
+              tegn i passordet jeg oppga ("6", 54). Så krypteringsalgoritmen
+              ligger foran oss her, vi må bare forstå hva operandene i
+              programmet gjør med dataene i stacken
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              I merkelig.py hopper kaninen alltid videre til feilmeldingsteksten
+              hvis gjeldende verdi på stacken er forskjellig fra "0"
+            </p>
+            <pre><code class="python" data-trim data-noescape>
+              elif op == "🐇":
+              sp -= 1
+              if stack[sp] != 0:
+                  pc += parse_num(code[pc:pc+4])
+              else:
+                  pc += 4
+            </code></pre>
+            <p class="fragment">
+              Klarer vi å få "0" til å være gjeldende stack-verdi så hopper den
+              videre til programmets neste instruks og går ikke til feilmelding
+            </p>
+            <aside class="notes">
+              Kaninen er nøkkelen for å komme videre. Hvis den er noe annet enn
+              0, så leses en ny instruks fra underfundig-programmet og det
+              hoppes etterhvert mot "Ikke riktig"-feilmeldingen (NESTE)<br /><br />
+
+              Vi ser at hvis gjeldende verdi på stacken når kaninen-operanden
+              blir kjørt er 0, så kjøres programmet videre
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Hvordan regne oss fram til at 🐇 operasjonen får "0" som gjeldende
+              stack-verdi?
+            </p>
+            <pre
+              class="less-spacing"
+            ><code class="shell smallest" data-trim data-noescape>
+              🥚:(...) 53,54,(119),34 (...) # 4. Hvis z er 10, så må 119 XOR 10 = 125 = }
+              🥚:(...) 53,z,(119),34 (...)
+              🐰:(...) 53,z,(42),34 (...)
+              🐰:(...) 53,z,42,(34) (...)
+              🌱:(...) 53,z,(42),34 (...) # 3. Her må z være 10, fordi 10 + 42 må bli 52
+              🌱:(...) 53,y,(42),34 (...)
+              🌱:(...) 53,y,(42),34 (...)
+              🐥:(...) 53,107,(y),34 (...)
+              🐥:(...) 53,107,y,(34) (...)
+              🐰:(...) 53,107,y,(52) (...)
+              🐰:(...) 53,107,y,52,(0) (...)
+              🌻:(...) 53,107,y,(52) (...) # 2. Her må y være 52, fordi 52 - 52 må bli 0
+              🌻:(...) 53,107,x,(52) (...)
+              🌻:(...) 53,107,x,(52) (...)
+              🐇:(...) 53,107,(x),52 (...) # 1. x skal være 0
+            </code></pre>
+            <p class="fragment">
+              119 XOR (52-42) = 125, dvs. ASCII-tegnet blir
+              <span class="fragment highlight-green">}</span> 😎
+            </p>
+            <aside class="notes">
+              Hvordan skal vi sørge for at kaninen ikke hopper videre? Vi må ha
+              0 på nederste stack-verdi når kanin-operasjonen blir kjørt. Hvis
+              vi regner oss bakover fra kaninen og oppover i stack-verdiene:<br />
+              * 1. x må være 0<br />
+              * 2. y må være 52 fordi her er operasjonen subtraksjon: 52 minus
+              52 = 0.<br />
+              * 3. z må være 10 fordi her er operasjonen addering: 10 + 42 må
+              bli 52<br />
+              * 4. Hvis z er 10, så kan vi regne oss til forventet det siste
+              forventete riktige passordtegnet (NESTE)<br /><br />
+
+              119 XOR 10 = 125 (NESTE), krøllparantes.
+            </aside>
+          </section>
+
+          <section>
+            <h3>Algoritmen</h3>
+            <p>Chiffertekst: w*4*D*T*W*J*7*A*Y*f*`*j (...)</p>
+            <p class="fragment">
+              w XOR (n+2 - n+1) = ?<br />
+              w XOR (4-*) = ? <br />
+            </p>
+            <p class="fragment">
+              med ASCII-tallverdier blir regnestykket:<br />
+              119 XOR (52-42) = ?<br />
+              119 XOR 10 = <span class="fragment highlight-green">125</span>,
+              dvs. tegnet
+              <span class="fragment highlight-green">}</span>
+            </p>
+            <aside class="notes">
+              Algoritmen vi kommer fram til blir (NESTE):<br />
+
+              * ta første tegn, XOR det med tegnet 2 plasser bort minus tegnet 1
+              plass bort. Svaret i ASCII-tallverdi blir første dekrypterte
+              bokstav!<br />
+              * w XOR med (tegnet 4 - tegnet "asteriks")<br />
+              * 119 XOR med (52 minus 42), som vil si 119 XOR 10 = 125, som er
+              tegnet høyre-krøllparentes
+            </aside>
+          </section>
+
+          <section>
+            <h3>Algoritmen</h3>
+            <p>Chiffertekst: w*4*D*T*W*J*7*A*Y*f*`*j (...)</p>
+            <p class="fragment">
+              4 XOR (n+2 - n+1) = ?<br />
+              4 XOR (D-*) = ? <br />
+            </p>
+            <p class="fragment">
+              med ASCII-tallverdier blir regnestykket:<br />
+              52 XOR (68-42) = ?<br />
+              52 XOR 26 = <span class="fragment highlight-green">46</span>,
+              alstå tegnet
+              <span class="fragment highlight-green">.</span>
+            </p>
+            <aside class="notes">
+              Vi gjentar for neste tegn 4<br />
+
+              * 4 XOR med (tegnet D - tegnet "asteriks")<br />
+              * 52 XOR med (68 minus 42), som vil si 52 XOR 26 = 46, som er
+              tegnet punktum
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Vi håndregner oss fram til vi har et par bokstaver i passordet:
+            </p>
+            <p class="fragment highlight-green"><b>}.nywG</b></p>
+            <br />
+            <h3 class="fragment fade-up">🤔</h3>
+            <aside class="notes">
+              Vi regner ut et par tegn til og får:<br />
+
+              * krøllparentes <br />
+              * punktum nywG<br /><br />
+
+              Må innrømme at det ser litt gresk ut, hadde håpet på noe som
+              lignet på passordet nå
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              På tide å kode dette istedet. Vi lager et Python-skript som bruker
+              algoritmen vår til å dechiffrere resten av chifferteksten
+            </p>
+          </section>
+
+          <section>
+            <p>Dechiffrerer chifferteksten (løsning.py)</p>
             <pre><code class="python" data-trim data-noescape>
               deciphered_cipher_raw = decipher(text)
 
@@ -732,18 +1008,20 @@
               dechiffrerte flagget og gir chifferteksten vi fikk istad som input
             </aside>
           </section>
+
           <section>
             <h3>}.nywG neP .nywG re nvan ttiM{TSHP</h3>
             <aside class="notes">
-              Vi er nesten i mål! Hva må vi gjøre her?<br /><br />
+              Det ser faktisk veldig lovende ut! Men hva må vi gjøre her?<br /><br />
 
-              Du ser at flaggformatet her ikke er helt riktig. Se mot høyreenden
-              av teksten. Stemmer, den er bakvendt! Så for å få riktig
-              flaggformat med "PHST{" osv. så må reversere teksten
+              Du ser at flaggformatet her ikke er helt riktig. <br />
+              Stemmer, den er bakvendt! For å få riktig flaggformat så må
+              reversere teksten
             </aside>
           </section>
+
           <section>
-            <p>Vi snur om på rekkefølgen på teksten</p>
+            <p>Vi snur om på rekkefølgen på teksten...</p>
             <pre><code class="python smaller" data-trim data-noescape>
               deciphered_cipher = deciphered_cipher_raw[::-1]
 
@@ -759,6 +1037,7 @@
               Mitt navn er Gwyn. Pen Gwyn
             </aside>
           </section>
+
           <section data-source="leo_reversing">
             <img
               data-src="img/leo_reversing.JPG"

@@ -6,7 +6,7 @@ base = len(digits)
 
 # HWM START: Create DEBUG-file
 output_file = open(
-    "ctf.phst.no/andre_påskedag/underfundig_debug", "w", encoding="utf-8")
+    "underfundig_debug", "w", encoding="utf-8")
 
 
 def print_debug(op, sp, stack):
