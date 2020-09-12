@@ -14,7 +14,7 @@ def parse_num(code):
 
 
 def write_decoded_commands(characters):
-    with open("ctf.phst.no\\løsning\\underfundig_som_kommandoer_output", "w", encoding="utf-8") as output_file:
+    with open("ctf.phst.no\\løsning\\underfundig_dekompilering_output", "w", encoding="utf-8") as output_file:
 
         group = []
         pc = 0

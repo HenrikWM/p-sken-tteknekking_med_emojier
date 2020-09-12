@@ -516,19 +516,28 @@
           <section>
             <h2>Dekompilering</h2>
           </section>
+
+          <section>
+            <p>
+              For å lage et dekompileringsskript må vi forstå
+              underfundig-programmet
+            </p>
+          </section>
+
           <section>
             <p>Finner vi et mønster i emojiene?</p>
             <p class="fragment fade-up">🐰🎮🍫🎮🎲🐤🐰🍫🎨🎮🎲🐤🐰🍫🍫🎧🎲🐤</p>
+            <p>-</p>
             <p class="fragment fade-up">🐰🐥🌱🌻🐇🥚🐤🐣🌞</p>
+            <p>=</p>
             <p class="fragment fade-up">🎮🍫🎮🎲🍫🎨🎮🎲🍫🍫🎧🎲</p>
 
-            <!-- Visualisere/outputte hva emojiene blir brukt til -->
             <aside class="notes">
-              Kanskje kan vi finne et mønster i emojiprogrammet? (NESTE)
+              Kanskje kan vi finne et mønster i underfundig-emojiene? (NESTE)
               <br /><br />
 
               * Dette er de første emojiene fra underfundig-filen...(NESTE)<br />
-              * Hvis vi trekker fra de operand-emojiene vi vet er
+              * Hvis vi trekker fra de operand-emojiene som vi vet er
               programinstruksjoner (NESTE)<br />
               * Hva sitter vi igjen med da?<br /><br />
 
@@ -536,58 +545,47 @@
               og tall)?
             </aside>
           </section>
+
           <section>
-            <p>I merkelig.py så vi...</p>
-            <pre><code class="python" data-trim data-noescape>
-              if op == "🐰":
-                stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 tegn
-                sp += 1
-                pc += 4
-            </code></pre>
-            <p>... leses 4 tegn av gangen</p>
+            <p>
+              Vi vet hva som er operander: <br />
+              🐰🐥🌱🌻🐇🥚🐤🐣🌞
+            </p>
+            <br />
+            <p>Vi vet hva som er data: <br />🎲🍫🎮🎧🎨🍬</p>
             <aside class="notes">
-              Det vi ser på hare-operanden er at den virtuelle maskinen vår
-              leser inn 4 tegn av gangen.<br /><br />
-
-              Og tilbake fra "parse_num" får vi et tall...<br /><br />
-
-              Hva hvis de data-emojiene 4 og 4 av gangen er tall?
+              Vi vet nå hvilke emojier som er operander og hvilke som er data.
+              Nå har vi det vi trenger for å dekompilere programmet
             </aside>
           </section>
-          <section>
-            <p>På tide å lage et hjelpeskript:</p>
-            <ul>
-              <li class="fragment">
-                Vi vet hva operandene er (programmets instrukser)
-              </li>
-              <li class="fragment">
-                Vi vet hva den virtuelle maskinen gjør per operand (push, pop,
-                jmp osv.)
-              </li>
-              <p class="fragment">
-                Vi kan generere en fil med "pseudo-kode" som gjør det lettere å
-                forstå underfundig-programmet, og skrive ut operander og data
-                slik at vi kan lettere tolke hva programmet gjør
-              </p>
-            </ul>
-          </section>
 
           <section>
+            <p>
+              Vi lager et Python-skript som genererer en fil med dekompilert
+              "pseudo-kode"
+            </p>
             <pre><code class="python" data-trim data-noescape>
-              > python .\underfundig_som_kommandoer.py .\underfundig
+              > python .\underfundig_dekompilering.py .\underfundig
             </code></pre>
+            <aside class="notes">
+              Vi lager skriptet <b>underfundig_dekompilering.py</b> til å skrive
+              ut peudo-kode, dvs. noe menneskelesbar kode som gjør at vi enklere
+              kan forstå hva programmet gjør<br /><br />
+
+              Skriptet tar underfundig-filen inn som parameter og dekoder
+              emojiene til lesbare kommandoer og dataverdier
+            </aside>
           </section>
 
           <section>
             <img
-              data-src="img/underfundig_som_kommandoer.png"
+              data-src="img/underfundig_dekompilert.png"
               class="plain"
               style="width: 30%"
             />
             <aside class="notes">
-              Programmet har lest underfundig-filen og den skriver ut linje for
-              linje operandene og emoji-gruppene på 4, som er data programmet
-              bruker.
+              Og da får vi dette! Programmet har skrevet ut linje for linje alle
+              operandene og emoji-dataene
               <br /><br />
 
               * På steg 0 i programtelleren: Hare leser inn de neste 4 emojiene
@@ -608,7 +606,26 @@
           </section>
 
           <section>
-            <p>Data-emojienes tallverdier ser ut til å være tekst!</p>
+            <p>I merkelig.py så vi:</p>
+            <pre><code class="python" data-trim data-noescape>
+              if op == "🐰":
+                stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 emojier
+                sp += 1
+                pc += 4
+            </code></pre>
+            <p>🐰 leser 4 emojier av gangen</p>
+            <aside class="notes">
+              Vi har forstått at hare-operanden i den virtuelle maskinen vår
+              leser inn 4 tegn av gangen<br /><br />
+
+              Og tilbake fra "parse_num"-funksjonen får vi et tall...<br /><br />
+
+              Hva slags tall er disse 4 og 4 data-emojiene tro?
+            </aside>
+          </section>
+
+          <section>
+            <p>Data-emojiene ser ut til å være tekst!</p>
             <table>
               <tr>
                 <td></td>
