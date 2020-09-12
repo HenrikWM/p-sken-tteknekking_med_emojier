@@ -363,6 +363,31 @@
           </section>
 
           <section>
+            <p>Vår virtuelle maskin, som en ekte CPU, kjører instrukser programmet gir den</p>
+            <table class="fragment">
+              <th><td>Operand (CPU-instruks)</td><td>Operand (emoji)</td></th>
+              <tr><td></td><td>jmp</td><td>🐇</td></tr>
+              <tr><td></td><td>push</td><td>🐥</td></tr>
+              <tr><td></td><td>pop_sub</td><td>🌻</td></tr>
+              <tr><td></td><td>pop_add</td><td>🌱</td></tr>
+              <tr><td></td><td>xor</td><td>🥚</td></tr>
+              <tr><td></td><td>...</td><td>...</td></tr>
+            </table>
+            <aside class="notes">
+              Vi ser at operandene i den virtuelle maskinen tilsvarer kjente CPU-instrukser, dvs emojiene er kompilert til en slags assemblyspråk (NESTE).<br/>
+
+              Vi kan utlede at:<br/>
+              * hare jumper/"hopper" til neste programinstruks<br/>
+              * push på stacken er kylling<br/>
+              * pop av stacken og subtrahering er solsikke<br/>
+              * pop av stacken med addering er palme<br/>
+              * xor er egg (XOR ofte brukt til å kryptere noe... hmmmm interessant)<br/><br/>
+
+              Vi kan bruke dette i dekompileringen vi må gjøre
+            </aside>
+          </section>
+
+          <section>
             <h3>Stack-basert virtuell maskin</h3>
             <p>Et program som kjøres på en virtuell maskin</p>
             <aside class="notes">
@@ -418,7 +443,7 @@
 
         <section>
           <section>
-            <h2>Forstå hva merkelig.py gjør</h2>
+            <h2>Dekompilering</h2>
           </section>
           <section>
             <p>Finner vi et mønster i emojiene?</p>
