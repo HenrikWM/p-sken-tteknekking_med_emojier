@@ -199,6 +199,7 @@
               Også er det jo en haug med emojis oppi det hele som jo er litt gøy
             </aside>
           </section>
+
           <section>
             <h3>Vi har fått 3 filer</h3>
             <ul>
@@ -232,7 +233,7 @@
             <h2>Analyse</h2>
           </section>
           <section>
-            <p>paskekyllingbetjenter.png</p>
+            <h3>paskekyllingbetjenter.png</h3>
             <img
               data-src="img/paskekyllingbetjenter.png"
               class="plain"
@@ -251,6 +252,7 @@
               <b>Steganografi</b>-analyse!
             </aside>
           </section>
+
           <section>
             <img
               data-src="img/paskekyllingbetjenter_stegsolve.gif"
@@ -271,7 +273,7 @@
           </section>
 
           <section>
-            <p>underfundig</p>
+            <h3>underfundig</h3>
             <img
               data-src="img/underfundig_emojis.png"
               class="plain"
@@ -288,16 +290,47 @@
               Det er ikke så mye mer å finne ut her, så vi ser på siste fil.
             </aside>
           </section>
+
           <section>
-            <p>merkelig.py</p>
+            <h3>merkelig.py</h3>
+            <pre><code class="python" data-trim data-noescape>
+              > python .\merkelig.py .\underfundig
+              Passord:
+            </code></pre>
+            <aside class="notes">
+              <b>merkelig.py</b> er et Python-skript. Når vi kjører skriptet så
+              spør det etter et passord
+            </aside>
+          </section>
+
+          <section>
+            <pre><code class="python" data-trim data-noescape>
+              > python .\merkelig.py .\underfundig
+              Passord: pangea
+              Ikke riktig :(
+            </code></pre>
+            <p class="fragment fade-up">Må finne passordet!</p>
+            <br />
+            <h3 class="fragment fade-up">🤔</h3>
+            <aside class="notes">
+              Og alle forsøk på å gjette passordet blir feil (NESTE)<br /><br />
+
+              Tydeligvis er målet er å finne passordet (NESTE)<br /><br />
+
+              Så vi må begynne å lete litt mer grundig...
+            </aside>
+          </section>
+
+          <section>
+            <h3>merkelig.py</h3>
             <img
               data-src="img/merkelig_py_1.png"
               class="plain"
               style="width: 70%"
             />
             <aside class="notes">
-              Dette er et Pyton-skript og vi må forsøke å forstå hva den
-              gjør.<br /><br />
+              Vi må se nærmere på Pyton-skriptet og vi må forsøke å forstå hva
+              den gjør.<br /><br />
 
               * Vi ser enkelte emojier defineres med en tall-verdi <br />
               * Vi ser en funksjon <b>parse_num</b> som gjør om input til et
@@ -312,8 +345,9 @@
               <b>sp</b>
             </aside>
           </section>
+
           <section>
-            <p>merkelig.py</p>
+            <h3>merkelig.py</h3>
             <img
               data-src="img/merkelig_py_2.png"
               class="plain"
@@ -321,12 +355,13 @@
             />
             <aside class="notes">
               Hmm. Videre ned i skriptet ser vi at dette kjøres i en
-              while-loop.<br /><br />
+              while-løkke.<br /><br />
 
-              Og når vi ser hva <b>op</b> brukes til i hver loop-iterasjon
-              begynner dette å bli klart hva vi har.
+              Og når vi ser hva <b>op</b> brukes til i hver runde i while-løkken
+              begynner dette å bli klart hva vi har her.
             </aside>
           </section>
+
           <section>
             <h3>Stack-basert virtuell maskin</h3>
             <p>Et program som kjøres på en virtuell maskin</p>
@@ -343,34 +378,33 @@
               virtuelle maskinen har i "minnet" når programmet kjører
             </aside>
           </section>
-          <section>skisse</section>
 
           <section>
-            <!-- definere problemet og mål -->
-            <p>Vi må forstå hva programmet gjør</p>
-          </section>
-
-          <section>
-            <p>Vi prøver å kjøre skriptet - ber om passord</p>
-            <pre><code class="python" data-trim data-noescape>
-              > python .\merkelig.py .\underfundig
-              Passord:
-            </code></pre>
+            <p>
+              underfundig er et program som er
+              <span class="fragment highlight-green">kompilert</span> til
+              emojier
+            </p>
+            <p class="fragment">
+              kan vi <span class="fragment highlight-green">dekompilere</span>
+              programmet tilbake til menneskelesbar kildekode?
+            </p>
             <aside class="notes">
-              Når vi kjører skriptet så spør det etter et passord
-            </aside>
-          </section>
-          <section>
-            <p>Passordet var feil :(</p>
-            <pre><code class="python" data-trim data-noescape>
-              > python .\merkelig.py .\underfundig
-              Passord: pangea
-              Ikke riktig :(
-            </code></pre>
-            <aside class="notes">
-              Og det feiler uansett hva man gir som input <br /><br />
+              Når man lager programmer så kompilerer (NESTE) man kildekoden med
+              en kompilator som omgjør menneskelesbar kode til lavnivå
+              programinstrukser som PCens CPU (hjerne) kan forstå og kjøre<br /><br />
 
-              Ser ut til at vi må finne et passord for å komme i mål
+              underfundig kan man si er "kompilert" til emojier slik at den kan
+              kjøres på denne virtuelle maskinen i
+              <b>merkelig.py</b> (NESTE)<br /><br />
+
+              Hvis vi kan reversere (NESTE) kompileringen fra emojier tilbake
+              til kildekode... Dette kalles "reversing" eller "reverse
+              engineering" på fagspråket<br /><br />
+
+              Når vi har gjort dette så klarer vi kanskje å forstå kildekoden og
+              hva den gjør, kanskje til og med finne passordet vi er på jakt
+              etter.
             </aside>
           </section>
         </section>
