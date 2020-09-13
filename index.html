@@ -293,6 +293,7 @@
 
           <section>
             <h3>merkelig.py</h3>
+            <p>Vi tester ut programmet:</p>
             <pre><code class="python" data-trim data-noescape>
               python .\merkelig.py .\underfundig
               Passord:
@@ -304,11 +305,13 @@
           </section>
 
           <section>
-            <pre><code class="python" data-trim data-noescape>
+            <p>Spurt om et passod, angir et tilfeldig passord <b>123456</b>:</p>
+            <pre><code class="shell" data-trim data-noescape>
               python .\merkelig.py .\underfundig
-              Passord: pangea
+              Passord: 123456
               Ikke riktig :(
             </code></pre>
+            <p>åpenbart feil passord :(</p>
             <p class="fragment fade-up">Må finne passordet!</p>
             <br />
             <h3 class="fragment fade-up">🤔</h3>
@@ -329,6 +332,8 @@
               style="width: 70%"
             />
             <aside class="notes">
+              TODO: sirkler rundt innhold!
+
               Vi studerer Pyton-skriptet litt nærmere.<br /><br />
 
               * Vi ser enkelte emojier defineres med en tall-verdi <br />
@@ -353,6 +358,8 @@
               style="width: 80%"
             />
             <aside class="notes">
+              TODO: sirkler rundt innhold!
+
               Hmm. Videre ned i skriptet ser vi at dette kjøres i en
               while-løkke<br /><br />
 
@@ -472,6 +479,7 @@
               </tbody>
             </table>
             <aside class="notes">
+              TODO: mappe fra instruks til emoji-dataene
               Har man erfaring med assembly-språk og lavnivå programmering så
               kjenner man igjen hva operandene i vår virtuelle maskin
               (merkelig.py) tilsvarer:<br /><br />
@@ -479,7 +487,7 @@
               * operanden Kanin "hopper" (jump) til neste maskininstruks<br />
               * push (legge data på stacken) er kylling<br />
               * pop (ta data av stacken) med subtrahering er solsikke<br />
-              * pop (ta data av stacken) med addering er palme<br />
+              * pop (ta data av stacken) med addering er spire<br />
               * xor (en maskininstruks som regner på to faktorer) er egg. XOR
               ofte brukt i forbindelse med kryptering... hmmmm interessant<br /><br />
 
@@ -534,12 +542,19 @@
 
           <section>
             <p>Finner vi et mønster i emojiene?</p>
-            <p class="fragment fade-up">🐰🎮🍫🎮🎲🐤🐰🍫🎨🎮🎲🐤🐰🍫🍫🎧🎲🐤</p>
-            <p>-</p>
-            <p class="fragment fade-up">🐰🐥🌱🌻🐇🥚🐤🐣🌞</p>
-            <p>=</p>
-            <p class="fragment fade-up">🎮🍫🎮🎲🍫🎨🎮🎲🍫🍫🎧🎲</p>
+            <div class="fragment fade-up">
+              <p>🐰🎮🍫🎮🎲🐤🐰🍫🎨🎮🎲🐤🐰🍫🍫🎧🎲🐤</p>
+              <p>-</p>
+            </div>
 
+            <div class="fragment fade-up">
+              <p>🐰🐥🌱🌻🐇🥚🐤🐣🌞</p>
+              <p>=</p>
+            </div>
+
+            <div class="fragment fade-up">
+              <p>🎮🍫🎮🎲🍫🎨🎮🎲🍫🍫🎧🎲</p>
+            </div>
             <aside class="notes">
               Kanskje kan vi finne et mønster i underfundig-emojiene? (NESTE)
               <br /><br />
@@ -1143,7 +1158,7 @@
             <img
               data-src="img/leo_reversing.JPG"
               class="plain"
-              style="width: 70%"
+              style="width: 60%"
             />
             <aside class="notes">
               Vi er i mål! Jeg syns vi kan være litt stolte av å ha dekompilert
