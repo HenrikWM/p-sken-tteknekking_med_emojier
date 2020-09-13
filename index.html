@@ -187,16 +187,16 @@
               Og oppgaven jeg har tenkt å vise dere heter "Andre påskedag"
               <br /><br />
 
-              Grunnen til at jeg ønsket å vise frem nettopp denne er fordi den
-              tester deg på de egenskapene man trenger å være god på for å være
-              en kodeknekker: <br /><br />
+              Grunnen til at jeg ønsker å vise dere akkurat denne oppgaven er
+              fordi ikke bare var den morsom, den utfordrer deg også på viktige
+              egenskaper man trenger som problemløser og kodeknekker:<br /><br />
 
               * analytisk <br />
               * bryte ned problemet<br />
               * kunne verktøyene<br />
               * forstå fagteorien bak problemstillingen vi må løse<br /><br />
 
-              Også er det jo en haug med emojis oppi det hele som jo er litt gøy
+              Så er det jo også en haug med emojis her som jo er litt spennende!
             </aside>
           </section>
 
@@ -284,17 +284,17 @@
               her)<br /><br />
 
               Tydeligvis noe mening med dette. Vi ser noen emojier repeteres,
-              noen bare forekommer en gang. Hva kan disse påskekyllingbetjentene
-              ha enkodet her som emojis? <br /><br />
+              noen bare forekommer en gang. Hva er de vi har her som er enkodet
+              som emojier? <br /><br />
 
-              Det er ikke så mye mer å finne ut her, så vi ser på siste fil.
+              Ellers er ikke så mye mer å finne ut her, så vi ser på siste fil.
             </aside>
           </section>
 
           <section>
             <h3>merkelig.py</h3>
             <pre><code class="python" data-trim data-noescape>
-              > python .\merkelig.py .\underfundig
+              python .\merkelig.py .\underfundig
               Passord:
             </code></pre>
             <aside class="notes">
@@ -305,7 +305,7 @@
 
           <section>
             <pre><code class="python" data-trim data-noescape>
-              > python .\merkelig.py .\underfundig
+              python .\merkelig.py .\underfundig
               Passord: pangea
               Ikke riktig :(
             </code></pre>
@@ -329,8 +329,7 @@
               style="width: 70%"
             />
             <aside class="notes">
-              Vi må se nærmere på Pyton-skriptet og vi må forsøke å forstå hva
-              den gjør.<br /><br />
+              Vi studerer Pyton-skriptet litt nærmere.<br /><br />
 
               * Vi ser enkelte emojier defineres med en tall-verdi <br />
               * Vi ser en funksjon <b>parse_num</b> som gjør om input til et
@@ -338,8 +337,8 @@
               <br />
               * Vi ser at <b>underfundig</b>-filen med alle emojiene kreves som
               input for å kjøre<br />
-              * Vi ser en "stack" bli definert som et 256-plasser stor array
-              (list) <br /><br />
+              * Vi ser en "stack" bli definert som et 256-plasser stort
+              register<br /><br />
 
               Vi legger merke til variabelnavnene: <b>pc</b>, <b>stack</b> og
               <b>sp</b>
@@ -355,11 +354,11 @@
             />
             <aside class="notes">
               Hmm. Videre ned i skriptet ser vi at dette kjøres i en
-              while-løkke.<br /><br />
+              while-løkke<br /><br />
 
               Og når vi ser hva <b>op</b>, <b>sp</b>, <b>stack</b> osv. brukes
               til i hver runde i while-løkken, begynner dette å bli klart hva vi
-              har her.
+              har med å gjøre.
             </aside>
           </section>
         </section>
@@ -368,9 +367,7 @@
         <section>
           <section>
             <h2>Stack-basert virtuell maskin</h2>
-            <aside class="notes">
-              Det vi har her er en "Stack-basert virtuell maskin"
-            </aside>
+            <aside class="notes">En "Stack-basert virtuell maskin"</aside>
           </section>
 
           <section data-source="stack_machine">
@@ -383,14 +380,14 @@
             </blockquote>
             <aside class="notes">
               <b>merkelig.py</b>-skriptet er den virtuelle maskinen og
-              <b>underfundig</b>-filen er programmet den kjører:<br /><br />
-
+              <b>underfundig</b>-filen med emojier er programmet den kjører:<br /><br />
+              <!--
               * lese input fra bruker<br />
               * hoppe til neste instruks<br />
               * lagre data i minnet osv.<br />
 
               Og stacken brukes til å holde på data som den virtuelle maskinen
-              har i "minnet" når programmet kjører
+              har i "minnet" når programmet kjører -->
             </aside>
           </section>
 
@@ -399,7 +396,7 @@
             <ul class="fragment">
               <li>
                 <span class="fragment highlight-green">pc</span>: program
-                counter
+                counter (programteller)
               </li>
               <li>
                 <span class="fragment highlight-green">stack</span>: register
@@ -407,25 +404,31 @@
               </li>
               <li>
                 <span class="fragment highlight-green">sp</span>: stack pointer
+                (peker på gjeldende posisjon i stacken)
               </li>
-              <li><span class="fragment highlight-green">op</span>: operand</li>
+              <li>
+                <span class="fragment highlight-green">op</span>: operand
+                (maskininstruksjoner: <b>pop</b>, <b>push</b>, <b>jmp</b> osv.)
+              </li>
             </ul>
             <aside class="notes">
               Kjennetegnene til en stack-basert virtuell maskin er:
-              (NESTE)(NESTE)<br />
+              (NESTE)(NESTE)<br /><br />
 
               * PC er programtelleren, også kalt instruksjonspeker, som holder
               styr på rekkefølgen av instruksjoner som kjøres (NESTE)<br />
 
-              * STACK er registeret som inneholder programmets data som den gjør
-              operasjoner på (NESTE)<br />
+              * STACKen er registeret hos den virtuelle maskinen som inneholder
+              oversikt på programmets data og instruksjoner (NESTE)<br />
 
-              * SP er gjeldende posisjonen i STACKEN, så programmet vet hvor i
-              STACK-registeret den kan finne neste data å gjøre operasjoner med
-              (NESTE)<br />
+              * SP er gjeldende posisjonen i STACKen, så programmet vet hvor i
+              STACK-registeret den kan finne neste data eller instruksjon å
+              jobbe med (NESTE)<br />
 
-              * OP er operanden (instruksjonen) som maskinen skal utføre (f.eks.
-              pop, push, jmp, xor osv som er vanlige maskininstrukser)
+              * OP er operanden (instruksjonen) som programmet ønsker at
+              maskinen skal utføre (f.eks. <b>pop</b> noe av stacken,
+              <b>push</b> noe oppå stacken, <b>jmp</b> hopper til neste
+              instruksjon osv.)
             </aside>
           </section>
 
@@ -437,30 +440,30 @@
             <table>
               <thead>
                 <tr>
-                  <th>Operand</th>
-                  <th>Tilsvarer emoji</th>
+                  <th>Emoji-operand</th>
+                  <th>Tilsvarer instruksjon</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>jmp</td>
                   <td>🐇</td>
+                  <td>jmp</td>
                 </tr>
                 <tr>
-                  <td>push</td>
                   <td>🐥</td>
+                  <td>push</td>
                 </tr>
                 <tr>
-                  <td>pop_sub</td>
                   <td>🌻</td>
+                  <td>pop_sub</td>
                 </tr>
                 <tr>
-                  <td>pop_add</td>
                   <td>🌱</td>
+                  <td>pop_add</td>
                 </tr>
                 <tr>
-                  <td>xor</td>
                   <td>🥚</td>
+                  <td>xor (⊕)</td>
                 </tr>
                 <tr>
                   <td>...</td>
@@ -469,19 +472,19 @@
               </tbody>
             </table>
             <aside class="notes">
-              Vi ser at operandene som utføres på den virtuelle maskinen
-              tilsvarer kjente instrukser som push, pop, jump, XOR osv.<br /><br />
+              Har man erfaring med assembly-språk og lavnivå programmering så
+              kjenner man igjen hva operandene i vår virtuelle maskin
+              (merkelig.py) tilsvarer:<br /><br />
 
-              Ved å studere <b>merkelig.py</b> kan vi utlede at:<br />
-              * kaninen jumper/"hopper" til neste programinstruks<br />
-              * push på stacken er kylling<br />
-              * pop av stacken og subtrahering er solsikke<br />
-              * pop av stacken med addering er palme<br />
-              * xor er egg (XOR ofte brukt til å kryptere noe... hmmmm
-              interessant)<br /><br />
+              * operanden Kanin "hopper" (jump) til neste maskininstruks<br />
+              * push (legge data på stacken) er kylling<br />
+              * pop (ta data av stacken) med subtrahering er solsikke<br />
+              * pop (ta data av stacken) med addering er palme<br />
+              * xor (en maskininstruks som regner på to faktorer) er egg. XOR
+              ofte brukt i forbindelse med kryptering... hmmmm interessant<br /><br />
 
-              Nå vet vi at emojiene i <b>underfundig</b> er et program og hva en
-              del av emojiene betyr!
+              Nå vet vi at emojiene i <b>underfundig</b> er et program og at en
+              del av emojiene er maskininstruksjoner!
             </aside>
           </section>
 
@@ -497,16 +500,16 @@
             </p>
             <aside class="notes">
               Når man lager programmer så kompilerer (NESTE) man kildekoden med
-              en kompilator, som omgjør menneskelesbar kode til lavnivå
-              programinstrukser som maskinens kan forstå og kjøre<br /><br />
+              en kompilator, som omgjør menneskelesbar kildekode til lavnivå
+              maskininstrukser som maskinens kan forstå og kjøre<br /><br />
 
               underfundig kan man si er "kompilert" til emojier slik at den kan
               kjøres på denne virtuelle maskinen i
               <b>merkelig.py</b> (NESTE)<br /><br />
 
               Hvis vi kan reversere (NESTE) det kompilerte programmet tilbake
-              til kildekode, så kan vi kanskje forstå hva programmet gjør og
-              finne det passordet vi er på jakt etter
+              til menneskelesbar kildekode, så kan vi kanskje forstå hva
+              programmet gjør og finne det passordet vi er på jakt etter
             </aside>
           </section>
         </section>
@@ -520,8 +523,13 @@
           <section>
             <p>
               For å lage et dekompileringsskript må vi forstå
-              underfundig-programmet
+              underfundig-programmet litt bedre
             </p>
+            <aside class="notes">
+              Vi lærte at underfundig-programmet inneholder operander, men for å
+              dekompilere hele programmet må vi også vite hva resten av emojiene
+              er.
+            </aside>
           </section>
 
           <section>
@@ -536,9 +544,9 @@
               Kanskje kan vi finne et mønster i underfundig-emojiene? (NESTE)
               <br /><br />
 
-              * Dette er de første emojiene fra underfundig-filen...(NESTE)<br />
+              * Dette er de første emojiene i underfundig-filen...(NESTE)<br />
               * Hvis vi trekker fra de operand-emojiene som vi vet er
-              programinstruksjoner (NESTE)<br />
+              maskininstruksjoner (NESTE)<br />
               * Hva sitter vi igjen med da?<br /><br />
 
               Kan dette være data som programmet bruker på noen måte (bokstaver
@@ -552,7 +560,12 @@
               🐰🐥🌱🌻🐇🥚🐤🐣🌞
             </p>
             <br />
-            <p>Vi vet hva som er data: <br />🎲🍫🎮🎧🎨🍬</p>
+            <p>I <b>merkelig.py</b> så vi:</p>
+            <pre><code class="python" data-trim data-noescape>
+              digits = {"🎲": 0, "🍫": 1,  "🎮": 2, "🎧": 3, "🎨": 4, "🍬": 5}
+            </code></pre>
+            <br />
+            <p>Så vi vet at disse er data: <br />🎲🍫🎮🎧🎨🍬</p>
             <aside class="notes">
               Vi vet nå hvilke emojier som er operander og hvilke som er data.
               Nå har vi det vi trenger for å dekompilere programmet
@@ -561,19 +574,17 @@
 
           <section>
             <p>
-              Vi lager et Python-skript som genererer en fil med dekompilert
+              Vi lager et Python-skript som dekompilererer emojiene til
               "pseudo-kode"
             </p>
-            <pre><code class="python" data-trim data-noescape>
-              > python .\underfundig_dekompilering.py .\underfundig
+            <pre><code class="shell" data-trim data-noescape>
+              python .\underfundig_dekompilering.py .\underfundig
             </code></pre>
             <aside class="notes">
-              Vi lager skriptet <b>underfundig_dekompilering.py</b> til å skrive
-              ut peudo-kode, dvs. noe menneskelesbar kode som gjør at vi enklere
-              kan forstå hva programmet gjør<br /><br />
-
-              Skriptet tar underfundig-filen inn som parameter og dekoder
-              emojiene til lesbare kommandoer og dataverdier
+              Vi lager skriptet <b>underfundig_dekompilering.py</b> som
+              oversetter emojiene i underfundig-programmet til operander og
+              data. Forhåpentligvis er resultatet noe som gjør at vi kan lettere
+              forstå hva programmet gjør
             </aside>
           </section>
 
@@ -588,8 +599,8 @@
               operandene og emoji-dataene
               <br /><br />
 
-              * På steg 0 i programtelleren: Hare leser inn de neste 4 emojiene
-              fra STACK'en<br />
+              * Øverst på steg 0 i programmet: Hare leser inn de neste 4
+              emojiene fra STACK'en<br />
 
               * De 4 emojiene er data (tallverdi 80, 80 i ASCII-tabellen er
               bokstaven "P"). ASCII-tabellen er en liste over alle tegn på
@@ -598,22 +609,22 @@
               * På steg 5 i programtelleren: Kylling skriver "P" ut til
               terminalen min <br /><br />
 
-              Ved å lese denne filen nedover kan vi tolke hva
-              underfundig-programmet gjør.<br />
-              Jeg syns vi kan skimte ordet "Passord" vertikalt her? Vi er inne
-              på noe...
+              Så vi klarer nå å lese at det første programmet gjør er å skrive
+              ut "Passord:" til terminalen min, slik vi så det gjorde tidligere
+              da jeg testet å kjøre "merkelig.py" og ikke hadde oppgitt riktig
+              passord
             </aside>
           </section>
 
           <section>
-            <p>I merkelig.py så vi:</p>
+            <p>I <b>merkelig.py</b> så vi:</p>
             <pre><code class="python" data-trim data-noescape>
               if op == "🐰":
                 stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 emojier
                 sp += 1
                 pc += 4
             </code></pre>
-            <p>🐰 leser 4 emojier av gangen</p>
+            <p>🐰 leser 4 emojier av gangen og omgjør til et tall</p>
             <aside class="notes">
               Vi har forstått at hare-operanden i den virtuelle maskinen vår
               leser inn 4 tegn av gangen<br /><br />
@@ -652,7 +663,7 @@
             <aside class="notes">
               Vi har oppdaget at <b>underfundig</b>-programmet inneholder tekst!
               Her ser vi at rekkefølgen på data-emojiene gir oss "Pass", som vi
-              antar er "Passord"...<br />
+              antar er "Passord"...<br /><br />
 
               Kan vi lage et Python-skript som skriver ut all den skjulte
               teksten i hele
@@ -662,40 +673,52 @@
 
           <section>
             <p>
-              Vi henter ut alle bokstavene i underfundig-programmet
-              (underfundig_dekompilering.py)
+              Vi lager et nytt skript <b>løsning.py</b> som henter ut alle
+              bokstavene i underfundig-programmet:
             </p>
             <pre><code class="python" data-trim data-noescape>
               text = extract_text(underfundig_content)
 
               print(text)
               </code></pre>
+            og kjører skriptet:
+            <pre><code class="shell" data-trim data-noescape>
+              python .\løsning.py .\underfundig
+              </code>
+            </pre>
             <aside class="notes">
-              Vi kaller 'extract_text'-metoden for å hente ut alle bokstavene og
-              gir innholdet i underfundig-filen som input
+              Vi lager oss et nytt skript "løsning.py" som: <br />
+
+              * oversetter alle data-emojiene til tallverdier * og så gjør vi om
+              disse ASCII-tallverdiene ASCII-tegn slik at bokstavtallene blir
+              til bokstaver<br /><br />
+
+              Vi kaller kjører skriptet med underfundig-filen som input
             </aside>
           </section>
           <section>
             <h3>
               Passord:
-              w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer!
+              "w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer!
               Flagget vet du allerede :)\nIkke riktig :(\n
             </h3>
             <aside class="notes">
-              Dette er spennende! Vi ser all teksten som programmet
+              Dette er spennende! Vi ser vi all teksten som programmet
               inneholder!<br /><br />
 
               Vi kjenner igjen noe av teksten:<br />
-              * 'Passord:' er det programmet printer ut når den vil ha
+              * 'Passord: ' er det programmet printer ut når den vil ha
               passordet<br />
-              * så er det mange kryptiske tegn <br />
+              * så har vi et hermetegn * og så mange kryptiske tegn i ca.
+              strukturert form (annenhver tegn og stjerne)<br />
               * 'Gratulerer' og 'Ikke riktig'-teksten er teksten programmet gir
               oss ved galt eller riktig passord
               <br /><br />
 
               Siden vi vet at den lesbare teksten her er det programmet selv
-              printer ut, kan vi anta at det <b>ikke-lesbare teksten her</b> som
-              er selve chifferteksten vi er ute etter!
+              printer ut, er jeg veldig interessert i den
+              <b>ikke-lesbare teksten her</b> som jeg sterkt mistenker er den
+              krypterte chifferteksten (flagget) vi er ute etter!
             </aside>
           </section>
           <section>
@@ -704,12 +727,10 @@
             <br />
             <h3 class="fragment fade-up">🕵️‍♀️🕵️‍♂️</h3>
             <aside class="notes">
-              Dvs dette er chifferteksten og vår neste utfordring<br /><br />
+              Dvs. dette er chifferteksten og vår neste utfordring (NESTE)<br /><br />
 
               Vi trenger å forstå hvordan chifferteksten har blitt kryptert slik
-              at vi kan dekryptere den (NESTE)<br /><br />
-
-              Kanskje det er passordet som skjuler seg her?
+              at vi kan dekryptere den
             </aside>
           </section>
         </section>
@@ -740,7 +761,7 @@
             </p>
             <p>Da ser vi det samme som maskinen ser når programmet kjøres</p>
             <pre><code class="shell" data-trim data-noescape>
-              > python .\merkelig.py .\underfundig
+              python .\merkelig.py .\underfundig
               Passord: tulleinput
             </code></pre>
           </section>
