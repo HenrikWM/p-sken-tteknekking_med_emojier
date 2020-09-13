@@ -738,13 +738,7 @@
         <!-- =================== DEKRYPTERING =================== -->
         <section>
           <section>
-            <h2>Dekryptere chifferteksten</h2>
-          </section>
-
-          <section>Forstå mønsteret</section>
-
-          <section>
-            Forstå operasjonene på chifferteksten ved å lese stack-output
+            <h2>Dekryptering</h2>
           </section>
 
           <section>
@@ -752,63 +746,94 @@
               Målet vårt nå er å dekryptere chifferteksten til noe som matcher
               flaggformatet "PHST{...}"
             </p>
+            <aside class="notes">
+              Målet vårt nå er å se om vi kan dekryptere chifferteksten til noe
+              som matcher flaggformatet som CTF-oppgaven forventer: PHST{...}
+            </aside>
           </section>
 
           <section>
             <p>
-              Vi endrer litt på merkelig.py: for hver operand som kjøres så
-              printer vi ut hele stacken
+              Vi endrer litt på <b>merkelig.py</b>: for hver operand som kjøres
+              så printer vi ut hele stacken
             </p>
             <p>Da ser vi det samme som maskinen ser når programmet kjøres</p>
             <pre><code class="shell" data-trim data-noescape>
               python .\merkelig.py .\underfundig
               Passord: tulleinput
             </code></pre>
+            <aside class="notes">
+              Jeg er interessert i XOR-operanden vi så underfundig-programmet
+              brukte tidligere. Jeg mistenker den brukes til kryptering men jeg
+              må ha full oversikt over alt som skjer og dataverdier i stacken
+              når underfundig-programmet kjøres, for å forstå nøyaktig hva som
+              skjer<br /><br />
+
+              Så vi tilpasser merkelig.py slik at vi ser det samme maskinen ser
+              når underfundig-programmet kjøres<br /><br />
+
+              Vi kjører Python-skriptet igjen med et tullepassord slik at vår
+              oversikt kan genereres
+            </aside>
           </section>
 
           <section>
-            <p>Passord "tulleinput" gir denne stacken:</p>
+            <p>Passord <b>tulleinput</b> gir denne stacken:</p>
             <pre><code class="shell" data-trim data-noescape>
-              (...)
-                  t , u , l , l , e , i , n , p , u , t
-              🐣:116,117,108,108,101,105,110,112,117,116,(10) (...)
-              🐣:116,117,108,108,101,105,110,112,117,116,10,(0) (...)
-              🐰:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
-              🐰:116,117,108,108,101,105,110,112,117,116,10,34,(0) (...)
-              🌻:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
-              🌻:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">-24</span>,(34) (...)
-              🌻:116,117,108,108,101,105,110,112,117,116,1272,(34) (...)
-              🐇:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">(1272)</span>,34 (...)
-              🐰:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">(73)</span>,34
-              (...)
-    </code></pre>
+            (...)
+
+                t , u , l , l , e , i , n , p , u , t
+            🐣:116,117,108,108,101,105,110,112,117,116,(10) (...)
+            🐣:116,117,108,108,101,105,110,112,117,116,10,(0) (...)
+            🐰:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
+            🐰:116,117,108,108,101,105,110,112,117,116,10,34,(0) (...)
+            🌻:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
+            🌻:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">-24</span>,(34) (...)
+            🌻:116,117,108,108,101,105,110,112,117,116,1272,(34) (...)
+            🐇:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">(1272)</span>,34 (...)
+            🐰:116,117,108,108,101,105,110,112,117,116,<span class="fragment highlight-green">(73)</span>,34 (...)
+
+            (...)
+            </code></pre>
             <p>
               Alle forsøk med gale passord ender med et negativt tallverdi på
               stacken som visst gjør at programmeta alltid spoler til "Ikke
               riktig :("
             </p>
             <aside class="notes">
-              Maskinen har lest "tulleinput" inn i på stacken som
+              Så denne stacken, som er et 256-plasser stort register, er her
+              skrevet ut bortover mot høyre med 256 plasser med data. Stacken er
+              en "Last in, first out"-stack som betyr at plassen som er lengst
+              mot høyre er dataverdien som er sist lagt på stacken<br />
+
+              Her har underfundig-programmet har blitt kjørt og vi ser at
+              maskinen har lest passordet vårt "tulleinput" inn i på stacken som
               ASCII-tallverdier<br />
 
-              Siste linje med (73) er I, som i "Ikke riktig :("
+              (NESTE x3) Siste linje med (73) er I, som i "Ikke riktig :(" -
+              beskjeden vi får ved galt passord. Resten av stacken viser at
+              programmet skriver ut denne beskjeden til min terminal.
             </aside>
           </section>
 
           <section>
             <p>
-              Forsøk med lengre og lengre tullepassord passord viste seg å gi
-              resultat
+              Etter mange forsøk ulike passord med ulike lengder, og observasjon
+              av forandringer i stacken...
             </p>
-            <p>Hvis passordet er 34 tegn langt...</p>
+            <p class="fragment">Hvis passordet er 34 tegn langt...</p>
+            <aside class="notes">
+              Etter mye prøving og observasjon av stacken... (NESTE)<br />
+              hvis jeg testet et passord som var 34 tegn langt...
+            </aside>
           </section>
 
           <section>
-            <p>Passord "tulleinput123456789123456789123456" gir:</p>
+            <p>Passord <b>tulleinput123456789123456789123456</b> gir:</p>
             <pre><code class="shell smaller" data-trim data-noescape>
             (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
-            🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(34) (...)
-            🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(0),<span class="fragment highlight-green">34</span> (...)
+            🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,<span class="fragment highlight-green">(34)</span> (...)
+            🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(0),34 (...)
             🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
             🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,119,(34) (...)
             🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
@@ -816,12 +841,23 @@
             🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,(42),34 (...)
             🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,42,(34) (...)
             (...)
-        </code></pre>
-            <p>
+            </code></pre>
+            <p class="fragment">
               34 er der igjen! Passordet mitt er 34 tegn langt. Er det en
-              passordlengdesjekk? Vi kom nå også til 🥚 som gjør XOR-operasjoner
-              mellom to stack-verdier
+              passordlengdesjekk?
             </p>
+            <p class="fragment">
+              Og programmet kjørte litt lenger nå, vi har kommet til 🥚 (XOR)
+            </p>
+            <aside class="notes">
+              (NESTE) 34 er der igjen! Passordet mitt er 34 tegn langt (NESTE)
+              <br /><br />
+
+              Er det en passordlengdesjekk? (NESTE)<br /><br />
+
+              Programmet kjørte visst litt flere instrukser nå og vi ser egget
+              (XOR) blir brukt!
+            </aside>
           </section>
 
           <section>
@@ -830,18 +866,24 @@
               <span class="fragment highlight-green">"</span> (hermetegn)
             </p>
             <p>
-              I teksten vi fant (<span class="fragment highlight-green"
+              I teksten vi fant i underfundig-programmet: <br />
+              <span class="fragment highlight-green"
                 >Passord: "w*4*D*T*W(...)</span
-              >) finner vi <b>"</b> 😮
+              ><br />
+              finner vi <b>"</b>
             </p>
-            <p>Vi har funnet programmets hardkodede passordlengde!</p>
+            <p>Vi har funnet programmets hardkodede passordlengde! 😁</p>
+            <aside class="notes">
+              34 som ASCII-tegn er et hermetegn (NESTE) <br />
+              Og vi så at i teksten vi fant var hermetegn (NESTE) foran rekken
+              av tegn som hadde en viss struktur over seg.<br /><br />
+
+              Vi ser ut til å ha funnet programmets konstant for passordlengde!
+            </aside>
           </section>
 
           <section>
-            <p>
-              Så vi vet passordets lengde og det ble gjort en XOR-operasjon med
-              verdier på stacken denne gangen.
-            </p>
+            <p>Passord <b>tulleinput123456789123456789123456</b>:</p>
             <pre><code class="shell smaller" data-trim data-noescape>
               (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
               🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(34) (...)
@@ -855,53 +897,59 @@
               (...)
             </code></pre>
             <p>
-              At gjeldende stack-verdi er "0" når 🐇 operasjonen kjøres gjør
-              visst at vi kommer litt videre
+              Hvis gjeldende stack-verdi er "0" når 🐇 operanden kjøres, går den
+              videre til XOR-operanden
             </p>
+            <p class="fragment">119 ⊕ 54 = 65</p>
             <aside class="notes">
-              Vi vet nå at passordets lengde er 34 tegn langt. Da kjører
-              programmet videre og gjør XOR-operasjoner med innholdet på
-              stacken, altså passordet vårt. Det viser seg også at
-              kaninen-operanden alltid har "0" som gjeldende stack-verdi når det
+              Tilbake til det lange tullepassordet. Vi vet nå at passordets
+              lengde skal være 34 tegn langt. Da kjører programmet videre og
+              gjør XOR-operasjoner med innholdet på stacken, altså tegnene i
+              passordet vårt (NESTE)<br />
+              Det viser seg at det er en sammenheng her: kaninen-operanden har
+              alltid tallverdi "0" som gjeldende stack-verdi når det senere
               XOR-es.<br /><br />
 
-              Her blir første tegn i chifferteksten ("w", 119) XOR'et med siste
-              tegn i passordet jeg oppga ("6", 54). Så krypteringsalgoritmen
-              ligger foran oss her, vi må bare forstå hva operandene i
-              programmet gjør med dataene i stacken
+              (NESTE x3) Her blir første tegn i chifferteksten ("w", <b>119</b>)
+              XOR'et med siste tegn i tullepassordet jeg oppga ("6", <b>54</b>).
+              Og svaret <b>65</b>
+              puttes inn i stacken. Så krypteringsalgoritmen ligger foran oss
+              her, hvis vi klarer å forstå verdiene som det XORes med
             </aside>
           </section>
 
           <section>
             <p>
-              I merkelig.py hopper kaninen alltid videre til feilmeldingsteksten
-              hvis gjeldende verdi på stacken er forskjellig fra "0"
+              I <b>merkelig.py</b> hopper 🐇 alltid videre til
+              feilmeldingsteksten hvis gjeldende verdi på stacken er forskjellig
+              fra <b>0</b>:
             </p>
-            <pre><code class="python" data-trim data-noescape>
+            <pre><code class="python smaller" data-trim data-noescape>
               elif op == "🐇":
               sp -= 1
-              if stack[sp] != 0:
-                  pc += parse_num(code[pc:pc+4])
+              if stack[sp] != 0: # skal kaninen hoppe til ny instruks eller ikke?
+                  pc += parse_num(code[pc:pc+4]) # hopp til ny instruks (feilmelding)
               else:
-                  pc += 4
+                  pc += 4 # programmet går videre til neste instruks
             </code></pre>
             <p class="fragment">
-              Klarer vi å få "0" til å være gjeldende stack-verdi så hopper den
-              videre til programmets neste instruks og går ikke til feilmelding
+              Klarer vi å få gjeldende stack-verdi til å være <b>0</b> så hopper
+              den videre til programmets neste instruks istedet for feilmelding
             </p>
             <aside class="notes">
               Kaninen er nøkkelen for å komme videre. Hvis den er noe annet enn
-              0, så leses en ny instruks fra underfundig-programmet og det
-              hoppes etterhvert mot "Ikke riktig"-feilmeldingen (NESTE)<br /><br />
+              0, så leses en ny instruks fra underfundig-programmet og
+              programmet skriver ut "Ikke riktig"-feilmeldingen (NESTE)<br /><br />
 
-              Vi ser at hvis gjeldende verdi på stacken når kaninen-operanden
-              blir kjørt er 0, så kjøres programmet videre
+              Men er gjeldende verdi på stacken når kaninen-operanden kjøres 0,
+              så kjøres programmet videre. Det ønsker vi å få til!
             </aside>
           </section>
 
           <section>
             <p>
-              Hvordan regne oss fram til at 🐇 operasjonen får "0" som gjeldende
+              Ved å analysere stacken nærmere, kan vi regne oss fram til hva som
+              skal til for at 🐇 operanden får <b>0</b> som gjeldende
               stack-verdi?
             </p>
             <pre
@@ -924,22 +972,26 @@
               🐇:(...) 53,107,(x),52 (...) # 1. x skal være 0
             </code></pre>
             <p class="fragment">
-              119 XOR (52-42) = 125, dvs. ASCII-tegnet blir
-              <span class="fragment highlight-green">}</span> 😎
+              119 ⊕ (52-42) = 125, dvs. ASCII-tegnet
+              <span class="fragment highlight-green"><b>}</b></span> 😎
             </p>
             <aside class="notes">
-              Hvordan skal vi sørge for at kaninen ikke hopper videre? Vi må ha
-              0 på nederste stack-verdi når kanin-operasjonen blir kjørt. Hvis
-              vi regner oss bakover fra kaninen og oppover i stack-verdiene:<br />
-              * 1. x må være 0<br />
-              * 2. y må være 52 fordi her er operasjonen subtraksjon: 52 minus
-              52 = 0.<br />
-              * 3. z må være 10 fordi her er operasjonen addering: 10 + 42 må
-              bli 52<br />
-              * 4. Hvis z er 10, så kan vi regne oss til forventet det siste
-              forventete riktige passordtegnet (NESTE)<br /><br />
+              Hvordan skal vi sørge for at kaninen ikke hopper videre til
+              feilmelding? På pkt. 1 nederst i stacken her må vi ha
+              <b>0</b> som stack-verdi når kanin-operanden blir kjørt. Hvis vi
+              regner oss bakover fra stack-verdien hos kaninen og oppover i
+              stack-verdiene:<br />
 
-              119 XOR 10 = 125 (NESTE), krøllparantes.
+              * Pkt 1. x må være 0<br />
+              * Pkt 2. y må være 52 fordi her er operasjonen subtraksjon: 52
+              minus 52 = 0.<br />
+              * Pkt 3. z må være 10 fordi her er operasjonen addering: 10 + 42
+              må bli 52<br />
+              * Pkt 4. Hvis z er 10, så kan vi bruke XOR med 119 og 10 regne oss
+              fram til det bakerste tegnet i det ukrypterte passordet (NESTE)<br /><br />
+
+              119 XOR 10 = 125 (NESTE), ASCII-tallet 125 er ASCII-tegnet
+              "krøllparantes".
             </aside>
           </section>
 
@@ -960,12 +1012,14 @@
             <aside class="notes">
               Algoritmen vi kommer fram til blir (NESTE):<br />
 
-              * ta første tegn, XOR det med tegnet 2 plasser bort minus tegnet 1
-              plass bort. Svaret i ASCII-tallverdi blir første dekrypterte
-              bokstav!<br />
-              * w XOR med (tegnet 4 - tegnet "asteriks")<br />
-              * 119 XOR med (52 minus 42), som vil si 119 XOR 10 = 125, som er
-              tegnet høyre-krøllparentes
+              * ta første tegn i chifferteksten, XOR det med tegnet 2 plasser
+              bort minus tegnet 1 plass bort. Svaret i ASCII-tallverdi blir
+              første dekrypterte bokstav! <br />
+
+              * w XOR med (4 minus "asteriks") (NESTE), <br />
+
+              * Dvs. med ASCII-tall: 119 XOR med (52 minus 42), som vil si:<br />
+              * 119 XOR 10 = 125 (NESTE x2), som er tegnet høyre-krøllparentes
             </aside>
           </section>
 
@@ -984,11 +1038,11 @@
               <span class="fragment highlight-green">.</span>
             </p>
             <aside class="notes">
-              Vi gjentar for neste tegn 4<br />
+              Vi gjentar for neste tegn i chifferteksten som er 4 (NESTE)<br />
 
-              * 4 XOR med (tegnet D - tegnet "asteriks")<br />
-              * 52 XOR med (68 minus 42), som vil si 52 XOR 26 = 46, som er
-              tegnet punktum
+              * 4 XOR med (D minus "asteriks") (NESTE)<br />
+              * Dvs. med ASCII-tall: 52 XOR med (68 minus 42), som vil si 52 XOR
+              26 = 46 (NESTE x2), som er tegnet punktum
             </aside>
           </section>
 
@@ -1000,40 +1054,56 @@
             <br />
             <h3 class="fragment fade-up">🤔</h3>
             <aside class="notes">
-              Vi regner ut et par tegn til og får:<br />
+              Vi regner ut et par tegn til og får: (NESTE)<br />
 
               * krøllparentes <br />
-              * punktum nywG<br /><br />
+              * punktum <br />
+              * nywG<br /><br />
 
-              Må innrømme at det ser litt gresk ut, hadde håpet på noe som
-              lignet på passordet nå
+              Må innrømme at det ser litt gresk ut (NESTE), hadde håpet på noe
+              som lignet på passordet nå
             </aside>
           </section>
 
           <section>
             <p>
-              På tide å kode dette istedet. Vi lager et Python-skript som bruker
-              algoritmen vår til å dechiffrere resten av chifferteksten
+              Vi utvider <b>løsning.py</b> med ny funksjon som bruker algoritmen
+              vår til å dekryptere resten av chifferteksten
             </p>
+            <aside class="notes">
+              Vi er på sporet av noe. På tide å utvide <b>løsning.py</b> med en
+              ny funksjon som bruker denne algorimen vi har funnet, og
+              dekryptere resten av chifferteksten
+            </aside>
           </section>
 
           <section>
-            <p>Dechiffrerer chifferteksten (løsning.py)</p>
-            <pre><code class="python" data-trim data-noescape>
-              deciphered_cipher_raw = decipher(text)
+            <p>Legger til ny funksjon for å dekryptere chifferteksten i <b>løsning.py</b>:</p>
+            <pre><code class="python smaller" data-trim data-noescape>
+              deciphered_cipher_raw = decipher(text) # text="Passord: "w*4*D*T*W (...)"
 
               print(deciphered_cipher_raw)
               </code></pre>
+            og kjører skriptet:
+            <pre><code class="shell" data-trim data-noescape>
+              python .\løsning.py .\underfundig
+              </code>
+            </pre>
             <aside class="notes">
-              Vi kaller 'decipher'-metoden for å hente ut det vi håper er
-              dechiffrerte flagget og gir chifferteksten vi fikk istad som input
+              Vi lagde oss en 'decipher'-funksjon i "løsning.py" for å hente
+              ut det vi håper er dekrypterte flagget.<br />
+
+              "dechipher"-funksjonen får chifferteksten som vi fant istad som
+              input<br /><br />
+
+              Vi kjører "løsning.py" og er håpefulle!
             </aside>
           </section>
 
           <section>
             <h3>}.nywG neP .nywG re nvan ttiM{TSHP</h3>
             <aside class="notes">
-              Det ser faktisk veldig lovende ut! Men hva må vi gjøre her?<br /><br />
+              Ha! Det ser faktisk veldig lovende ut! Men hva må vi gjøre her?<br /><br />
 
               Du ser at flaggformatet her ikke er helt riktig. <br />
               Stemmer, den er bakvendt! For å få riktig flaggformat så må
@@ -1042,18 +1112,28 @@
           </section>
 
           <section>
-            <p>Vi snur om på rekkefølgen på teksten...</p>
+            <p>Vi snur om på rekkefølgen på teksten. Legger til et par linjer til i <b>løsning.py</b>:
+            </p>
             <pre><code class="python smaller" data-trim data-noescape>
               deciphered_cipher = deciphered_cipher_raw[::-1]
 
               print(deciphered_cipher)
               </code></pre>
-            <aside class="notes">Vi reverserer en tekst slik i Python</aside>
+              og kjører skriptet igjen:
+            <pre><code class="shell" data-trim data-noescape>
+              python .\løsning.py .\underfundig
+              </code>
+            <aside class="notes">
+              Vi justerer "løsning.py" og snur om på rekkefølgen i den dekrypterte teksten<br/>
+              Så kjører vi "løsning.py" igjen
+            </aside>
           </section>
           <section>
             <h3>PHST{Mitt navn er Gwyn. Pen Gwyn.}</h3>
+            <br/>
+            <p>🎉🎉🎉</p>
             <aside class="notes">
-              Yes! <b>Der</b> fant vi endelig flagget! <br /><br />
+              Yes! <b>Der</b> har vi endelig flagget! <br /><br />
 
               Mitt navn er Gwyn. Pen Gwyn
             </aside>
@@ -1063,16 +1143,16 @@
             <img
               data-src="img/leo_reversing.JPG"
               class="plain"
-              style="width: 60%"
+              style="width: 70%"
             />
             <aside class="notes">
               Vi er i mål! Jeg syns vi kan være litt stolte av å ha dekompilert
-              et emoji-program som kjørte på en stack-basert virtuell maskin!
+              et emoji-program som kjørte på en stack-basert virtuell maskin! Jeg feiret ved å lage meg en meme jeg.
               <br /><br />
 
               Det var mye detektivarbeid og kodeknekking som måtte til, men med
               litt pågangsmot, innsats og å bruke tid på forstå ett og ett
-              delproblem, så fant vi altså riktig løsning til slutt
+              delproblem og lage oss en oversikt så så fant vi riktig løsning til slutt
             </aside>
           </section>
         </section>
@@ -1120,14 +1200,12 @@
           </section> -->
 
           <section>
-            <h2>Lyst til å bli en kodeknekker?</h2>
+            <h2>Gøy, ikke sant?</h2>
             <aside class="notes">
               Jeg håper denne oppgaven vekket litt nysgjerrighet hos deg slik
               som den gjorde hos meg <br /><br />
 
-              Syns du det du så idag så kult ut?<br /><br />
-
-              Lyst til å prøve litt selv?
+              Syns du det du så idag så litt gøy ut?
             </aside>
           </section>
 
