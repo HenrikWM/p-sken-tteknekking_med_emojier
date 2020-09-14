@@ -423,7 +423,7 @@
               </li>
               <li>
                 <span class="fragment highlight-green">stack</span>: register
-                med prorammets data
+                med programmets data
               </li>
               <li>
                 <span class="fragment highlight-green">sp</span>: stack pointer
@@ -431,34 +431,79 @@
               </li>
               <li>
                 <span class="fragment highlight-green">op</span>: operand
-                (maskininstruksjoner: <b>pop</b>, <b>push</b>, <b>jmp</b> osv.)
+                (<b>pop</b>, <b>push</b>, <b>jmp</b>, <b>xor</b> osv.)
               </li>
             </ul>
             <aside class="notes">
               Kjennetegnene til en stack-basert virtuell maskin er:
               (NESTE)(NESTE)<br /><br />
 
-              * PC er programtelleren, også kalt instruksjonspeker, som holder
+              * PC (program counter) er programtelleren, også kalt instruksjonspeker, som holder
               styr på rekkefølgen av instruksjoner som kjøres (NESTE)<br />
 
-              * STACKen er registeret hos den virtuelle maskinen som inneholder
-              oversikt på programmets data og instruksjoner (NESTE)<br />
+              * STACKen er registeret hos den virtuelle maskinen som tar vare på
+              programmets data (NESTE)<br />
 
-              * SP er gjeldende posisjonen i STACKen, så programmet vet hvor i
+              * SP (stack-pointer) er gjeldende posisjonen i STACKen, så programmet vet hvor i
               STACK-registeret den kan finne neste data eller instruksjon å
               jobbe med (NESTE)<br />
 
               * OP er operanden (instruksjonen) som programmet ønsker at
-              maskinen skal utføre (f.eks. <b>pop</b> noe av stacken,
-              <b>push</b> noe oppå stacken, <b>jmp</b> hopper til neste
-              instruksjon osv.)
+              maskinen skal utføre
             </aside>
           </section>
 
           <section>
             <p>
-              Operandene underfundig-programmet inneholder og kjører på den
-              virtuelle maskinen:
+              Alle operand-emojiene underfundig-filen inneholder...<br/>
+              <br/>
+              🐰🐥🌱🌻🐇🥚🐤🐣🌞
+              <br/>
+            </p>
+            <p class="fragment">er <span class="fragment highlight-green">maskininstruksjoner</span>!</p>
+            <aside class="notes">
+              Så alle operandene vi ser i underfundig-filen er alstå da (NESTE x2)...<br/><br/>
+              maskininstruksjoner til et program!
+            </aside>
+          </section>
+
+          <section>
+            <pre class="even-less-spacing"><code class="python smallester" data-trim data-noescape>
+              (...)
+              elif op == "🐥": # 1. kylling tilsvarer assembly-instruksjonen "PUSH"
+                  stack[sp] = stack[sp-1]
+                  sp += 1
+              elif op == "🌱": # 2. frø tilsvarer assembly-instruksjonen "ADD"
+                  sp -= 1
+                  stack[sp-1] += stack[sp]
+                  stack[sp-1] %= base**4
+              elif op == "🌻": # 3. solsikke tilsvarer assembly-instruksjonen "SUB"
+                  sp -= 1
+                  stack[sp-1] -= stack[sp]
+                  stack[sp-1] %= base**4
+              elif op == "🐇": # 4. kanin tilsvarer assembly-instruksjonen "JMP"
+                  sp -= 1
+                  if stack[sp] != 0:
+                      pc += parse_num(code[pc:pc+4])
+                  else:
+                      pc += 4
+              (...)
+            </code></pre>
+            <aside class="notes">
+              Vi kjenner igjen maskininstruksjonene i denne virtuelle maskinen, som jo ligner litt på kjente instruksjoner fra assembly-språk (det datamaskiner bruker til instruksjoner):<br/>
+
+              * Pkt.1: kylling flytter gjeldende stack-verdi i stacken en plass ned i stack-registeret, en "push"<br/>
+              * Pkt.2: spire gjør blant annet addering mellom to stack-verdier, en "add"<br/>
+              * Pkt.3: solsikke gjør blant annet subtraksjon mellom to stack-verdier, en "sub"<br/>
+              * Pkt.4: ...og kaninen hopper til ny instruksjon eller videre i programmet, en "jump"<br/><br/>
+
+              Så når vi mapper alle operandene i hele denne virtuelle maskinen til noe som ligner på mer kjente maskininstruksjoner...
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Operander og maskininstrukser i den virtuelle maskinen:
             </p>
             <table>
               <thead>
@@ -495,19 +540,17 @@
               </tbody>
             </table>
             <aside class="notes">
-              TODO: mappe fra instruks til emoji-dataene
-              Har man erfaring med assembly-språk og lavnivå programmering så
-              kjenner man igjen hva operandene i vår virtuelle maskin
-              (merkelig.py) tilsvarer:<br /><br />
+              Så får vi dette! Har man erfaring med assembly-språk og lavnivå programmering så
+              kjenner man igjen hva alle disse operandene i vår virtuelle maskin tilsvarer:<br /><br />
 
-              * operanden Kanin "hopper" (jump) til neste maskininstruks<br />
-              * push (legge data på stacken) er kylling<br />
-              * pop (ta data av stacken) med subtrahering er solsikke<br />
-              * pop (ta data av stacken) med addering er spire<br />
-              * xor (en maskininstruks som regner på to faktorer) er egg. XOR
-              ofte brukt i forbindelse med kryptering... hmmmm interessant<br /><br />
+              * operanden kanin "hopper" (jump)<br />
+              * kylling er "push" <br />
+              * solsikke er "pop" og "sub"<br />
+              * spire er "pop" og "add"<br />
+              * egg er XOR (en maskininstruks som regner på to faktorer). XOR
+              ofte brukt i forbindelse med kryptering... interessant!<br /><br />
 
-              Nå vet vi at emojiene i <b>underfundig</b> er et program og at en
+              Nå vet vi at <b>underfundig</b>-filen er et program og at en
               del av emojiene er maskininstruksjoner!
             </aside>
           </section>

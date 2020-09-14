@@ -29,8 +29,14 @@
   box-shadow: none;
 }
 
+.reveal pre.even-less-spacing {
+  line-height: 0.9em;
+}
 .reveal pre.less-spacing {
   line-height: 1.1em;
+}
+.reveal pre code.smallester {
+  font-size: 0.7em;
 }
 .reveal pre code.smallest {
   font-size: 0.8em;
