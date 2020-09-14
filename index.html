@@ -184,7 +184,7 @@
             <h2>"Andre påskedag"</h2>
 
             <aside class="notes">
-              Og oppgaven jeg har tenkt å vise dere heter "Andre påskedag"
+              Og oppgaven jeg har tenkt å vise dere heter <b>Andre påskedag</b>
               <br /><br />
 
               Grunnen til at jeg ønsker å vise dere akkurat denne oppgaven er
@@ -218,9 +218,9 @@
             <aside class="notes">
               Oppgaven gir oss disse 3 filene:<br /><br />
 
-              * påskekyllingbetjenter.png (bilde)<br />
-              * merkelig.py (Python-skript)<br />
-              * underfundig (fil med emojier)<br /><br />
+              * <b>påskekyllingbetjenter.png</b> (bilde)<br />
+              * <b>merkelig.py</b> (Python-skript)<br />
+              * <b>underfundig</b> (fil med emojier)<br /><br />
 
               Det første vi må gjøre er å analysere det vi har fått og prøve å
               forstå problemstillingen.
@@ -311,13 +311,14 @@
               Ikke riktig :(
             </code></pre>
             <p>åpenbart feil passord :(</p>
+            <br/>
             <p class="fragment fade-up">Må finne passordet!</p>
             <br />
             <h3 class="fragment fade-up">🤔</h3>
             <aside class="notes">
-              Og alle forsøk på å gjette passordet blir feil (NESTE x2)<br /><br />
+              Og alle forsøk på å gjette passordet blir feil<br /><br />
 
-              Tydeligvis er målet er å finne passordet<br /><br />
+              Tydeligvis er målet er å finne passordet (NESTE x2)<br /><br />
 
               Så vi må begynne å lete litt mer grundig...
             </aside>
@@ -351,7 +352,7 @@
               * Vi ser at <b>underfundig</b>-filen med alle emojiene kreves som
               input for å kjøre<br />
 
-              * Vi ser en "stack" bli definert som et 256-plasser stort
+              * Vi ser en <b>STACK</b> bli definert som et 256-plasser stort
               register<br />
 
               * Og vi legger merke til variabelnavnene: <b>pc</b>, <b>stack</b> og
@@ -430,7 +431,7 @@
             </ul>
             <aside class="notes">
               Kjennetegnene til en stack-basert virtuell maskin er:
-              (NESTE)(NESTE)<br /><br />
+              (NESTE x2)<br /><br />
 
               * PC (program counter) er programtelleren, også kalt instruksjonspeker, som holder
               styr på rekkefølgen av instruksjoner som kjøres (NESTE)<br />
@@ -438,7 +439,7 @@
               * STACKen er registeret hos den virtuelle maskinen som tar vare på
               programmets data når programmet kjører (NESTE)<br />
 
-              * SP (stack-pointer) er gjeldende posisjonen i STACKen, så programmet vet hvor i
+              * SP (stack-pointer) er gjeldende posisjonen i stacken, så programmet vet hvor i
               STACK-registeret den kan finne neste data å
               jobbe med (NESTE)<br />
 
@@ -456,7 +457,7 @@
             </p>
             <p class="fragment">er <span class="fragment highlight-green">maskininstruksjoner</span>!</p>
             <aside class="notes">
-              Så alle operandene vi ser i underfundig-filen er alstå da (NESTE x2)...<br/><br/>
+              Så alle operandene vi ser i <b>underfundig</b>-filen er alstå da (NESTE x2)...<br/><br/>
               maskininstruksjoner til et program!
             </aside>
           </section>
@@ -534,7 +535,7 @@
               </tbody>
             </table>
             <aside class="notes">
-              Så får vi dette! Har man erfaring med assembly-språk og lavnivå programmering så
+              ...så får vi dette! Har man erfaring med assembly-språk og lavnivå programmering så
               kjenner man igjen hva alle disse operandene i vår virtuelle maskin tilsvarer:<br /><br />
 
               * operanden kanin "hopper" (jump)<br />
@@ -564,9 +565,9 @@
 
               <b>underfundig</b>-filen kan man si er "kompilert" til emojier slik at den kan
               kjøres på denne virtuelle maskinen i
-              <b>merkelig.py</b> (NESTE)<br /><br />
+              <b>merkelig.py</b><br /><br />
 
-              Hvis vi kan reversere (NESTE) det kompilerte programmet tilbake
+              Hvis vi kan reversere (NESTE x2) det kompilerte programmet tilbake
               til menneskelesbar kildekode, så kan vi kanskje forstå hva
               programmet gjør og finne det passordet vi er på jakt etter
             </aside>
@@ -585,9 +586,9 @@
               underfundig-programmet litt bedre
             </p>
             <aside class="notes">
-              Vi lærte at underfundig-programmet inneholder operander, men for å
+              Vi lærte at <b>underfundig</b>-programmet inneholder operander, men for å
               dekompilere hele programmet må vi også vite hva resten av emojiene
-              er.
+              er
             </aside>
           </section>
 
@@ -617,8 +618,8 @@
 
               * Hva sitter vi igjen med da?<br /><br />
 
-              Kan dette være data som programmet bruker på noen måte (bokstaver
-              og tall)?
+              Kan dette være data som programmet bruker på noen måte? (bokstaver
+              og tall)
             </aside>
           </section>
 
@@ -650,7 +651,7 @@
             </code></pre>
             <aside class="notes">
               Vi lager skriptet <b>underfundig_dekompilering.py</b> som
-              oversetter emojiene i underfundig-programmet til operander og
+              oversetter emojiene i <b>underfundig</b>-programmet til operander og
               data. Forhåpentligvis er resultatet noe som gjør at vi kan lettere
               forstå hva programmet gjør
             </aside>
@@ -729,12 +730,12 @@
             </table>
             <aside class="notes">
               Det viser seg at flere av data-emojiene i <b>underfundig</b>-programmet er tekst!
-              Her ser vi at rekkefølgen på data-emojiene gir oss "Pass", som vi
+              Her ser vi at de første data-emojiene gir oss "Pass", som vi
               antar er "Passord" (det programmet skrev ut da den ba oss om passord istad)<br /><br />
 
               Kan vi lage et Python-skript som skriver ut all den skjulte
               teksten i hele
-              <b>underfundig</b>-programmet tro? Litt sånn som <b>strings</b>-programmet gjør på Linux
+              <b>underfundig</b>-programmet tro? Litt som når vi bruker programmet <b>strings</b> på Linux for å finne skjult tekst i filer, i grunn.
             </aside>
           </section>
 
@@ -754,9 +755,9 @@
               </code>
             </pre>
             <aside class="notes">
-              Vi lager oss et nytt skript <b>løsning.py</b> som: <br />
+              Vi lager oss et nytt skript <b>løsning.py</b>: <br />
 
-              * oversetter alle data-emojiene til tallverdier<br/>
+              * som oversetter alle data-emojiene til tallverdier<br/>
 
               * og så gjør vi om disse ASCII-tallverdiene til ASCII-tegn slik at tallene blir
               til bokstaver og tegn<br /><br />
@@ -838,11 +839,11 @@
               når <b>underfundig</b>-programmet kjøres, for å forstå nøyaktig hva som
               skjer<br /><br />
 
-              Så vi tilpasser merkelig.py slik at vi ser det samme maskinen ser
+              Så vi tilpasser <b>merkelig.py</b> slik at vi ser det samme maskinen ser
               når <b>underfundig</b>-programmet kjøres<br /><br />
 
               Vi kjører Python-skriptet igjen med et tullepassord slik at vår
-              oversikt kan genereres
+              oversikt over stacken kan genereres
             </aside>
           </section>
 
@@ -872,13 +873,13 @@
             <aside class="notes">
               Her er stacken, et 256-plasser stort register, skrevet ut bortover mot høyre med 256 plasser med data. Stacken er
               en "Last in, first out"-stack som betyr at plassen som er lengst
-              mot høyre er dataverdien som er sist lagt på stacken<br />
+              mot høyre er dataverdien som er sist lagt på stacken<br /><br/>
 
               Her har <b>underfundig</b>-programmet blitt kjørt og vi ser at
               maskinen har lest passordet vårt "tulleinput" inn i på stacken som
-              ASCII-tallverdier<br />
+              ASCII-tallverdier (NESTE x3) <br /><br/>
 
-              (NESTE x3) Siste linje med (73) er I, som i "Ikke riktig :(" -
+              Siste linje med (73) er I, som i "Ikke riktig :(" -
               beskjeden vi får ved galt passord. Resten av stacken viser at
               programmet skriver ut denne beskjeden til min terminal.
             </aside>
@@ -893,9 +894,9 @@
             <aside class="notes">
               Etter mye prøving og observasjon av stacken...<br/>
 
-              så jeg at både tallet 34 forekom ofte på toppen av stacken etter at passordet var lest inn (NESTE)<br />
+              så jeg at tallet 34 forekom ofte på toppen av stacken etter at passordet var lest inn (NESTE)<br /><br/>
 
-              hvis jeg testet et passord som var 34 tegn langt...
+              og da jeg testet et passord som var 34 tegn langt...
             </aside>
           </section>
 
@@ -914,19 +915,12 @@
             (...)
             </code></pre>
             <p class="fragment">
-              34 er der igjen! Passordet mitt er 34 tegn langt. Er det en
-              passordlengdesjekk?
-            </p>
-            <p class="fragment">
-              Og programmet kjørte litt lenger nå, vi har kommet til 🥚 (⊕)
+              Programmet kjørte litt lenger nå, vi har kommet til 🥚 (⊕)
             </p>
             <aside class="notes">
-              (NESTE) 34 er der igjen! Passordet mitt er 34 tegn langt (NESTE)
-              <br /><br />
+              så er 34 (NESTE) der igjen, men noe mer har skjedd<br /><br />
 
-              Er det en passordlengdesjekk? (NESTE)<br /><br />
-
-              Programmet kjørte visst litt flere instrukser nå og vi ser egget
+              Programmet kjørte visst litt flere instrukser nå (NESTE) og vi ser egget
               (XOR) blir brukt!
             </aside>
           </section>
@@ -946,7 +940,7 @@
             <p>Vi har funnet programmets hardkodede passordlengde! 😁</p>
             <aside class="notes">
               34 som ASCII-tegn er et hermetegn (NESTE) <br />
-              Og vi så at i teksten vi fant var hermetegn (NESTE) foran rekken
+              Og vi så den skjulte teksten i programmet inneholdt et hermetegn (NESTE) foran rekken
               av tegn som hadde en viss struktur over seg.<br /><br />
 
               Vi ser ut til å ha funnet programmets konstant for passordlengde!
@@ -976,7 +970,8 @@
               Tilbake til det lange tullepassordet. Vi vet nå at passordets
               lengde skal være 34 tegn langt. Da kjører programmet videre og
               gjør XOR-operasjoner med innholdet på stacken, altså tegnene i
-              passordet vårt (NESTE)<br />
+              passordet vårt (NESTE)<br /><br/>
+
               Det viser seg at det er en sammenheng her: kanin-operanden har
               alltid tallverdi "0" som gjeldende stack-verdi når det senere
               XOR-es.<br /><br />
@@ -1004,7 +999,7 @@
                   pc += 4 # programmet går videre til neste instruks
             </code></pre>
             <p class="fragment">
-              Får vi gjeldende stack-verdi til å være <b>0</b> så kjører programmet videre til neste instruks istedet for å hoppe til feilmelding
+              Får vi gjeldende stack-verdi til å være <b>0</b> så kjører programmet videre til neste instruks istedet
             </p>
             <aside class="notes">
               Kaninen er nøkkelen for å komme videre. Hvis den er noe annet enn
@@ -1080,7 +1075,7 @@
               <span class="fragment highlight-green">}</span>
             </p>
             <aside class="notes">
-              Algoritmen vi kommer fram til blir (NESTE):<br />
+              Algoritmen vi kommer fram til blir (NESTE):<br /><br/>
 
               * ta første tegn i chifferteksten, XOR det med tegnet 2 plasser
               bort minus tegnet 1 plass bort. Svaret i ASCII-tallverdi blir
@@ -1088,9 +1083,9 @@
 
               * w XOR med (4 minus "asteriks") (NESTE), <br />
 
-              * Dvs. med ASCII-tall: 119 XOR med (52 minus 42), som vil si:<br />
+              * Dvs. med ASCII-tall: 119 XOR med (52 minus 42), som vil si:<br /><br/>
 
-              * 125 (NESTE x2), som er tegnet høyre-krøllparentes
+              125 (NESTE x2), som er tegnet høyre-krøllparentes
             </aside>
           </section>
 
@@ -1109,13 +1104,13 @@
               <span class="fragment highlight-green">.</span>
             </p>
             <aside class="notes">
-              Vi prøver oss på neste tegn i chifferteksten som er 4 (NESTE)<br />
+              Vi prøver oss på neste tegn i chifferteksten som er 4 (NESTE):<br /><br/>
 
               * 4 XOR med (D minus "asteriks") (NESTE)<br />
 
-              * Dvs. med ASCII-tall: 52 XOR med (68 minus 42) gir: <br/>
+              * Dvs. med ASCII-tall: 52 XOR med (68 minus 42) gir: <br/><br/>
 
-              * 46 (NESTE x2), som er tegnet punktum
+              46 (NESTE x2), som er tegnet punktum
             </aside>
           </section>
 
@@ -1163,13 +1158,13 @@
               </code>
             </pre>
             <aside class="notes">
-              Vi lager en 'decipher'-funksjon i <b>løsning.py</b> for å hente
+              Vi lager en <b>decipher</b>-funksjon i <b>løsning.py</b> for å hente
               ut det vi håper er dekrypterte flagget<br /><br />
 
               <b>dechipher</b>-funksjonen får chifferteksten som vi fant istad som
               input<br /><br />
 
-              Vi kjører <b>løsning.py</b>og krysser fingrene!
+              Vi kjører <b>løsning.py</b> og krysser fingrene!
             </aside>
           </section>
 
@@ -1198,14 +1193,15 @@
               python .\løsning.py .\underfundig
               </code>
             <aside class="notes">
-              Vi justerer <b>løsning.py</b> og snur om på rekkefølgen i den dekrypterte teksten<br/>
+              Vi justerer <b>løsning.py</b> og snur om på rekkefølgen i den dekrypterte teksten<br/><br/>
+
               Så kjører vi <b>løsning.py</b> igjen
             </aside>
           </section>
           <section>
             <h3>PHST{Mitt navn er Gwyn. Pen Gwyn.}</h3>
             <br/>
-            <p>🎉🎉🎉</p>
+            <p>🎉🐧🎉</p>
             <aside class="notes">
               Yes! <b>Der</b> har vi endelig flagget! <br /><br />
 
@@ -1225,7 +1221,7 @@
               <br /><br />
 
               Det var mye detektivarbeid og kodeknekking som måtte til, men med
-              litt pågangsmot, innsats, bruke tid på forstå ett og ett
+              litt pågangsmot, fokus, bruke tid på forstå ett og ett
               delproblem av gangen og lage oss verktøy som gir litt bedre oversikt, så fant vi riktig løsning til slutt
             </aside>
           </section>
