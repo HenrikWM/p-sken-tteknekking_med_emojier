@@ -1031,7 +1031,7 @@
             </code></pre>
             <p>
               <b>tulleinput</b> gir et negativt tallverdi på stacken som gjør at
-              programmeta alltid spoler til "Ikke riktig :("
+              programmet alltid hopper til "Ikke riktig :("
             </p>
             <aside class="notes">
               Her er stacken, et 256-plasser stort register, skrevet ut bortover
@@ -1106,15 +1106,18 @@
               ...finner vi <b>"</b>
             </p>
             <p class="fragment">
-              Vi har funnet programmets hardkodede passordlengde! 😁
+              Vi har funnet programmets konstant for passordlengde! 😁
             </p>
             <aside class="notes">
-              34 som ASCII-tegn er et hermetegn (NESTE) <br />
-              Og vi så den skjulte teksten i programmet inneholdt et hermetegn
-              (NESTE) foran rekken av tegn som hadde en viss struktur over seg
+              34 som ASCII-tegn er et hermetegn (NESTE) <br /><br />
+
+              Og vi så den skjulte teksten vi fant inneholdt et hermetegn
+              (NESTE) foran tegnene som hadde en viss struktur over seg
               (NESTE)<br /><br />
 
               Vi ser ut til å ha funnet programmets konstant for passordlengde!
+              Programmet gir alltid feilmelding hvis passordet vi gir ikke er 34
+              tegn langt
             </aside>
           </section>
 
