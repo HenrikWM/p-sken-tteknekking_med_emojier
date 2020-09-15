@@ -1007,13 +1007,12 @@
               Så vi tilpasser <b>merkelig.py</b> slik at vi ser det samme
               maskinen ser når <b>underfundig</b>-programmet kjøres<br /><br />
 
-              Vi kjører Python-skriptet igjen med et tullepassord slik at vår
-              oversikt over stacken kan genereres
+              Vi kjører <b>merkelig.py</b> igjen med et tullepassord slik at vår
+              oversikt over innholdet i stacken kan genereres
             </aside>
           </section>
 
           <section>
-            <p>Passord <b>tulleinput</b> gir denne stacken:</p>
             <pre><code class="shell" data-trim data-noescape>
             (...)
 
@@ -1031,7 +1030,7 @@
             (...)
             </code></pre>
             <p>
-              Passordet gir et negativt tallverdi på stacken som gjør at
+              <b>tulleinput</b> gir et negativt tallverdi på stacken som gjør at
               programmeta alltid spoler til "Ikke riktig :("
             </p>
             <aside class="notes">
@@ -1040,13 +1039,16 @@
               out"-stack som betyr at plassen som er lengst mot høyre er
               dataverdien som er sist lagt på stacken<br /><br />
 
-              Her har <b>underfundig</b>-programmet blitt kjørt og vi ser at
-              maskinen har lest passordet vårt "tulleinput" inn i på stacken som
-              ASCII-tallverdier (NESTE x3) <br /><br />
+              Vi ser at <b>underfundig</b>-programmet har lest inn passordet
+              vårt <b>tulleinput</b> inn på stacken som ASCII-tallverdier (NESTE
+              x3) <br /><br />
 
-              Siste linje med (73) er I, som i "Ikke riktig :(" - beskjeden vi
-              får ved galt passord. Resten av stacken viser at programmet
-              skriver ut denne beskjeden til min terminal.
+              Det vi kan tolke her er at <b>tulleinput</b> stadig vekk er feil
+              passord. Etter passordet vårt ser vi 34 og så et negativt tall
+              (-24), og kaninen ber programmet hoppe til 1272, som er starten på
+              "Ikke riktig :("-feilmeldingen (ASCII-tallet 73 er "I"). Stacken
+              videre nedover viser at programmet skriver ut denne beskjeden til
+              min terminal
             </aside>
           </section>
 
