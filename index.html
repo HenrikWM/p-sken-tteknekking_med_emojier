@@ -240,35 +240,147 @@
               style="width: 90%"
             />
             <aside class="notes">
-              Vi begynner med bilde av påskekyllingbetjentene.<br /><br />
+              Vi begynner med bildet av påskekyllingbetjentene.<br /><br />
 
               For å lete etter ledetråder i bilder liker jeg å bruke programmene
               <b>file</b> og <b>strings</b> på Linux. Ofte finner man skjult
-              tekst i bilder og disse programmene vil finne det<br /><br />
+              tekst i bilder og disse programmene vil finne det
+            </aside>
+          </section>
 
-              Dessverre var det ingen skjult tekst i bildet.<br /><br />
+          <section>
+            <p>
+              Analyse med <span class="fragment highlight-green">file</span>:
+            </p>
+            <pre
+              class="fragment fade-up"
+            ><code class="shell smaller" data-trim data-noescape>
+            root@c04ddcc8bccd:~# file paskekyllingbetjenter.png
 
-              Så neste analyse jeg tenker er lurt da:
+            paskekyllingbetjenter.png: PNG image data, 1920 x 1080, \
+            8-bit/color RGBA, non-interlaced
+            </code>
+            </pre>
+            <aside class="notes">
+              Jeg starter opp en Linux-terminal i Windows og prøver først med
+              programmet <b>file</b> (NESTE):<br /><br />
+
+              * Hva gjør <b>file</b> (NESTE)?<br /><br />
+
+              Her får vi bekreftet at vi har et PNG-bilde. Ikke noe mer
+              spennende enn det.
+            </aside>
+          </section>
+
+          <section>
+            <p>
+              Analyse med <span class="fragment highlight-green">strings</span>:
+            </p>
+            <pre
+              class="fragment fade-up"
+            ><code class="shell smaller" data-trim data-noescape>
+            root@c04ddcc8bccd:~# strings paskekyllingbetjenter.png
+
+            ...
+            PQ8I9C]
+            =g+m*o)
+            y|u?
+            Io>rw
+            K_rA
+            l]@?
+            %@X@
+            rX#s
+            2hf
+            ...
+            </code>
+            </pre>
+            <aside class="notes">
+              Vi prøver igjen med <b>strings</b> (NESTE):<br /><br />
+
+              * Hva gjør <b>strings</b>? (NESTE) <br /><br />
+
+              * Her ser vi bare masse tulletekst som egentlig er bildedata, og
+              det er det. Så ingen flagg gjemt her heller<br /><br />
+
+              Da må vi innom en tredje analyseteknikk:
               <b>Steganografi</b>-analyse!
             </aside>
           </section>
 
           <section>
+            <p>
+              Steganografi-analyse:
+              <a
+                href="https://github.com/eugenekolo/sec-tools/raw/master/stego/stegsolve/stegsolve/stegsolve.jar"
+                >Stegsolve.jar</a
+              >
+            </p>
+            <pre>
+              <code data-trim class="shell">root@c04ddcc8bccd:~# java -jar stegsolve.jar</code>
+            </pre>
+            <aside class="notes">
+              Å skjule data i et bilde kalles <b>Steganografi</b><br />
+              * Stegsolve: et Java-program som lar oss kikke igjennom
+              fargefiltre i bildet<br />
+              ** ser etter <b>skjult tekst</b> eller <b>andre skjulte bilder</b
+              ><br /><br />
+
+              La oss starte opp Stegsolve og først kikke på et
+              <b>eksempel</b> på hvordan man kan finne en skjult kode i et bilde
+            </aside>
+          </section>
+
+          <section
+            data-transition="fade-in"
+            data-source="failOverflow_doge_stege"
+          >
+            <img
+              data-src="img/failOverflow_doge_stege.png"
+              class="plain"
+              style="width: 70%"
+            />
+            <aside class="notes">
+              * Her har jeg funnet fram et bilde fra en annen CTF-oppgave
+              <b>doge_stege</b> (<b>Plaid CTF 2014</b>)<br />
+              * Vi klikker igjennom fargefiltrene i Stegsolve...
+            </aside>
+          </section>
+
+          <section
+            data-transition="none fade-out"
+            data-source="failOverflow_doge_stege"
+          >
+            <img
+              data-src="img/insignificant_shark-doge-decoded-highlighted.png"
+              class="plain"
+              style="width: 70%"
+            />
+            <aside class="notes">
+              * Se der!<br />
+              * I et av fargefiltrene er koden (flagget) man skal finne gjemt:
+              <b>pctf{keep_doge_alive_2014}</b><br /><br />
+
+              Vi får se om det skjuler seg noe lignende hos
+              påskekyllingbetjentene
+            </aside>
+          </section>
+
+          <section data-source="stegsolve_caesum">
             <img
               data-src="img/paskekyllingbetjenter_stegsolve.gif"
               class="plain"
               style="width: 100%"
             />
             <aside class="notes">
-              (Forklar Steganografi)<br /><br />
+              * Nå har jeg lastet inn bildet av påskekyllingbetjentene i
+              Stegsolve, og klikker igjennom fargefiltrene<br /><br />
 
-              Her bruker jeg <b>Stegsolve</b>: et program som lar oss bla
-              igjennom bildefiltre for å se etter skjult tekst i bilder
-              <br /><br />
+              (VENTE 10s)<br /><br />
 
-              Men vi finner ingenting her heller.<br /><br />
+              Men vi finner ingenting her heller<br /><br />
 
-              Konklusjon: dette er bare lokkemat og vi legger bildet til side
+              Konklusjon: dette er bare lokkemat og vi legger bildet til side.
+              Vi tar istedet en kikk på denne <b>underfundig</b>-filen
             </aside>
           </section>
 
@@ -277,7 +389,7 @@
             <img
               data-src="img/underfundig_emojis.png"
               class="plain"
-              style="width: 100%"
+              style="width: 110%"
             />
             <aside class="notes">
               I <b>underfundig</b>-filen har vi 1043 emojier på rad og rekke!
@@ -1406,6 +1518,9 @@
         background_image: "Foto: iStock.com, rami_hakala",
         bitmoji: "Bitmoji Avatar Ⓒ Snap Group Limited",
         henrikwm: "Kilde: Henrik Walker Moe, Lisens: CC BY 4.0",
+        stegsolve_caesum: "Foto: StegSolve, Caesum, Windows 10",
+        failOverflow_doge_stege:
+          "Kilde: https://fail0verflow.com/blog/2014/plaidctf2014-for100-doge_stege/, Foto: jix, fail0verflow",
         leo_reversing: "Kilde: https://imgflip.com/i/4edng0",
         stack_machine: "Kilde: https://en.wikipedia.org/wiki/Stack_machine",
       };
