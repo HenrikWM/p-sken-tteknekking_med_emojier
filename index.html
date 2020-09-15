@@ -722,14 +722,15 @@
               </tr>
               <tr>
                 <td>Bokstav</td>
-                <td>P</td>
-                <td>a</td>
-                <td>s</td>
-                <td>s</td>
+                <td class="fragment highlight-green">P</td>
+                <td class="fragment highlight-green">a</td>
+                <td class="fragment highlight-green">s</td>
+                <td class="fragment highlight-green">s</td>
               </tr>
             </table>
             <aside class="notes">
-              Det viser seg at flere av data-emojiene i <b>underfundig</b>-programmet er tekst!
+              Det viser seg at flere av data-emojiene i <b>underfundig</b>-programmet er tekst! (NESTE x4)<br/><br/>
+
               Her ser vi at de første data-emojiene gir oss "Pass", som vi
               antar er "Passord" (det programmet skrev ut da den ba oss om passord istad)<br /><br />
 
@@ -816,17 +817,19 @@
           <section>
             <p>
               Målet vårt nå er å dekryptere chifferteksten til noe som matcher
-              flaggformatet "PHST{...}"
+              flaggformatet <b class="fragment highlight-green">PHST{...}</b>
             </p>
             <aside class="notes">
               Målet vårt nå er å se om vi kan dekryptere chifferteksten til noe
-              som matcher flaggformatet som CTF-oppgaven forventer: PHST{...} (påskeharens sikkerhetstjeneste)
+              som matcher flaggformatet som CTF-oppgaven forventer (NESTE):<br/>
+
+              PHST{...} (påskeharens sikkerhetstjeneste)
             </aside>
           </section>
 
           <section>
             <p>
-              Vi endrer litt på <b>merkelig.py</b>: skriv ut hele stacken for hver operand-instruksjon som blir utført
+              Vi endrer litt på <b>merkelig.py</b>: <br/>skriv ut hele stacken for hver operand-instruksjon som blir utført
             </p>
             <pre><code class="shell" data-trim data-noescape>
               python .\merkelig.py .\underfundig
@@ -927,7 +930,7 @@
 
           <section>
             <p>
-              ASCII-tegnet til tallet <b>34</b> er
+              ASCII-tallet <b>34</b> er tegnet
               <span class="fragment highlight-green">"</span> (hermetegn)
             </p>
             <p>
@@ -935,13 +938,13 @@
               <span class="fragment highlight-green"
                 >Passord: "w*4*D*T*W(...)</span
               ><br />
-              finner vi <b>"</b>
+              ...finner vi <b>"</b>
             </p>
-            <p>Vi har funnet programmets hardkodede passordlengde! 😁</p>
+            <p class="fragment">Vi har funnet programmets hardkodede passordlengde! 😁</p>
             <aside class="notes">
               34 som ASCII-tegn er et hermetegn (NESTE) <br />
               Og vi så den skjulte teksten i programmet inneholdt et hermetegn (NESTE) foran rekken
-              av tegn som hadde en viss struktur over seg.<br /><br />
+              av tegn som hadde en viss struktur over seg (NESTE)<br /><br />
 
               Vi ser ut til å ha funnet programmets konstant for passordlengde!
             </aside>
