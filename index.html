@@ -773,16 +773,34 @@
 
           <section>
             <p>
-              Vi lager et Python-skript som dekompilererer emojiene til
-              "pseudo-kode"
+              Vi lager et nytt Python-skript
+              <b>underfundig_dekompilering.py</b>:
             </p>
+            <pre
+              class="even-less-spacing"
+            ><code class="python" data-trim data-noescape>
+              code = open(sys.argv[1], "rt", encoding="utf-8").read()
+
+              write_decoded_commands(code) # code=innholdet i underfundig-filen
+              </code></pre>
+            <p>Kjører skriptet:</p>
             <pre><code class="shell" data-trim data-noescape>
               python .\underfundig_dekompilering.py .\underfundig
             </code></pre>
+
+            <p>som lager en ny fil: <b>underfundig_dekompilering_output</b></p>
             <aside class="notes">
-              Vi lager skriptet <b>underfundig_dekompilering.py</b> som
-              oversetter emojiene i <b>underfundig</b>-programmet til operander
-              og data. Forhåpentligvis er resultatet noe som gjør at vi kan
+              Vi lager oss hjelpeskriptet
+              <b>underfundig_dekompilering.py</b> som inneholder en funksjon
+              <b>write_decoded_commands</b>: <br />
+
+              * funksjonen går igjennom innholdet i <b>underfundig-filen</b>
+              <br />
+              * oversetter emojiene til operander og data<br />
+              * resultatet lagres til ny fil
+              <b>underfundig_dekompilering_output</b><br /><br />
+
+              Forhåpentligvis er resultatet av dette noe som gjør at vi kan
               lettere forstå hva programmet gjør
             </aside>
           </section>
@@ -794,10 +812,9 @@
               style="width: 30%"
             />
             <aside class="notes">
-              Og da får vi dette! Programmet har kjørt, lest inn masse data på
-              STACKen og skrevet ut linje for linje alle operandene og
-              emoji-dataene som ble brukt:
-              <br /><br />
+              Og i <b>underfundig_dekompilering_output</b> får vi dette! Linje
+              for linje ser vi alle operandene og emoji-dataene som programmet
+              består av: <br /><br />
 
               * Øverst på steg 0 i programmet: Hare leser inn de neste 4
               emojiene fra STACK'en<br />
@@ -877,30 +894,36 @@
 
           <section>
             <p>
-              Vi lager et nytt skript <b>løsning.py</b> som henter ut alle
-              bokstavene i underfundig-programmet:
+              Vi lager et nytt skript <b>løsning.py</b> som henter ut all tekst
+              i underfundig-programmet:
             </p>
             <pre><code class="python" data-trim data-noescape>
               text = extract_text(underfundig_content)
 
               print(text)
               </code></pre>
-            og kjører skriptet:
-            <pre><code class="shell" data-trim data-noescape>
+            <div class="fragment">
+              og kjører skriptet:
+              <pre><code class="shell" data-trim data-noescape>
               python .\løsning.py .\underfundig
               </code>
             </pre>
+            </div>
             <aside class="notes">
-              Vi lager oss et nytt skript <b>løsning.py</b>: <br />
+              Vi lager oss et nytt skript som blir starten på løsningen:
+              <b>løsning.py</b>: <br />
 
-              * som oversetter alle data-emojiene til tallverdier<br />
+              * skriptet inneholder en funksjon <b>extract_text</b> som
+              oversetter alle data-emojiene til ASCII-tallverdier<br />
 
-              * og så gjør vi om disse ASCII-tallverdiene til ASCII-tegn slik at
-              tallene blir til bokstaver og tegn<br /><br />
+              * og så gjør den om disse ASCII-tallverdiene til ASCII-tegn slik
+              at tallene blir til bokstaver og tegn (NESTE)<br /><br />
 
-              Vi kjører skriptet med <b>underfundig</b>-filen som input
+              Så vi kjører skriptet og gir den <b>underfundig</b>-filen som
+              input
             </aside>
           </section>
+
           <section>
             <h3>
               Passord:
@@ -930,6 +953,7 @@
               krypterte chifferteksten (flagget) vi er ute etter!
             </aside>
           </section>
+
           <section>
             <p>w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*</p>
             <p>\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵ</p>
