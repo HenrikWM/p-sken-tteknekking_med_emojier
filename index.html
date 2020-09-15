@@ -440,7 +440,7 @@
             </aside>
           </section>
 
-          <section data-transition="none">
+          <section data-transition="fade-in">
             <h3>merkelig.py</h3>
             <img
               data-src="img/merkelig_py_1.png"
@@ -452,7 +452,7 @@
             </aside>
           </section>
 
-          <section data-transition="none">
+          <section data-transition="none fade-out">
             <h3>merkelig.py</h3>
             <img
               data-src="img/merkelig_py_1_highlighted.png"
@@ -477,7 +477,7 @@
             </aside>
           </section>
 
-          <section data-transition="none">
+          <section data-transition="fade-in">
             <h3>merkelig.py</h3>
             <img
               data-src="img/merkelig_py_2.png"
@@ -490,7 +490,7 @@
             </aside>
           </section>
 
-          <section data-transition="none">
+          <section data-transition="none fade-out">
             <h3>merkelig.py</h3>
             <img
               data-src="img/merkelig_py_2_highlighted.png"
@@ -741,7 +741,8 @@
               Kanskje kan vi finne et mønster i underfundig-emojiene? (NESTE)
               <br />
 
-              * Dette er de første emojiene i underfundig-filen...(NESTE)<br />
+              * Dette er de første emojiene i
+              <b>underfundig</b>-filen...(NESTE)<br />
 
               * Hvis vi trekker fra de operand-emojiene som vi vet er
               maskininstruksjoner (NESTE)<br />
@@ -761,7 +762,7 @@
             <br />
             <p>I <b>merkelig.py</b> så vi:</p>
             <pre><code class="python" data-trim data-noescape>
-              digits = {"🎲": 0, "🍫": 1,  "🎮": 2, "🎧": 3, "🎨": 4, "🍬": 5}
+            digits = {"🎲": 0, "🍫": 1,  "🎮": 2, "🎧": 3, "🎨": 4, "🍬": 5}
             </code></pre>
             <br />
             <p>Så vi vet at disse er data: <br />🎲🍫🎮🎧🎨🍬</p>
@@ -779,13 +780,13 @@
             <pre
               class="even-less-spacing"
             ><code class="python" data-trim data-noescape>
-              code = open(sys.argv[1], "rt", encoding="utf-8").read()
+            code = open(sys.argv[1], "rt", encoding="utf-8").read()
 
-              write_decoded_commands(code) # code=innholdet i underfundig-filen
-              </code></pre>
+            write_decoded_commands(code) # code=innholdet i underfundig-filen
+            </code></pre>
             <p>Kjører skriptet:</p>
             <pre><code class="shell" data-trim data-noescape>
-              python .\underfundig_dekompilering.py .\underfundig
+            python .\underfundig_dekompilering.py .\underfundig
             </code></pre>
 
             <p>som lager en ny fil: <b>underfundig_dekompilering_output</b></p>
@@ -835,10 +836,10 @@
           <section>
             <p>I <b>merkelig.py</b> så vi:</p>
             <pre><code class="python" data-trim data-noescape>
-              if op == "🐰":
-                stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 emojier
-                sp += 1
-                pc += 4
+            if op == "🐰":
+              stack[sp] = parse_num(code[pc:pc+4]) # les inn 4 emojier
+              sp += 1
+              pc += 4
             </code></pre>
             <p>🐰 leser 4 emojier av gangen og omgjør til et tall</p>
             <aside class="notes">
@@ -898,12 +899,12 @@
               i underfundig-programmet:
             </p>
             <pre><code class="python" data-trim data-noescape>
-              text = extract_text(underfundig_content)
+            text = extract_text(underfundig_content)
 
-              print(text)
+            print(text)
               </code></pre>
             <div class="fragment">
-              og kjører skriptet:
+              <p>og kjører skriptet:</p>
               <pre><code class="shell" data-trim data-noescape>
               python .\løsning.py .\underfundig
               </code>
@@ -994,8 +995,8 @@
               for hver operand-instruksjon som blir utført
             </p>
             <pre><code class="shell" data-trim data-noescape>
-              python .\merkelig.py .\underfundig
-              Passord: tulleinput
+            python .\merkelig.py .\underfundig
+            Passord: tulleinput
             </code></pre>
             <aside class="notes">
               Jeg er interessert i XOR-operanden vi så
@@ -1124,16 +1125,16 @@
           <section>
             <p>Passord <b>tulleinput123456789123456789123456</b>:</p>
             <pre><code class="shell smaller" data-trim data-noescape>
-              (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
-              🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(34) (...)
-              🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,<span class="fragment highlight-green">(0)</span>,34 (...)
-              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
-              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,119,(34) (...)
-              🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,<span class="fragment highlight-green">54,(119)</span>,34 (...)
-              🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,<span class="fragment highlight-green">65</span>,(119),34 (...)
-              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,(42),34 (...)
-              🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,42,(34) (...)
-              (...)
+            (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
+            🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(34) (...)
+            🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,<span class="fragment highlight-green">(0)</span>,34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,119,(34) (...)
+            🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,<span class="fragment highlight-green">54,(119)</span>,34 (...)
+            🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,<span class="fragment highlight-green">65</span>,(119),34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,(42),34 (...)
+            🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,65,42,(34) (...)
+            (...)
             </code></pre>
             <p>
               Hvis gjeldende stack-verdi er "0" når 🐇 operanden kjøres, går den
@@ -1165,12 +1166,12 @@
               fra <b>0</b>:
             </p>
             <pre><code class="python smaller" data-trim data-noescape>
-              elif op == "🐇":
-              sp -= 1
-              if stack[sp] != 0: # skal kaninen hoppe til ny instruks eller ikke?
-                  pc += parse_num(code[pc:pc+4]) # hopp til ny instruks (feilmelding)
-              else:
-                  pc += 4 # programmet går videre til neste instruks
+            elif op == "🐇":
+            sp -= 1
+            if stack[sp] != 0: # skal kaninen hoppe til ny instruks eller ikke?
+                pc += parse_num(code[pc:pc+4]) # hopp til ny instruks (feilmelding)
+            else:
+                pc += 4 # programmet går videre til neste instruks
             </code></pre>
             <p class="fragment">
               Får vi gjeldende stack-verdi til å være <b>0</b> så kjører
@@ -1195,21 +1196,21 @@
             <pre
               class="less-spacing"
             ><code class="shell smallest" data-trim data-noescape>
-              🥚:(...) 53,54,(119),34 (...) # 4. Hvis z er 10, så må 119 XOR 10 = 125 = }
-              🥚:(...) 53,z,(119),34 (...)
-              🐰:(...) 53,z,(42),34 (...)
-              🐰:(...) 53,z,42,(34) (...)
-              🌱:(...) 53,z,(42),34 (...) # 3. Her må z være 10, fordi 10 + 42 må bli 52
-              🌱:(...) 53,y,(42),34 (...)
-              🌱:(...) 53,y,(42),34 (...)
-              🐥:(...) 53,107,(y),34 (...)
-              🐥:(...) 53,107,y,(34) (...)
-              🐰:(...) 53,107,y,(52) (...)
-              🐰:(...) 53,107,y,52,(0) (...)
-              🌻:(...) 53,107,y,(52) (...) # 2. Her må y være 52, fordi 52 - 52 må bli 0
-              🌻:(...) 53,107,x,(52) (...)
-              🌻:(...) 53,107,x,(52) (...)
-              🐇:(...) 53,107,(x),52 (...) # 1. x skal være 0
+            🥚:(...) 53,54,(119),34 (...) # 4. Hvis z er 10, så må 119 XOR 10 = 125 = }
+            🥚:(...) 53,z,(119),34 (...)
+            🐰:(...) 53,z,(42),34 (...)
+            🐰:(...) 53,z,42,(34) (...)
+            🌱:(...) 53,z,(42),34 (...) # 3. Her må z være 10, fordi 10 + 42 må bli 52
+            🌱:(...) 53,y,(42),34 (...)
+            🌱:(...) 53,y,(42),34 (...)
+            🐥:(...) 53,107,(y),34 (...)
+            🐥:(...) 53,107,y,(34) (...)
+            🐰:(...) 53,107,y,(52) (...)
+            🐰:(...) 53,107,y,52,(0) (...)
+            🌻:(...) 53,107,y,(52) (...) # 2. Her må y være 52, fordi 52 - 52 må bli 0
+            🌻:(...) 53,107,x,(52) (...)
+            🌻:(...) 53,107,x,(52) (...)
+            🐇:(...) 53,107,(x),52 (...) # 1. x skal være 0
             </code></pre>
             <p class="fragment">
               119 ⊕ (52-42) = 125, dvs. ASCII-tegnet
@@ -1326,14 +1327,14 @@
               <b>løsning.py</b>:
             </p>
             <pre><code class="python smaller" data-trim data-noescape>
-              deciphered_cipher_raw = decipher(text) # text="Passord: "w*4*D*T*W (...)"
+            deciphered_cipher_raw = decipher(text) # text="Passord: "w*4*D*T*W (...)"
 
-              print(deciphered_cipher_raw)
+            print(deciphered_cipher_raw)
               </code></pre>
             og kjører skriptet:
             <pre><code class="shell" data-trim data-noescape>
-              python .\løsning.py .\underfundig
-              </code>
+            python .\løsning.py .\underfundig
+            </code>
             </pre>
             <aside class="notes">
               Vi lager en <b>decipher</b>-funksjon i <b>løsning.py</b> for å
