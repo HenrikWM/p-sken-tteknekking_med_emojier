@@ -76,14 +76,25 @@
     <link rel="stylesheet" href="plugin/title-footer/title-footer.css" />
     <link rel="stylesheet" href="plugin/title-footer/title-footer-custom.css" />
 
-    <!-- QR Codes -->
-    <script type="text/javascript" src="lib/qrcode.min.js"></script>
-
     <!-- Globals -->
     <script type="text/javascript">
       var defaultFooterText =
         "Påskenøtteknekking med emojier 🐇 - JavaZone 2023";
     </script>
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+
+    <!-- QR Codes -->
+    <script type="text/javascript" src="lib/qrcode.min.js"></script>
   </head>
   <body>
     <div class="reveal">
