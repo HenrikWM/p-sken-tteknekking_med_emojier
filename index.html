@@ -254,7 +254,7 @@
               Oppgaven gir oss disse 3 filene:<br /><br />
 
               * <b>påskekyllingbetjenter.png</b> (bilde)<br />
-              * <b>merkelig.py</b> (Python-skript)<br />
+              * <b>merkelig.py</b> (Python-program)<br />
               * <b>underfundig</b> (fil med emojier)<br /><br />
 
               Det første vi må gjøre er å analysere det vi har fått og prøve å
@@ -460,7 +460,7 @@
             <p class="fragment fade-up">🥺</p>
 
             <aside class="notes">
-              <b>merkelig.py</b> er et Python-skript og skriptet tar inn
+              <b>merkelig.py</b> er et Python-program og programmet tar inn
               <b>underfundig</b>-filen som input. Når prøver å kjøre det, og det
               spør etter et (NESTE) <b>passord</b><br /><br />
 
@@ -480,7 +480,7 @@
 
               Siden bildet med påskekyllingbetjentene bare var lokkemat, og
               <b>underfundig</b>-filen bare en er haug med emojier, så må vi se
-              nærmere på Python-skriptet <b>merkelig.py</b>
+              nærmere på Python-programmet <b>merkelig.py</b>
             </aside>
           </section>
 
@@ -532,7 +532,7 @@
             />
 
             <aside class="notes">
-              Hmm. Videre ned i skriptet ser vi at dette kjøres i en
+              Hmm. Videre ned i programmet ser vi at dette kjøres i en
               while-løkke. Dvs det vi ser her repeteres flere ganger
             </aside>
           </section>
@@ -582,7 +582,7 @@
             </blockquote>
 
             <aside class="notes">
-              <b>merkelig.py</b>-skriptet er den virtuelle maskinen og
+              <b>merkelig.py</b>-programmet er den virtuelle maskinen og
               <b>underfundig</b>-filen med emojier er programmet den kjører
             </aside>
           </section>
@@ -778,7 +778,7 @@
 
           <section>
             <p>
-              For å lage et dekompileringsskript må vi forstå
+              For å lage et dekompileringsprogram må vi forstå
               underfundig-programmet litt bedre
             </p>
 
@@ -843,7 +843,7 @@
 
           <section>
             <p>
-              Vi lager et nytt Python-skript
+              Vi lager et nytt Python-program
               <b>underfundig_dekompilering.py</b>:
             </p>
             <pre
@@ -853,7 +853,7 @@
 
             write_decoded_commands(code) # code=innholdet i underfundig-filen
             </code></pre>
-            <p>Kjører skriptet:</p>
+            <p>Kjører programmet:</p>
             <pre><code class="python" data-trim data-noescape>
             $ python underfundig_dekompilering.py underfundig
             </code></pre>
@@ -861,7 +861,7 @@
             <p>som lager en ny fil: <b>underfundig_dekompilering_output</b></p>
 
             <aside class="notes">
-              Vi lager oss hjelpeskriptet
+              Vi lager oss hjelpeprogrammet
               <b>underfundig_dekompilering.py</b> som inneholder en funksjon
               <b>write_decoded_commands</b>: <br />
 
@@ -958,7 +958,7 @@
               er "Passord" (det programmet skrev ut da den ba oss om passord
               istad)<br /><br />
 
-              Kan vi lage et Python-skript som skriver ut all den skjulte
+              Kan vi lage et Python-program som skriver ut all den skjulte
               teksten i hele
               <b>underfundig</b>-programmet tro? Litt som når vi bruker
               programmet <b>strings</b> på Linux for å finne skjult tekst i
@@ -968,7 +968,7 @@
 
           <section>
             <p>
-              Vi lager et nytt skript
+              Vi lager et nytt program
               <b>løsning.py</b> som henter ut all tekst i
               underfundig-programmet:
             </p>
@@ -978,7 +978,7 @@
             print(text)
               </code></pre>
             <div class="fragment">
-              <p>og kjører skriptet:</p>
+              <p>og kjører programmet:</p>
               <pre><code class="python" data-trim data-noescape>
               $ python løsning.py underfundig
               </code>
@@ -986,16 +986,17 @@
             </div>
 
             <aside class="notes">
-              Vi lager oss et nytt skript (NESTE) som blir starten på løsningen:
+              Vi lager oss et nytt program (NESTE) som blir starten på
+              løsningen:
               <b>løsning.py</b>: <br />
 
-              * skriptet inneholder en funksjon <b>extract_text</b> som
+              * programmet inneholder en funksjon <b>extract_text</b> som
               oversetter alle data-emojiene til ASCII-tallverdier<br />
 
               * og så gjør den om disse ASCII-tallverdiene til ASCII-tegn slik
               at tallene blir til bokstaver og tegn (NESTE)<br /><br />
 
-              Så vi kjører skriptet og gir den <b>underfundig</b>-filen som
+              Så vi kjører programmet og gir den <b>underfundig</b>-filen som
               input
             </aside>
           </section>
@@ -1426,7 +1427,7 @@
               </code>
             </pre>
 
-            og kjører skriptet:
+            og kjører programmet:
 
             <pre>
               <code class="python" data-trim data-noescape>
@@ -1472,7 +1473,7 @@
               </code>
             </pre>
 
-            og kjører skriptet igjen:
+            og kjører programmet igjen:
 
             <pre>
               <code class="python" data-trim data-noescape>
