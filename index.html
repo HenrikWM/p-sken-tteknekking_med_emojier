@@ -1045,11 +1045,11 @@
 
             <aside class="notes">
               Dvs. det er dette som er chifferteksten vi skal finne og vår neste
-              utfordring. Klarer vi å dekryptere chifferen er jeg helt sikker på
-              at vi finner flagget! (NESTE)<br /><br />
+              utfordring (NESTE)<br /><br />
 
               Vi trenger å forstå hvordan chifferteksten har blitt kryptert slik
-              at vi kan dekryptere den
+              at vi kan dekryptere den. Da er jeg rimelig sikker på at vi har
+              flagget vårt
             </aside>
           </section>
         </section>
@@ -1062,13 +1062,13 @@
 
           <section>
             <p>
-              Målet vårt nå er å dekryptere chifferteksten til noe som matcher
+              Målet vårt nå er å dekryptere chifferteksten til noe som ligner
               flaggformatet <b class="fragment highlight-green">PHST{...}</b>
             </p>
 
             <aside class="notes">
               Målet vårt nå er å se om vi kan dekryptere chifferteksten til noe
-              som matcher flaggformatet som CTF-oppgaven forventer (NESTE):<br /><br />
+              som ligner flaggformatet som CTF-oppgaven forventer (NESTE):<br /><br />
 
               PHST{...} (påskeharens sikkerhetstjeneste)
             </aside>
@@ -1345,7 +1345,8 @@
             </p>
 
             <aside class="notes">
-              Algoritmen vi kommer fram til blir (NESTE):<br /><br />
+              Vi har her en algoritme, en fremgangsmåte som gir oss ett og ett
+              tegn (NESTE):<br /><br />
 
               * ta første tegn i chifferteksten, XOR det med tegnet 2 plasser
               bort minus tegnet 1 plass bort. Svaret i ASCII-tallverdi blir
@@ -1455,12 +1456,14 @@
           <section>
             <h3>}.nywG neP .nywG re nvan ttiM{TSHP</h3>
 
+            <p class="fragment fade-up">😲</p>
+
             <aside class="notes">
-              Ha! Dette ser veldig lovende ut! Men hva må vi gjøre her?<br /><br />
+              Ha! Vi er så nære! Men hva må vi gjøre her?<br /><br />
 
-              Du ser at flaggformatet her ikke er helt riktig. <br /><br />
+              Du ser at teksten her ikke er helt riktig. <br /><br />
 
-              Stemmer, den er bakvendt! For å få riktig flaggformat så må
+              Stemmer, teksten er bakvendt! For å få riktig flaggformat så må
               reversere teksten
             </aside>
           </section>
@@ -1502,14 +1505,14 @@
             <aside class="notes">
               Yes! <b>Der</b> har vi endelig flagget! <br /><br />
 
-              Mitt navn er Gwyn. Pen Gwyn
+              Mitt navn er Gwyn. Pen Gwyn (vent 3s)
             </aside>
           </section>
 
           <section>
             <p>Vi kjører <b>merkelig.py</b> igjen:</p>
             <pre class="highlight">
-              <span>$ python løsning.py underfundig</span>              
+              <span>$ python merkelig.py underfundig</span>              
               <span class="fragment">Passord: <span class="fragment highlight-green">PHST{Mitt navn er Gwyn. Pen Gwyn.}</span></span>
               <span class="fragment">Gratulerer! Flagget vet du allerede :)</span>                
             </pre>
@@ -1520,8 +1523,8 @@
               Da gjenstår det å verifisere at det faktisk ER passordet vi har
               funnet<br /><br />
 
-              Vi kjører <b>merkelig.py</b> igjen og angir det vi håper er
-              passordet (NESTE) (NESTE)<br /><br />
+              Vi kjører det opprinnelige programmet <b>merkelig.py</b> igjen og
+              angir det vi håper er passordet (NESTE) (NESTE)<br /><br />
 
               Og vi får bekreftet: (NESTE)
               <b>Gratulerer! Flagget vet du allerede :)</b> (NESTE)<br /><br />
@@ -1538,9 +1541,9 @@
             />
 
             <aside class="notes">
-              Vi er i mål! Jeg syns vi kan være litt stolte av å ha dekompilert
-              et emoji-program som kjørte på en snedig variant av en
-              stack-basert virtuell maskin!
+              Vi er i mål! Bra jobba for å holde ut helt hit. Jeg syns vi kan
+              være litt stolte av å ha dekompilert et emoji-program som kjørte
+              på en snedig variant av en stack-basert virtuell maskin!
               <br /><br />
 
               Det var mye detektivarbeid og kodeknekking som måtte til, men med
