@@ -107,6 +107,7 @@
               <span class="fragment">@</span>
               <span class="fragment">bekk</span>
             </p>
+
             <aside class="notes">
               Heisann alle sammen! Og takk for at dere kom for å høre på meg
               idag! Setter stor pris på at så mange av dere stiller opp på
@@ -129,6 +130,7 @@
               <h2>Påskenøttekking med emojier 🐇</h2>
               <img src="img/intro_spy_avatar.png" class="plain" />
             </div>
+
             <aside class="notes">
               <b>Påskenøtteknekking med emojier!</b><br /><br />
 
@@ -150,6 +152,7 @@
         <section>
           <section>
             <h2>Hvem er jeg?</h2>
+
             <aside class="notes">Et par ord om meg</aside>
           </section>
 
@@ -179,6 +182,7 @@
 
           <section>
             <h3>I ❤️ CTF-er</h3>
+
             <aside class="notes">
               Og som nevnt, jeg digger Capture the Flag-oppgaver!<br /><br />
 
@@ -245,6 +249,7 @@
                 <a href="ctf.phst.no/andre_påskedag/underfundig">underfundig</a>
               </li>
             </ul>
+
             <aside class="notes">
               Oppgaven gir oss disse 3 filene:<br /><br />
 
@@ -269,6 +274,7 @@
               class="plain"
               style="width: 90%"
             />
+
             <aside class="notes">
               Vi begynner med bildet av påskekyllingbetjentene.<br /><br />
 
@@ -291,6 +297,7 @@
             8-bit/color RGBA, non-interlaced
             </code>
             </pre>
+
             <aside class="notes">
               Jeg starter opp en Linux-terminal i Windows og prøver først med
               programmet <b>file</b> (NESTE):<br /><br />
@@ -324,6 +331,7 @@
             ...
             </code>
             </pre>
+
             <aside class="notes">
               Vi prøver igjen med <b>strings</b> (NESTE):<br /><br />
 
@@ -348,6 +356,7 @@
             <pre>
               <code data-trim class="python">$ java -jar stegsolve.jar</code>
             </pre>
+
             <aside class="notes">
               Å skjule data i et bilde kalles <b>Steganografi</b><br />
               * Stegsolve: et Java-program som lar oss kikke igjennom
@@ -369,6 +378,7 @@
               class="plain"
               style="width: 70%"
             />
+
             <aside class="notes">
               * Her har jeg funnet fram et bilde fra en annen CTF-oppgave
               <b>doge_stege</b> (<b>Plaid CTF 2014</b>)<br />
@@ -385,6 +395,7 @@
               class="plain"
               style="width: 70%"
             />
+
             <aside class="notes">
               * Se der!<br />
               * I et av fargefiltrene er koden (flagget) man skal finne gjemt:
@@ -401,6 +412,7 @@
               class="plain"
               style="width: 100%"
             />
+
             <aside class="notes">
               * Nå har jeg lastet inn bildet av påskekyllingbetjentene i
               Stegsolve, og klikker igjennom fargefiltrene<br /><br />
@@ -421,6 +433,7 @@
               class="plain"
               style="width: 110%"
             />
+
             <aside class="notes">
               I <b>underfundig</b>-filen har vi 1043 emojier på rad og rekke!
               (stablet de sammen her)<br /><br />
@@ -440,22 +453,28 @@
 
             <pre class="highlight">
               <span>$ python merkelig.py underfundig</span>              
-              <span class="fragment">Passord: <span class="fragment highlight-green">123456</span>
+              <span class="fragment">Passord: <span class="fragment highlight-green">123456</span></span>
               <span class="fragment">Ikke riktig :(</span>                
             </pre>
 
+            <p class="fragment fade-up">🥺</p>
+
             <aside class="notes">
               <b>merkelig.py</b> er et Python-skript og skriptet tar inn
-              <b>underfundig</b>-filen som input. Når prøver å kjøre det, og det spør etter et (NESTE) <b>passord</b><br /><br />
+              <b>underfundig</b>-filen som input. Når prøver å kjøre det, og det
+              spør etter et (NESTE) <b>passord</b><br /><br />
 
-              Vi får teste noe å se hva som skjer. Prøver <b>123456</b> (NESTE)<br/><br/>
+              Vi får teste noe å se hva som skjer. Prøver
+              <b>123456</b> (NESTE)<br /><br />
 
-              Programmet sier at passordet ikke er riktig. Her kan vi ikke gjette til evig tid
+              Programmet sier at passordet ikke er riktig. Her kan vi ikke
+              gjette til evig tid
             </aside>
           </section>
 
           <section>
             <p>Vi må finne passordet!</p>
+
             <aside class="notes">
               Scopet på oppgaven her er klar: målet er å finne passordet<br /><br />
 
@@ -472,6 +491,7 @@
               class="plain"
               style="width: 70%"
             />
+
             <aside class="notes">
               Hva kan vi tolke fra kildekoden vi ser her?
             </aside>
@@ -484,6 +504,7 @@
               class="plain"
               style="width: 70%"
             />
+
             <aside class="notes">
               * Vi ser enkelte emojier defineres med en tall-verdi <br />
 
@@ -509,6 +530,7 @@
               class="plain"
               style="width: 70%"
             />
+
             <aside class="notes">
               Hmm. Videre ned i skriptet ser vi at dette kjøres i en
               while-løkke. Dvs det vi ser her repeteres flere ganger
@@ -522,6 +544,7 @@
               class="plain"
               style="width: 70%"
             />
+
             <aside class="notes">
               Og når vi ser hva <b>op</b>,<b>pc</b>,<b>stack</b> og
               <b>sp</b> osv. brukes til i hver runde i while-løkken, så begynner
@@ -534,6 +557,7 @@
         <section>
           <section>
             <h2>Stack-basert virtuell maskin</h2>
+
             <aside class="notes">
               Det vi har her er en
               <b>Stack-basert virtuell maskin</b>!<br /><br />
@@ -556,6 +580,7 @@
               instructions assume that operands will be from the stack, and
               results placed in the stack.
             </blockquote>
+
             <aside class="notes">
               <b>merkelig.py</b>-skriptet er den virtuelle maskinen og
               <b>underfundig</b>-filen med emojier er programmet den kjører
@@ -582,6 +607,7 @@
                 (<b>pop</b>, <b>push</b>, <b>jmp</b>, <b>xor</b> osv.)
               </li>
             </ul>
+
             <aside class="notes">
               Kjennetegnene til en stack-basert virtuell maskin er: (NESTE
               x2)<br /><br />
@@ -613,6 +639,7 @@
               er
               <span class="fragment highlight-green">maskininstruksjoner</span>!
             </p>
+
             <aside class="notes">
               Så alle operandene vi ser i <b>underfundig</b>-filen er alstå da
               (NESTE x2)...<br /><br />
@@ -644,6 +671,7 @@
                       pc += 4
               (...)
             </code></pre>
+
             <aside class="notes">
               Vi kjenner igjen mange av disse maskininstruksjonene i den
               virtuelle maskinen. Flere ligner litt på kjente instruksjoner fra
@@ -699,6 +727,7 @@
                 </tr>
               </tbody>
             </table>
+
             <aside class="notes">
               ...så får vi dette! Har man erfaring med assembly-språk og lavnivå
               programmering så kjenner man igjen hva alle disse operandene i vår
@@ -724,6 +753,7 @@
               kan vi <span class="fragment highlight-green">dekompilere</span>
               programmet tilbake til menneskelesbar kildekode?
             </p>
+
             <aside class="notes">
               Når man lager programmer så kompilerer (NESTE) man kildekoden med
               en kompilator, som omgjør menneskelesbar kildekode til lavnivå
@@ -751,6 +781,7 @@
               For å lage et dekompileringsskript må vi forstå
               underfundig-programmet litt bedre
             </p>
+
             <aside class="notes">
               Vi lærte at <b>underfundig</b>-programmet inneholder operander,
               men for å dekompilere hele programmet må vi også vite hva resten
@@ -773,6 +804,7 @@
             <div class="fragment fade-up">
               <p>🎮🍫🎮🎲🍫🎨🎮🎲🍫🍫🎧🎲</p>
             </div>
+
             <aside class="notes">
               Kanskje kan vi finne et mønster i underfundig-emojiene? (NESTE)
               <br />
@@ -802,6 +834,7 @@
             </code></pre>
             <br />
             <p>Så vi vet at disse er data: <br />🎲🍫🎮🎧🎨🍬</p>
+
             <aside class="notes">
               Vi vet nå hvilke emojier som er operander og hvilke som er data.
               Nå har vi det vi trenger for å dekompilere programmet
@@ -826,6 +859,7 @@
             </code></pre>
 
             <p>som lager en ny fil: <b>underfundig_dekompilering_output</b></p>
+
             <aside class="notes">
               Vi lager oss hjelpeskriptet
               <b>underfundig_dekompilering.py</b> som inneholder en funksjon
@@ -848,6 +882,7 @@
               class="plain"
               style="width: 30%"
             />
+
             <aside class="notes">
               Og i <b>underfundig_dekompilering_output</b> får vi dette! Linje
               for linje ser vi alle operandene og emoji-dataene som programmet
@@ -878,6 +913,7 @@
               pc += 4
             </code></pre>
             <p>🐰 leser 4 emojier av gangen og omgjør til et tall</p>
+
             <aside class="notes">
               Vi har forstått at hare-operanden i den virtuelle maskinen vår
               leser inn 4 tegn av gangen<br /><br />
@@ -913,6 +949,7 @@
                 <td class="fragment highlight-green">s</td>
               </tr>
             </table>
+
             <aside class="notes">
               Det viser seg at flere av data-emojiene i
               <b>underfundig</b>-programmet er tekst! (NESTE x4)<br /><br />
@@ -931,8 +968,9 @@
 
           <section>
             <p>
-              Vi lager et nytt skript <span class="fragment highlight-green">løsning.py</span> som henter ut all tekst
-              i underfundig-programmet:
+              Vi lager et nytt skript
+              <b>løsning.py</b> som henter ut all tekst i
+              underfundig-programmet:
             </p>
             <pre><code class="python" data-trim data-noescape>
             text = extract_text(underfundig_content)
@@ -968,6 +1006,7 @@
               "w*4*D*T*W*J*7*A*Y*f*`*j*n***}*4*\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵGratulerer!
               Flagget vet du allerede :)\nIkke riktig :(\n
             </h3>
+
             <aside class="notes">
               Dette er spennende! Vi ser vi all teksten som programmet
               inneholder!<br /><br />
@@ -997,6 +1036,7 @@
             <p>\x9d*ç*¿*Ą*Ŏ*Ŋ*Ŧ*ı*Ɖ*Ǔ*Ǒ*Ǐ*ǐ*Ǉ*Ǧ*ǜ*ƹ*ț*ɵ</p>
             <br />
             <h3 class="fragment fade-up">🕵️‍♀️🕵️‍♂️</h3>
+
             <aside class="notes">
               Dvs. det er dette som er chifferteksten og vår neste utfordring
               (NESTE)<br /><br />
@@ -1018,6 +1058,7 @@
               Målet vårt nå er å dekryptere chifferteksten til noe som matcher
               flaggformatet <b class="fragment highlight-green">PHST{...}</b>
             </p>
+
             <aside class="notes">
               Målet vårt nå er å se om vi kan dekryptere chifferteksten til noe
               som matcher flaggformatet som CTF-oppgaven forventer (NESTE):<br /><br />
@@ -1035,6 +1076,7 @@
             $ python merkelig.py underfundig
             Passord: tulleinput
             </code></pre>
+
             <aside class="notes">
               Jeg er interessert i XOR-operanden vi så
               <b>underfundig</b>-programmet brukte tidligere. Jeg mistenker den
@@ -1071,6 +1113,7 @@
               <b>tulleinput</b> gir et negativt tallverdi på stacken som gjør at
               programmet alltid hopper til "Ikke riktig :("
             </p>
+
             <aside class="notes">
               Her er stacken, et 256-plasser stort register, skrevet ut bortover
               mot høyre med 256 plasser med data. Stacken er en "Last in, first
@@ -1096,6 +1139,7 @@
               av forandringer i stacken...
             </p>
             <p class="fragment">Hvis passordet er 34 tegn langt...</p>
+
             <aside class="notes">
               Etter mye prøving og observasjon av stacken...<br />
 
@@ -1123,6 +1167,7 @@
             <p class="fragment">
               Programmet kjørte litt lenger nå, vi har kommet til 🥚 (⊕)
             </p>
+
             <aside class="notes">
               så er 34 (NESTE) der igjen, men noe mer har skjedd<br /><br />
 
@@ -1146,6 +1191,7 @@
             <p class="fragment">
               Vi har funnet programmets konstant for passordlengde! 😁
             </p>
+
             <aside class="notes">
               34 som ASCII-tegn er et hermetegn (NESTE) <br /><br />
 
@@ -1178,6 +1224,7 @@
               videre til XOR-operanden
             </p>
             <p class="fragment">119 ⊕ 54 = 65</p>
+
             <aside class="notes">
               Tilbake til det lange tullepassordet. Vi vet nå at passordets
               lengde skal være 34 tegn langt. Da kjører programmet videre og
@@ -1214,6 +1261,7 @@
               Får vi gjeldende stack-verdi til å være <b>0</b> så kjører
               programmet videre til neste instruks istedet
             </p>
+
             <aside class="notes">
               Kaninen er nøkkelen for å komme videre. Hvis den er noe annet enn
               0, så hoppes det til ny instruks fra <b>underfundig</b>-programmet
@@ -1253,6 +1301,7 @@
               119 ⊕ (52-42) = 125, dvs. ASCII-tegnet
               <span class="fragment highlight-green"><b>}</b></span> 😎
             </p>
+
             <aside class="notes">
               Hvordan skal vi sørge for at kaninen ikke hopper videre til
               feilmelding? På pkt. 1 nederst i stacken her må vi ha
@@ -1287,6 +1336,7 @@
               dvs. tegnet
               <span class="fragment highlight-green">}</span>
             </p>
+
             <aside class="notes">
               Algoritmen vi kommer fram til blir (NESTE):<br /><br />
 
@@ -1316,6 +1366,7 @@
               alstå tegnet
               <span class="fragment highlight-green">.</span>
             </p>
+
             <aside class="notes">
               Vi prøver oss på neste tegn i chifferteksten som er 4 (NESTE):<br /><br />
 
@@ -1334,6 +1385,7 @@
             <p class="fragment highlight-green"><b>}.nywG</b></p>
             <br />
             <h3 class="fragment fade-up">🤔</h3>
+
             <aside class="notes">
               Vi regner ut et par tegn til og får: (NESTE)<br />
 
@@ -1348,12 +1400,14 @@
 
           <section>
             <p>
-              Vi utvider <b>løsning.py</b> med ny funksjon som bruker algoritmen
-              vår til å dekryptere resten av chifferteksten
+              Vi utvider
+              <b>løsning.py</b> med ny funksjon som bruker algoritmen vår til å
+              dekryptere resten av chifferteksten
             </p>
+
             <aside class="notes">
-              Vi er på sporet av noe. På tide å utvide <b>løsning.py</b> med en
-              ny funksjon som bruker denne algorimen vi har funnet, og
+              Vi er på sporet av noe. På tide å utvide <b>løsning.py</b> (NESTE)
+              med en ny funksjon som bruker denne algorimen vi har funnet, og
               dekryptere resten av chifferteksten
             </aside>
           </section>
@@ -1363,19 +1417,26 @@
               Legger til ny funksjon for å dekryptere chifferteksten i
               <b>løsning.py</b>:
             </p>
-            <pre><code class="python smaller" data-trim data-noescape>
-            deciphered_cipher_raw = decipher(text) # text="Passord: "w*4*D*T*W (...)"
 
-            print(deciphered_cipher_raw)
-              </code></pre>
-            og kjører skriptet:
-            <pre><code class="python" data-trim data-noescape>
-            $ python løsning.py underfundig
-            </code>
+            <pre>
+              <code class="python smaller" data-trim data-noescape>
+                deciphered_cipher_raw = decipher(text) # text="Passord: "w*4*D*T*W (...)"
+
+                print(deciphered_cipher_raw)
+              </code>
             </pre>
+
+            og kjører skriptet:
+
+            <pre>
+              <code class="python" data-trim data-noescape>
+                $ python løsning.py underfundig
+              </code>
+            </pre>
+
             <aside class="notes">
-              Vi lager en <b>decipher</b>-funksjon i <b>løsning.py</b> for å
-              hente ut det vi håper er dekrypterte flagget<br /><br />
+              Vi lager en <b>decipher</b>-funksjon i <b>løsning.py</b> (NESTE)
+              for å hente ut det vi håper er dekrypterte flagget<br /><br />
 
               <b>dechipher</b>-funksjonen får chifferteksten som vi fant istad
               som input<br /><br />
@@ -1386,6 +1447,7 @@
 
           <section>
             <h3>}.nywG neP .nywG re nvan ttiM{TSHP</h3>
+
             <aside class="notes">
               Ha! Dette ser veldig lovende ut! Men hva må vi gjøre her?<br /><br />
 
@@ -1401,15 +1463,23 @@
               Vi snur om på rekkefølgen på teksten. Legger til et par linjer til
               i <b>løsning.py</b>:
             </p>
-            <pre><code class="python" data-trim data-noescape>
-            deciphered_cipher = deciphered_cipher_raw[::-1]
 
-            print(deciphered_cipher)
-            </code></pre>
+            <pre>
+              <code class="python" data-trim data-noescape>
+              deciphered_cipher = deciphered_cipher_raw[::-1]
+
+              print(deciphered_cipher)
+              </code>
+            </pre>
+
             og kjører skriptet igjen:
-            <pre><code class="python" data-trim data-noescape>
-            $ python løsning.py underfundig
-            </code></pre>
+
+            <pre>
+              <code class="python" data-trim data-noescape>
+              $ python løsning.py underfundig
+              </code>
+            </pre>
+
             <aside class="notes">
               Vi justerer <b>løsning.py</b> og snur om på rekkefølgen i den
               dekrypterte teksten<br /><br />
@@ -1421,6 +1491,7 @@
             <h3>PHST{Mitt navn er Gwyn. Pen Gwyn.}</h3>
             <br />
             <h3>🎉🐧🎉</h3>
+
             <aside class="notes">
               Yes! <b>Der</b> har vi endelig flagget! <br /><br />
 
@@ -1430,29 +1501,25 @@
 
           <section>
             <p>Vi kjører <b>merkelig.py</b> igjen:</p>
-            <pre><code class="python smaller" data-trim data-noescape>
-            $ python løsning.py underfundig
-            Passord:
-            </code></pre>
-            <p>Så angir vi passordet:</p>
-            <pre><code class="python smaller" data-trim data-noescape>
-            $ python løsning.py underfundig
-            Passord: PHST{Mitt navn er Gwyn. Pen Gwyn.}
-            <span class="fragment">Gratulerer! Flagget vet du allerede :)</span>
-            </code></pre>
-            <br />
-            <p class="fragment">😎</p>
+            <pre class="highlight">
+              <span>$ python løsning.py underfundig</span>              
+              <span class="fragment">Passord: <span class="fragment highlight-green">PHST{Mitt navn er Gwyn. Pen Gwyn.}</span></span>
+              <span class="fragment">Gratulerer! Flagget vet du allerede :)</span>                
+            </pre>
+
+            <p class="fragment fade-up">😎</p>
+
             <aside class="notes">
               Da gjenstår det å verifisere at det faktisk ER passordet vi har
               funnet<br /><br />
 
               Vi kjører <b>merkelig.py</b> igjen og angir det vi håper er
-              passordet (NESTE)<br /><br />
+              passordet (NESTE) (NESTE)<br /><br />
 
-              Og vi får bekreftet:
-              <b>Gratulerer! Flagget vet du allerede :)</b> <br /><br />
+              Og vi får bekreftet: (NESTE)
+              <b>Gratulerer! Flagget vet du allerede :)</b> (NESTE)<br /><br />
 
-              (NESTE) Kult!
+              Kult!
             </aside>
           </section>
 
@@ -1462,6 +1529,7 @@
               class="plain"
               style="width: 60%"
             />
+
             <aside class="notes">
               Vi er i mål! Jeg syns vi kan være litt stolte av å ha dekompilert
               et emoji-program som kjørte på en snedig variant av en
@@ -1480,6 +1548,7 @@
         <section>
           <section>
             <h2>Gøy, ikke sant?</h2>
+
             <aside class="notes">
               Jeg håper denne oppgaven vekket litt nysgjerrighet hos deg slik
               som den gjorde for meg <br /><br />
@@ -1507,6 +1576,7 @@
             <p>
               <a href="https://ctf.hacker101.com">Hacker101 CTF</a>
             </p>
+
             <aside class="notes">
               Tenn din indre kodegnist. Vi blir bedre problemløsere av å øve.<br /><br />
 
