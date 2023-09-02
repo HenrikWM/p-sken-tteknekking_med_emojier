@@ -438,13 +438,13 @@
             <h3>merkelig.py</h3>
             <p>Vi tester ut programmet:</p>
             <pre><code class="python" data-trim data-noescape>
-              python .\merkelig.py .\underfundig
+              $ python merkelig.py underfundig
               Passord:
             </code></pre>
             <div class="fragment">
               <p>Angir et tilfeldig passord <b>123456</b>:</p>
-              <pre><code class="shell" data-trim data-noescape>
-              python .\merkelig.py .\underfundig
+              <pre><code class="python" data-trim data-noescape>
+              $ python merkelig.py underfundig
               Passord: 123456
               <span class="fragment">Ikke riktig :(</span>
             </code></pre>
@@ -826,8 +826,8 @@
             write_decoded_commands(code) # code=innholdet i underfundig-filen
             </code></pre>
             <p>Kjører skriptet:</p>
-            <pre><code class="shell" data-trim data-noescape>
-            python .\underfundig_dekompilering.py .\underfundig
+            <pre><code class="python" data-trim data-noescape>
+            $ python underfundig_dekompilering.py underfundig
             </code></pre>
 
             <p>som lager en ny fil: <b>underfundig_dekompilering_output</b></p>
@@ -946,8 +946,8 @@
               </code></pre>
             <div class="fragment">
               <p>og kjører skriptet:</p>
-              <pre><code class="shell" data-trim data-noescape>
-              python .\løsning.py .\underfundig
+              <pre><code class="python" data-trim data-noescape>
+              $ python løsning.py underfundig
               </code>
             </pre>
             </div>
@@ -1035,8 +1035,8 @@
               Vi endrer litt på <b>merkelig.py</b>: <br />skriv ut hele stacken
               for hver operand-instruksjon som blir utført
             </p>
-            <pre><code class="shell" data-trim data-noescape>
-            python .\merkelig.py .\underfundig
+            <pre><code class="python" data-trim data-noescape>
+            $ python merkelig.py underfundig
             Passord: tulleinput
             </code></pre>
             <aside class="notes">
@@ -1373,8 +1373,8 @@
             print(deciphered_cipher_raw)
               </code></pre>
             og kjører skriptet:
-            <pre><code class="shell" data-trim data-noescape>
-            python .\løsning.py .\underfundig
+            <pre><code class="python" data-trim data-noescape>
+            $ python løsning.py underfundig
             </code>
             </pre>
             <aside class="notes">
@@ -1411,8 +1411,8 @@
             print(deciphered_cipher)
             </code></pre>
             og kjører skriptet igjen:
-            <pre><code class="shell" data-trim data-noescape>
-            python .\løsning.py .\underfundig
+            <pre><code class="python" data-trim data-noescape>
+            $ python løsning.py underfundig
             </code></pre>
             <aside class="notes">
               Vi justerer <b>løsning.py</b> og snur om på rekkefølgen i den
@@ -1435,12 +1435,12 @@
           <section>
             <p>Vi kjører <b>merkelig.py</b> igjen:</p>
             <pre><code class="python smaller" data-trim data-noescape>
-            python .\løsning.py .\underfundig
+            $ python løsning.py underfundig
             Passord:
             </code></pre>
             <p>Så angir vi passordet:</p>
             <pre><code class="python smaller" data-trim data-noescape>
-            python .\løsning.py .\underfundig
+            $ python løsning.py underfundig
             Passord: PHST{Mitt navn er Gwyn. Pen Gwyn.}
             <span class="fragment">Gratulerer! Flagget vet du allerede :)</span>
             </code></pre>
