@@ -574,13 +574,14 @@
               Det vi har her er en
               <b>Stack-basert virtuell maskin</b>!<br /><br />
 
-              Da jeg fikk vite jeg har siste tidsluke på siste dag av JavaZone,
-              hvor folk sikkert allerede har hodet fullt, er det ikke
-              <b>litt ambisiøst</b> å prøve å forklare publikum hvordan CPU'er
+              Da jeg fikk vite jeg fikk siste tidsluke på siste dag av JavaZone,
+              tenkte jeg: her vil sikkert folk allerede har hodet fullt. Er det
+              ikke
+              <b>litt ambisiøst</b> å prøve å forklare hvordan datamaskiner
               kjører programmer og hva en stack-basert virtuell maskin er?<br /><br />
 
-              Jeg tar den utfordringen jeg - dette er ikke bare fjasing med
-              emojier. Til og med her skal dere <b>lære noe</b>!
+              Men jeg tar utfordringen - dette er ikke bare fjasing med emojier.
+              Til og med her skal dere <b>få litt faglig utbytte</b>!
             </aside>
           </section>
 
@@ -594,14 +595,14 @@
             </blockquote>
 
             <aside class="notes">
-              Python-programmet <b>merkelig.py</b> er vår virtuelle maskinen og
+              Python-programmet <b>merkelig.py</b> er vår virtuelle maskin og
               <b>underfundig</b>-filen med emojiene er <b>programmet</b> den
               kjører<br /><br />
 
-              Noen har altså kompilert et program til å kjøre på den virtuelle
-              maskinen og "maskinkoden" er emojiene i
-              <b>underfundig</b>-filen. Programmet spør etter et passord og gir
-              oss antagelig flagget hvis passordet er riktig.
+              Her har noen altså kompilert et program til å kjøre på den
+              virtuelle maskinen og "maskinkoden" med data og instruksjoner er
+              emojiene i
+              <b>underfundig</b>-filen
             </aside>
           </section>
 
@@ -609,16 +610,18 @@
             <p>Hva kjennetegner en stack-basert virtuell maskin?</p>
             <ul class="fragment">
               <li>
-                <span class="fragment highlight-green">pc</span>: program
-                counter (programteller)
-              </li>
-              <li>
                 <span class="fragment highlight-green">stack</span>: register
                 med programmets data
               </li>
               <li>
                 <span class="fragment highlight-green">sp</span>: stack pointer
-                (peker på gjeldende posisjon i stacken)
+                peker på minneadressen som inneholder neste posisjon (toppen) av
+                stacken
+              </li>
+              <li>
+                <span class="fragment highlight-green">pc</span>: program
+                counter (programteller) vet i hvilken minneadresse den finner
+                neste instruks/data
               </li>
               <li>
                 <span class="fragment highlight-green">op</span>: operand
@@ -627,22 +630,63 @@
             </ul>
 
             <aside class="notes">
-              Kjennetegnene til en stack-basert virtuell maskin er: (NESTE
-              x2)<br /><br />
+              Hva kjennetegner en stack-basert virtuell maskin: (NESTE x2)<br /><br />
+
+              * STACKen er minneregisteret hos den virtuelle maskinen som tar
+              vare på programmets data og instruksjoner når programmet kjører.
+              Som vi så tidligere har denne virtuelle maskinen 256 minneadresser
+              (NESTE)<br /><br />
+
+              * SP (stack-pointer) peker på minneadressen til toppen av stacken
+              (NESTE)<br /><br />
 
               * PC (program counter) er programtelleren, også kalt
               instruksjonspeker, som holder styr på rekkefølgen av instruksjoner
-              som kjøres (NESTE)<br />
-
-              * STACKen er registeret hos den virtuelle maskinen som tar vare på
-              programmets data når programmet kjører (NESTE)<br />
-
-              * SP (stack-pointer) er gjeldende posisjonen i stacken, så
-              programmet vet hvor i STACK-registeret den kan finne neste data å
-              jobbe med (NESTE)<br />
+              som kjøres. Den vet i hvilken minneadresse på stacken programmet
+              skal finne neste data (NESTE)<br /><br />
 
               * OP er operanden (instruksjonen) som programmet ønsker at
-              maskinen skal utføre
+              maskinens hjerne skal utføre for oss.<br />
+              Push legger til data på stacken og Pop leser ut data fra
+              stacken.<br />
+              Jmp forteller programmet at det skal hoppe til et sted i
+              minnet.<br />
+              XOR er en av flere vanlige binæroperasjoner man kan gjøre på data
+              (man har ofte i tilleg AND, OR osv.)
+            </aside>
+          </section>
+
+          <section data-source="wiki_callstack">
+            <img
+              data-src="img/call_stack_layout.svg.png"
+              class="plain"
+              style="width: 70%"
+            />
+
+            <aside class="notes">
+              Vi kan godt se for oss en mental modell av en STACK slik. Her
+              kjører et grafikkprogram og den har to subrutiner "DrawLine" og
+              "DrawSquare".<br /><br />
+
+              Hver subrutine har plassert sine data i minneadressene på
+              maskinens STACK.<br /><br />
+
+              Se for deg flere gigabytes med minneplass på maskinen og mange
+              programmer som kjører samtidig. Stack pointer og program counter
+              holder fortsatt holder på hvor neste data og instrukser er slik at
+              det ikke blir helt kaos.<br /><br />
+
+              ANEKDOTE 1: Hvis programmer gjør noe galt og fyller opp hele
+              stacken (typisk hvis man lager en evig loop ved et uhell), da får
+              man StackOverflow-feil. StackOverflow.com er jo en nettside noen
+              her kanskje sikkert kjenner til...<br /><br />
+
+              ANEKDOTE 2: Noen tenker kanskje at hvis man klarer å manipulere
+              disse minneadressene og få et program til å lese annen data, eller
+              peke til et annet sted i minne hvor du vil at den istedet skal
+              lete, så er det nyttig manipulasjon å kunne.<br />
+              Og det er helt riktig. Slik hacking gjør at man f.eks. kan cracke
+              programmer og omgå f.eks. lisenssjekker og andre ting.
             </aside>
           </section>
 
@@ -659,10 +703,13 @@
             </p>
 
             <aside class="notes">
-              Så alle operandene vi ser i <b>underfundig</b>-filen er altså da
-              (NESTE x2)...<br /><br />
-              maskininstruksjoner til et program som kjører på denne virtuelle
-              maskinen!
+              Så nå vet vi litt mer om STACKen og hvordan programmet kjører, så
+              vi går videre med emojiene våre.<br /><br />
+
+              Vi vet nå at alle operandene vi ser i <b>underfundig</b>-filen er
+              altså da (NESTE x2)...<br /><br />
+              <b>maskininstruksjoner</b> til et program som kjører på denne
+              virtuelle maskinen!
             </aside>
           </section>
 
@@ -784,10 +831,10 @@
               slik at den kan kjøres på denne virtuelle maskinen i
               <b>merkelig.py</b><br /><br />
 
-              Hvis vi kan reversere (NESTE x2) det kompilerte programmet tilbake
-              til menneskelesbar kildekode, dvs. dekompilere det, så kan vi
-              kanskje forstå hva programmet gjør og finne det passordet vi er på
-              jakt etter
+              Hvis vi kan reversere (NESTE) det kompilerte programmet tilbake
+              til menneskelesbar kildekode, dvs. dekompilere (NESTE) det, så kan
+              vi kanskje forstå hva programmet gjør og finne det passordet vi er
+              på jakt etter
             </aside>
           </section>
         </section>
@@ -1721,6 +1768,8 @@
           "Kilde: https://fail0verflow.com/blog/2014/plaidctf2014-for100-doge_stege/, Foto: jix, fail0verflow",
         leo_reversing: "Kilde: https://imgflip.com/i/4edng0",
         stack_machine: "Kilde: https://en.wikipedia.org/wiki/Stack_machine",
+        wiki_callstack:
+          "Kilde: https://commons.wikimedia.org/wiki/File:Call_stack_layout.svg",
       };
 
       function setFooterSource() {
