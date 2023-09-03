@@ -145,7 +145,7 @@
               "flagg"<br /><br />
 
               * Når man sender inn riktig flagg får man poeng. Den mest flest
-              poeng vinner.<br /><br />
+              poeng innen konkurransens slutt vinner.<br /><br />
             </aside>
           </section>
         </section>
@@ -164,7 +164,7 @@
           >
             <aside class="notes">
               Jeg...<br />
-              * liker å løpe, noen ganger langt<br />
+              * liker å løpet<br />
               * er sta, har pågangsmot <br />
               * liker utfordringer med klare mål<br /><br />
 
@@ -190,8 +190,8 @@
 
               * Hvorfor liker jeg CTF'er? <br />
               ** <b>Prosessen</b>: <b>rekognosering</b> og <b>analyse</b> for å
-              forstå hvordan man kan <b>utnytte</b> en sårbarhet eller en finne
-              flagget<br />
+              forstå hvordan man kan <b>utnytte</b> en sårbarhet eller knekke en
+              kode for å finne flagget<br />
               ** <b>Måldrevne</b>: delmål underveis, motiverer<br />
               ** <b>Belønning!</b>: (flagget, viktig spisskompetanse)<br /><br />
 
@@ -444,11 +444,8 @@
             />
 
             <aside class="notes">
-              Vi husker det var 3 filer vi fikk: påskekyllingbetjenter.PNG,
-              underfundig og merkelig.py.<br /><br />
-
-              I <b>underfundig</b>-filen har vi 1043 emojier på rad og rekke!
-              (stablet de sammen her)<br /><br />
+              Dette var fil nummer to vi fikk. I <b>underfundig</b>-filen har vi
+              1043 emojier på rad og rekke! (stablet de sammen her)<br /><br />
 
               Tydeligvis noe mening med dette. Vi ser noen emojier repeteres,
               noen bare forekommer en gang. Hva kan det være vi ser her?<br /><br />
@@ -472,17 +469,19 @@
             <p class="fragment fade-up">🥺</p>
 
             <aside class="notes">
-              <b>merkelig.py</b> er et Python-program og programmet tar inn
-              <b>underfundig</b>-filen som input. Når vi prøver å kjøre det
-              (NESTE) så spør den etter et <b>passord</b><br /><br />
+              Siste fil er <b>merkelig.py</b>. Det er et Python-program og
+              programmet tar inn <b>underfundig</b>-filen som input. Når vi
+              prøver å kjøre det (NESTE) så spør den etter et <b>passord</b
+              ><br /><br />
 
               Vi får skrive noe og se hva som skjer. Prøver
               <b>123456</b> (NESTE)<br /><br />
 
-              Programmet sier (NESTE) at passordet ikke er riktig (NESTE).<br />
+              Programmet sier (NESTE) at passordet ikke er riktig (NESTE).<br /><br />
+
               Her kan vi lage et hjelpeprogram som bare gjetter seg frem, såkalt
-              brute-force metoden som er en måte å løse oppgaven på, men hvorfor
-              gå for den enkle løsningen?
+              brute-force metoden, som er helt riktig måte å løse oppgaven på.
+              Men hvorfor gå for den enkle løsningen?
             </aside>
           </section>
 
@@ -527,8 +526,8 @@
               * Vi ser en funksjon <b>parse_num</b> som omgjør sin input til et
               tall<br />
 
-              * Vi ser at <b>underfundig</b>-filen med alle emojiene kreves som
-              input for å kjøre programmet<br />
+              * Vi ser at <b>underfundig</b>-filen kreves som input for å kjøre
+              programmet<br />
 
               * Vi ser en variabel <b>STACK</b> bli definert som et 256-plasser
               stort register<br />
@@ -649,7 +648,8 @@
               skal finne neste data eller instruksjon (NESTE)<br /><br />
 
               * OP er operanden (instruksjonen) som programmet ønsker at
-              maskinens hjerne skal utføre for oss.<br />
+              maskinens hjerne (gjerne CPU-en i en datamaskin) skal utføre for
+              oss.<br />
               Push legger til data på stacken og Pop leser ut data fra
               stacken.<br />
               Jmp forteller programmet at det skal hoppe til et sted i
@@ -674,10 +674,10 @@
               Hver av disse subrutinene har plassert sine data i minneadressene
               på maskinens STACK.<br /><br />
 
-              Se for deg her en datamaskin med flere gigabytes med minne på
-              maskinen og mange programmer som kjører samtidig. Stack pointer og
-              program counter holder styr på hvor neste data og instrukser er
-              slik at det ikke blir helt kaos.<br /><br />
+              Se for deg her en datamaskin med flere gigabytes med minne og
+              mange programmer som kjører samtidig. Stack pointer og program
+              counter holder styr på hvor neste data og instrukser er slik at
+              det ikke blir helt kaos.<br /><br />
 
               ANEKDOTE 1: Hvis programmer gjør noe galt og fyller opp hele
               stacken (typisk hvis man lager en evig loop ved et uhell), da får
@@ -808,8 +808,8 @@
               * kylling er "push" <br />
               * solsikke er "pop" og "sub"<br />
               * spire er "pop" og "add"<br />
-              * egg er XOR (en maskininstruks som regner på to faktorer). XOR
-              ofte brukt i forbindelse med kryptering... interessant!
+              * egg er XOR (en binærmatematikk som regner på to faktorer). XOR i
+              CTF-er er gjerne brukt til enkel kryptering... interessant!
             </aside>
           </section>
 
@@ -941,14 +941,14 @@
               <b>underfundig_dekompilering.py</b> som inneholder en funksjon
               <b>write_decoded_commands</b>: <br />
 
-              * den funksjonen tar inn alt innholdet i <b>underfundig-filen</b>
+              * den funksjonen tar inn alt innholdet i <b>underfundig</b>-filen
               <br />
               * deretter oversetter den emojiene til operander og data<br />
               * og tilslutt skriver resultatet til en fil
               <b>underfundig_dekompilering_output</b><br /><br />
 
               Forhåpentligvis viser filen oss hva hver emoji egentlig gjør i den
-              rekkefølgen som programmet kjøres.<br /><br />
+              rekkefølgen som programmet kjører.<br /><br />
 
               Vi kjører hjelpeprogrammet i terminalen vår og i filen vår ser
               vi...
@@ -1182,8 +1182,8 @@
               slikt verktøy selv. Vi ønsker å se hva vi har "på stacken" når
               programmet kjører.<br /><br />
 
-              Vi kjører <b>merkelig.py</b> igjen med et tullepassord slik at vår
-              oversikt over innholdet i stacken kan genereres
+              Vi kjører <b>merkelig.py</b> igjen, gir passordet "tulleinput",
+              slik at vår oversikt over innholdet i stacken kan genereres
             </aside>
           </section>
 
@@ -1197,9 +1197,9 @@
               🐰:116,117,108,108,101,105,110,112,117,116,10,34,(0) (...)
               🌻:116,117,108,108,101,105,110,112,117,116,10,(34) (...)
               🌻:116,117,108,108,101,105,110,112,117,116,<mark>-24</mark>,(34) (...) 
-              🌻:116,117,108,108,101,105,110,112,117,116,1272,(34) (...) 
+              🌻:116,117,108,108,101,105,110,112,117,116,<mark>1272</mark>,(34) (...) 
               🐇:116,117,108,108,101,105,110,112,117,116,(1272),34 (...) 
-              🐰:116,117,108,108,101,105,110,112,117,116,(73),34 (...) 
+              🐰:116,117,108,108,101,105,110,112,117,116,<mark>(73)</mark>,34 (...) 
               (...)
               </pre>
             </pre>
@@ -1252,7 +1252,7 @@
               <pre class="" data-trim data-noescape>
               (...)     9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6
               🌻:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,0,(<mark>34</mark>) (...)
-              🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(0),34 (...)
+              🐇:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,<mark>(0)</mark>,34 (...)
               🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
               🐰:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,119,(34) (...)
               🥚:(...) 57,49,50,51,52,53,54,55,56,57,49,50,51,52,53,54,(119),34 (...)
@@ -1331,11 +1331,11 @@
               Tilbake til det lange tullepassordet. Vi vet nå at passordets
               lengde skal være 34 tegn langt. Da kjører programmet videre og
               gjør XOR-operasjoner med innholdet på stacken, altså tegnene i
-              passordet vårt (NESTE)<br /><br />
+              passordet vårt<br /><br />
 
               Det viser seg at det er en sammenheng her: kanin-operanden har
               alltid tallverdi "0" som gjeldende stack-verdi når det senere
-              XOR-es.<br /><br />
+              XOR-es (NESTE)<br /><br />
 
               Her blir første tegn i chifferteksten ("w", <b>119</b>) XOR'et med
               siste tegn i tullepassordet jeg oppga ("6", <b>54</b>). Og svaret
@@ -1409,9 +1409,10 @@
             <aside class="notes">
               Hvordan skal vi sørge for at kaninen ikke hopper videre til
               feilmelding? På pkt. 1 nederst i stacken her må vi ha
-              <b>0</b> som stack-verdi når kanin-operanden blir kjørt. Hvis vi
-              regner oss bakover fra stack-verdien hos kaninen og oppover i
-              stack-verdiene:<br />
+              <b>0</b> som stack-verdi når kanin-operanden blir kjørt. Vi regner
+              oss bakover fra stack-verdien hos kaninen og oppover i
+              stack-verdiene. Jeg bruker x, y og z som variabler for å gjøre
+              regnestykket enklere:<br />
 
               * Pkt 1. x må være 0<br />
               * Pkt 2. y må være 52 fordi her er operasjonen subtraksjon: 52
@@ -1419,7 +1420,8 @@
               * Pkt 3. z må være 10 fordi her er operasjonen addering: 10 + 42
               må bli 52<br />
               * Pkt 4. Hvis z er 10, så kan vi bruke XOR med 119 og 10 regne oss
-              fram til det siste tegnet i det ukrypterte passordet (NESTE)<br /><br />
+              fram til det siste tegnet i det <b>ukrypterte</b> passordet
+              (NESTE)<br /><br />
 
               119 XOR 10 = 125 (NESTE)(NESTE), ASCII-tallet 125 er ASCII-tegnet
               "krøllparantes".
@@ -1436,7 +1438,7 @@
               dekryptert tegn fra chifferteksten:<br /><br />
 
               * ta første tegn i chifferteksten, XOR det med tegnet 2 plasser
-              bort minus tegnet 1 plass bort. Svaret er en ASCII-tallverdi som
+              bort, minus tegnet 1 plass bort. Svaret er en ASCII-tallverdi som
               representerer vår første dekrypterte tegn!
             </aside>
           </section>
@@ -1536,7 +1538,7 @@
             <aside class="notes">
               Vi er på sporet av noe. Vi utvider programmet
               <b>løsning.py</b> med en ny funksjon som bruker denne algoritmen
-              vi har funnet, og dekryptere resten av chifferteksten for oss
+              vi har funnet, og dekrypterer resten av chifferteksten for oss
             </aside>
           </section>
 
@@ -1567,7 +1569,8 @@
               hente ut det vi håper er dekrypterte flagget<br /><br />
 
               <b>dechipher</b>-funksjonen får chifferteksten som vi fant istad
-              som input<br /><br />
+              som input, og algoritmen vi har regnet oss frem til finner ett og
+              ett passordtegn.<br /><br />
 
               Vi kjører <b>løsning.py</b> og krysser fingrene!
             </aside>
@@ -1579,12 +1582,12 @@
             <p class="fragment fade-up">😲</p>
 
             <aside class="notes">
-              Vi er så nære! Men hva må vi gjøre her?<br /><br />
+              Vi er så nære! Men hva må vi gjøre her? (NESTE)<br /><br />
 
-              Du ser at teksten her ikke er helt riktig. <br /><br />
+              Du ser at teksten her ikke er helt riktig.<br /><br />
 
-              Stemmer, teksten er bakvendt! (NESTE) For å få riktig flaggformat
-              så må reversere teksten
+              Stemmer, teksten er bakvendt! For å få riktig flaggformat så må
+              reversere teksten
             </aside>
           </section>
 
@@ -1623,7 +1626,7 @@
             <img
               data-src="img/penguin-dancing-moves.gif"
               class="fragment fade-up plain"
-              style="width: 60%"
+              style="width: 40%"
             />
 
             <aside class="notes">
@@ -1648,7 +1651,7 @@
               funnet<br /><br />
 
               Vi kjører det opprinnelige programmet <b>merkelig.py</b> igjen og
-              angir det vi håper er passordet (NESTE) (NESTE)<br /><br />
+              gir den det vi håper er passordet (NESTE) (NESTE)<br /><br />
 
               Og vi får bekreftet: (NESTE)
               <b>Gratulerer! Flagget vet du allerede :)</b> (NESTE)<br /><br />
@@ -1675,8 +1678,8 @@
               gangen, og lage oss verktøy som gir litt bedre oversikt, så fant
               vi riktig løsning til slutt<br /><br />
 
-              I CTF'er handler det ofte om å rekke å melde inn poeng på kort
-              tid. Men jeg koste meg med dette. Brukte flere måneder i
+              I CTF'er handler det ofte om å rekke å melde inn flaggene innen
+              viss tid. Men jeg koste meg med dette. Brukte flere måneder i
               kalendertid når jeg hadde lyst på pirke videre på oppgaven. Lærte
               også masse om stack-baserte programmer underveis.
             </aside>
@@ -1715,6 +1718,9 @@
             <p>
               <a href="https://ctf.hacker101.com">Hacker101 CTF</a>
             </p>
+            <p>
+              <a href="https://cryptohack.org">cryptohack.org</a>
+            </p>
 
             <aside class="notes">
               Jeg håper dette tente din indre kodegnist. Vi blir bedre
@@ -1729,7 +1735,10 @@
               På CTF-sidene til Hacker101 finner du mange nybegynneroppgaver du
               kan starte med<br /><br />
 
-              Prøv deg på noen enkle oppgaver. Kjenn litt på mestringsfølelsen
+              Hvis du synes XOR og binærmatematikk er spennende er
+              cryptohack.org stedet for deg.<br /><br />
+
+              Prøv deg på de enkle oppgavene. Kjenn litt på mestringsfølelsen
               når du begynner å finne flaggene. Jeg håper dere også blir hekta!
             </aside>
           </section>
