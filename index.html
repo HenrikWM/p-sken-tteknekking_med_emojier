@@ -111,13 +111,15 @@
             <aside class="notes">
               Heisann alle sammen! Og takk for at dere kom for å høre på meg
               idag! Setter stor pris på at så mange av dere stiller opp på
-              dagens siste foredrag. <br /><br />
+              dagens siste foredrag!<br /><br />
 
               Fordi det er siste foredrag: hvis det er noen som har noen
               <b>spørsmål underveis</b>, så kom gjerne opp til meg etterpå slik
               at vi <b>runder av i god tid</b><br /><br />
 
-              (NESTE)<br /><br />
+              Så len dere tilbake, senke skuldrene. La oss ha det litt gøy.<br /><br />
+
+              Hvem er er? (NESTE)<br /><br />
 
               Mitt navn er Henrik Walker Moe og jeg jobber i (NESTE) (NESTE)<br />
               Bekk.<br /><br />
@@ -1414,27 +1416,7 @@
           <section>
             <h3>Algoritmen</h3>
 
-            <p>
-              <b>kryptert tegn XOR (n+2 - n+1) = dekryptert tegn</b>
-            </p>
-
-            <br />
-
-            <p class="fragment">
-              <span class="fragment highlight-green">w</span
-              >*4*D*T*W*J*7*A*Y*f*`*j (...)
-            </p>
-
-            <p class="fragment">w XOR (4-*)</p>
-
-            <br />
-
-            <p class="fragment">
-              med ASCII-tallverdier blir regnestykket:<br />
-              119 XOR (52-42) =
-              <span class="fragment highlight-green">125</span>, dvs. tegnet
-              <span class="fragment highlight-green">}</span>
-            </p>
+            <p>kryptert tegn XOR (n+2 - n+1) = dekryptert tegn</p>
 
             <aside class="notes">
               Vi har her en algoritme, en fremgangsmåte som gir oss ett og ett
@@ -1442,9 +1424,29 @@
 
               * ta første tegn i chifferteksten, XOR det med tegnet 2 plasser
               bort minus tegnet 1 plass bort. Svaret er en ASCII-tallverdi som
-              representerer vår første dekrypterte bokstav! (NESTE)<br /><br />
+              representerer vår første dekrypterte tegn!
+            </aside>
+          </section>
 
-              * Så fra chifferteksten vi har starter vi med "w" (NESTE)<br /><br />
+          <section>
+            <p>
+              <span class="fragment highlight-green">w</span
+              >*4*D*T*W*J*7*A*Y*f*`*j (...)
+            </p>
+
+            <p class="fragment">w XOR (4-*)</p>
+
+            <p class="fragment">
+              ...med ASCII-tallverdier:<br />
+              119 XOR (52-42) =
+              <span class="fragment highlight-green">125</span>
+              <br /><br />
+              <b><span class="fragment highlight-green">}</span></b>
+            </p>
+
+            <aside class="notes">
+              * Så fra chifferteksten vi har starter vi med "w" (NESTE)
+              (NESTE)<br /><br />
 
               * w XOR med (4 minus "asteriks") (NESTE)<br /><br />
 
@@ -1453,13 +1455,12 @@
 
               * Så 119 XOR med (52 minus 42), som vil si:<br /><br />
 
-              125 (NESTE x2), som er tegnet høyre-krøllparentes
+              125 (NESTE x2), som når vi slår opp i ASCII-tabellen er tegnet
+              "høyre-krøllparentes"
             </aside>
           </section>
 
           <section>
-            <h3>Algoritmen</h3>
-
             <p class="fragment">
               w*<span class="fragment highlight-green">4</span
               >*D*T*W*J*7*A*Y*f*`*j (...)
@@ -1467,13 +1468,12 @@
 
             <p class="fragment">4 XOR (D-*)</p>
 
-            <br />
-
             <p class="fragment">
-              med ASCII-tallverdier blir regnestykket:<br />
+              ...med ASCII-tallverdier:<br />
               52 XOR (68-42) =
-              <span class="fragment highlight-green">46</span>, dvs. tegnet
-              <span class="fragment highlight-green">.</span>
+              <span class="fragment highlight-green">46</span>
+              <br /><br />
+              <b><span class="fragment highlight-green">.</span></b>
             </p>
 
             <aside class="notes">
@@ -1487,7 +1487,8 @@
 
               * Så 52 XOR med (68 minus 42), som vil si:<br /><br />
 
-              46 (NESTE x2), som er tegnet punktum
+              46 (NESTE x2), som når vi slår opp i ASCII-tabellen er tegnet
+              "punktum"
             </aside>
           </section>
 
@@ -1500,7 +1501,8 @@
             <h3 class="fragment fade-up">🤔</h3>
 
             <aside class="notes">
-              Vi regner ut et par tegn til og får: (NESTE)<br />
+              Vi håndregner ut et par tegn til for å sjekke om algoritmen
+              faktisk stemmer, og får: (NESTE)<br />
 
               * krøllparentes fra w-tegnet <br />
               * punktum fra 4-tegnet<br />
@@ -1528,7 +1530,7 @@
 
           <section>
             <p>
-              Legger til ny funksjon for å dekryptere chifferteksten i
+              Lager en decipher()-funksjon for å dekryptere chifferteksten i
               <b>løsning.py</b>:
             </p>
 
@@ -1576,8 +1578,8 @@
 
           <section>
             <p>
-              Vi snur om på rekkefølgen på teksten. Legger til et par linjer til
-              i <b>løsning.py</b>:
+              Vi snur om på rekkefølgen på den dechiffrerte teksten i
+              <b>løsning.py</b>:
             </p>
 
             <pre>
@@ -1617,7 +1619,7 @@
 
           <section>
             <p>Vi kjører <b>merkelig.py</b> igjen:</p>
-            <pre class="highlight">
+            <pre class="shell">
               <span>$ python merkelig.py underfundig</span>              
               <span class="fragment">Passord: <span class="fragment highlight-green">PHST{Mitt navn er Gwyn. Pen Gwyn.}</span></span>
               <span class="fragment">Gratulerer! Flagget vet du allerede :)</span>                
@@ -1647,14 +1649,15 @@
             />
 
             <aside class="notes">
-              Vi er i mål! Bra jobba for å holde ut helt hit. Jeg syns vi kan
-              være litt stolte av å ha dekompilert et emoji-program som kjørte
-              på en snedig variant av en stack-basert virtuell maskin!
+              Følelsen man får er ca slik oppsummert! Da er vi i mål! Bra jobba
+              for å holde ut helt hit. Jeg syns vi kan være litt stolte av å ha
+              dekompilert et emoji-program som kjørte på en snedig variant av en
+              stack-basert virtuell maskin dere!
               <br /><br />
 
-              Det var mye detektivarbeid og kodeknekking som måtte til, men med
-              litt pågangsmot, fokus, bruke tid på forstå ett og ett delproblem
-              av gangen og lage oss verktøy som gir litt bedre oversikt, så fant
+              Det var mye detektivarbeid for å komme helt hit men med litt
+              pågangsmot, fokus, bruke tid på forstå ett og ett delproblem av
+              gangen, og lage oss verktøy som gir litt bedre oversikt, så fant
               vi riktig løsning til slutt
             </aside>
           </section>
